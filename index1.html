@@ -43,7 +43,7 @@
             </button>
         </nav>
 
-        <!-- SECTIONS DE CONTENU (Affichées au clic) -->
+        <!-- SECTIONS DE CONTENU -->
 
         <!-- 1. DÉMARCHES -->
         <div id="demarches" class="tab-content active">
@@ -182,4 +182,41 @@
                 <div class="card">
                     <div class="card-icon">🧺</div>
                     <h3>Aide Alimentaire</h3>
-                    <p>Distributions de pani
+                    <p>Distributions de paniers repas gratuits (Linkee, Cop1...).</p>
+                    <a href="https://www.linkee.co/" target="_blank" class="card-btn">Trouver une distribution</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Jobs Étudiants</h3>
+                    <p>Emplois à temps partiel compatibles avec tes études sur Jobaviz.</p>
+                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir les offres</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Guide mis à jour — Version 2 | <a href="index0.html">Voir la Version 1</a></p>
+    </footer>
+
+    <!-- SCRIPT POUR LE CLIC SUR LES ICÔNES -->
+    <script>
+        function openCategory(evt, categoryName) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            var buttons = document.getElementsByClassName("category-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(categoryName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
+
+</body>
+</html>
