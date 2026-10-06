@@ -10,179 +10,176 @@
 
     <header>
         <h1>🎓 Guide de Survie Étudiante & Internationale</h1>
-        <p>Toutes les démarches, aides et ressources indispensables pour réussir son installation en France.</p>
+        <p>Cliquez sur une catégorie pour afficher les ressources associées.</p>
     </header>
 
     <main>
 
-        <!-- DÉMARCHES ADMINISTRATIVES -->
-        <h2 class="section-title">📋 Démarches Administratives</h2>
-        <div class="grid-container">
+        <!-- MENU AVEC ICÔNES ET INTITULÉS -->
+        <nav class="categories-nav">
+            <button class="category-btn active" onclick="openCategory(event, 'demarches')">
+                <span class="category-icon">📋</span>
+                <span class="category-title">Démarches</span>
+            </button>
 
-            <div class="card">
-                <div class="card-icon">🛂</div>
-                <h3>Validation du Visa (VLS-TS)</h3>
-                <p>Obligatoire dans les 3 mois suivant ton arrivée en France sur la plateforme officielle ANEF.</p>
-                <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Valider mon visa</a>
+            <button class="category-btn" onclick="openCategory(event, 'logement')">
+                <span class="category-icon">🏠</span>
+                <span class="category-title">Logement & Crous</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'sante')">
+                <span class="category-icon">🩺</span>
+                <span class="category-title">Santé</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'bourses')">
+                <span class="category-icon">💶</span>
+                <span class="category-title">Bourses & Aides</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'transports')">
+                <span class="category-icon">🚆</span>
+                <span class="category-title">Transports & Vie</span>
+            </button>
+        </nav>
+
+        <!-- SECTIONS DE CONTENU (Affichées au clic) -->
+
+        <!-- 1. DÉMARCHES -->
+        <div id="demarches" class="tab-content active">
+            <h2 class="section-title">📋 Démarches Administratives</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🛂</div>
+                    <h3>Validation du Visa (VLS-TS)</h3>
+                    <p>Obligatoire dans les 3 mois suivant ton arrivée en France sur la plateforme ANEF.</p>
+                    <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Valider mon visa</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Titre de Séjour</h3>
+                    <p>Demandes de renouvellement et suivi de dossier en ligne.</p>
+                    <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏦</div>
+                    <h3>Compte Bancaire</h3>
+                    <p>Indispensable pour recevoir la CAF, la bourse et tes remboursements de santé.</p>
+                    <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">En savoir plus</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📑</div>
+                    <h3>Attestation CVEC</h3>
+                    <p>Contribution Vie Étudiante et de Campus à obtenir avant l'inscription.</p>
+                    <a href="https://cvec.etudiant.gouv.fr/" target="_blank" class="card-btn">Obtenir la CVEC</a>
+                </div>
             </div>
-
-            <div class="card">
-                <div class="card-icon">🏛️</div>
-                <h3>Titre de Séjour</h3>
-                <p>Effectue tes demandes de renouvellement et suis l'avancement de tes démarches en ligne.</p>
-                <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🏦</div>
-                <h3>Compte Bancaire</h3>
-                <p>Indispensable pour recevoir les aides de la CAF, les remoursements de santé ou ton salaire.</p>
-                <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">En savoir plus</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">📑</div>
-                <h3>Attestation CVEC</h3>
-                <p>La Contribution Vie Étudiante et de Campus est à télécharger avant toute inscription à l'université.</p>
-                <a href="https://cvec.etudiant.gouv.fr/" target="_blank" class="card-btn">Obtenir la CVEC</a>
-            </div>
-
         </div>
 
-        <!-- LOGEMENT ET CROUS -->
-        <h2 class="section-title">🏠 Logement & Crous</h2>
-        <div class="grid-container">
-
-            <div class="card">
-                <div class="card-icon">🏢</div>
-                <h3>Logement Crous</h3>
-                <p>Recherche et réserve une chambre ou un studio en résidence universitaire Crous.</p>
-                <a href="https://www.trouverunlogement.lescrous.fr/" target="_blank" class="card-btn">Trouver un Crous</a>
+        <!-- 2. LOGEMENT -->
+        <div id="logement" class="tab-content">
+            <h2 class="section-title">🏠 Logement & Crous</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Logement Crous</h3>
+                    <p>Réserve une chambre ou un studio en résidence universitaire Crous.</p>
+                    <a href="https://www.trouverunlogement.lescrous.fr/" target="_blank" class="card-btn">Trouver un logement</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Garant Visale</h3>
+                    <p>Caution locative gratuite accordée par Action Logement.</p>
+                    <a href="https://www.visale.fr/" target="_blank" class="card-btn">Demander Visale</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔑</div>
+                    <h3>Résidences Privées</h3>
+                    <p>Plateformes de recherche de logements étudiants privés.</p>
+                    <a href="https://www.studapart.com/" target="_blank" class="card-btn">Voir Studapart</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📞</div>
+                    <h3>Carte des Crous</h3>
+                    <p>Coordonnées directes des gestionnaires et secrétariats régionaux.</p>
+                    <a href="https://www.etudiant.gouv.fr/fr/vos-crous-1139" target="_blank" class="card-btn">Contacter mon Crous</a>
+                </div>
             </div>
-
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h3>Garant Visale</h3>
-                <p>Une caution locative accordée gratuitement par Action Logement pour garantir ton loyer.</p>
-                <a href="https://www.visale.fr/" target="_blank" class="card-btn">Demander Visale</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🔑</div>
-                <h3>Résidences Privées</h3>
-                <p>Plateformes dédiées au logement étudiant privé (Studapart, Adele...).</p>
-                <a href="https://www.studapart.com/" target="_blank" class="card-btn">Voir Studapart</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">📞</div>
-                <h3>Carte des Crous</h3>
-                <p>Retrouve les coordonnées directes des gestionnaires et du secrétariat de ton Crous régional.</p>
-                <a href="https://www.etudiant.gouv.fr/fr/vos-crous-1139" target="_blank" class="card-btn">Contacter mon Crous</a>
-            </div>
-
         </div>
 
-        <!-- SANTÉ ET BIEN-ÊTRE -->
-        <h2 class="section-title">🩺 Santé & Accompagnement</h2>
-        <div class="grid-container">
-
-            <div class="card">
-                <div class="card-icon">💳</div>
-                <h3>Sécurité Sociale (Ameli)</h3>
-                <p>Inscription gratuite pour les étudiants internationaux afin de bénéficier de la prise en charge des soins.</p>
-                <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">S'inscrire à la Sécu</a>
+        <!-- 3. SANTÉ -->
+        <div id="sante" class="tab-content">
+            <h2 class="section-title">🩺 Santé & Accompagnement</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h3>Sécurité Sociale (Ameli)</h3>
+                    <p>Inscription gratuite pour les étudiants internationaux.</p>
+                    <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">S'inscrire à Ameli</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>Mutuelle CSS</h3>
+                    <p>Prise en charge des soins pour les revenus modestes.</p>
+                    <a href="https://www.ameli.fr/assure/droits-demarches/difficultes-acces-droits-soins/complementaire-sante-solidaire" target="_blank" class="card-btn">Tester son éligibilité</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Doctolib</h3>
+                    <p>Rendez-vous médicaux rapides chez des praticiens proches de chez toi.</p>
+                    <a href="https://www.doctolib.fr/" target="_blank" class="card-btn">Prendre RDV</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Soutien Psychologique</h3>
+                    <p>Séances de psy gratuites via Santé Psy Étudiant.</p>
+                    <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Santé Psy Étudiant</a>
+                </div>
             </div>
-
-            <div class="card">
-                <div class="card-icon">🏥</div>
-                <h3>Mutuelle CSS</h3>
-                <p>La Complémentaire Santé Solidaire vous aide pour vos frais de santé si vos revenus sont modestes.</p>
-                <a href="https://www.ameli.fr/assure/droits-demarches/difficultes-acces-droits-soins/complementaire-sante-solidaire" target="_blank" class="card-btn">Tester son éligibilité</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">📅</div>
-                <h3>Doctolib</h3>
-                <p>Prends rendez-vous rapidement chez un médecin, dentiste ou spécialiste à proximité.</p>
-                <a href="https://www.doctolib.fr/" target="_blank" class="card-btn">Trouver un médecin</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🧠</div>
-                <h3>Soutien Psychologique</h3>
-                <p>Consulte un psychologue gratuitement grâce au dispositif national Santé Psy Étudiant.</p>
-                <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Santé Psy Étudiant</a>
-            </div>
-
         </div>
 
-        <!-- BOURSES ET AIDES -->
-        <h2 class="section-title">💶 Bourses & Aides Financières</h2>
-        <div class="grid-container">
-
-            <div class="card">
-                <div class="card-icon">🎓</div>
-                <h3>Dossier Social Étudiant (DSE)</h3>
-                <p>Fais ta demande de bourse sur critères sociaux et de logement pour l'année universitaire.</p>
-                <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Faire le DSE</a>
+        <!-- 4. BOURSES -->
+        <div id="bourses" class="tab-content">
+            <h2 class="section-title">💶 Bourses & Aides Financières</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Dossier Social Étudiant</h3>
+                    <p>Demande de bourse sur critères sociaux et de logement Crous.</p>
+                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Faire le DSE</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+                    <h3>Aide au Logement (CAF)</h3>
+                    <p>Calcule et demande ton APL en ligne.</p>
+                    <a href="https://www.caf.fr/" target="_blank" class="card-btn">Demander l'APL</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🆘</div>
+                    <h3>Aides Ponctuelles Crous</h3>
+                    <p>Rendez-vous avec une assistante sociale en cas de besoin urgent.</p>
+                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV Social</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🍽️</div>
+                    <h3>Repas Crous à 1 €</h3>
+                    <p>Repas complets à tarif réduit pour les étudiants boursiers/précaires.</p>
+                    <a href="https://www.lescrous.fr/" target="_blank" class="card-btn">Infos Restos U</a>
+                </div>
             </div>
-
-            <div class="card">
-                <div class="card-icon">🏠</div>
-                <h3>Aide au Logement (CAF)</h3>
-                <p>Calcule le montant de ton APL (Aide Personnalisée au Logement) et fais ta demande en ligne.</p>
-                <a href="https://www.caf.fr/" target="_blank" class="card-btn">Demander l'APL</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🆘</div>
-                <h3>Aides Ponctuelles Crous</h3>
-                <p>En cas de grosse difficulté financière, sollicite un rendez-vous avec une assistante sociale du Crous.</p>
-                <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV Social</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🍽️</div>
-                <h3>Repas Crous à 1 €</h3>
-                <p>Profite de repas complets à tarif très réduit dans les Restos U si tu es boursier ou en précarité.</p>
-                <a href="https://www.lescrous.fr/" target="_blank" class="card-btn">Infos Restos U</a>
-            </div>
-
         </div>
 
-        <!-- TRANSPORTS ET VIE PRATIQUE -->
-        <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
-        <div class="grid-container">
-
-            <div class="card">
-                <div class="card-icon">🎫</div>
-                <h3>Transports (Imagine R)</h3>
-                <p>Abonnements de transport à tarif préférentiel pour les étudiants en Île-de-France ou en région.</p>
-                <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">🧺</div>
-                <h3>Aide Alimentaire (Linkee / Cop1)</h3>
-                <p>Profite des distributions de paniers alimentaires gratuits pour les étudiants dans ta ville.</p>
-                <a href="https://www.linkee.co/" target="_blank" class="card-btn">Trouver une distribution</a>
-            </div>
-
-            <div class="card">
-                <div class="card-icon">💼</div>
-                <h3>Jobs Étudiants (Jobaviz)</h3>
-                <p>Trouve un travail à temps partiel compatible avec ton emploi du temps universitaire.</p>
-                <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Consulter les offres</a>
-            </div>
-
-        </div>
-
-    </main>
-
-    <footer>
-        <p>Guide mis à jour — Version 2 | <a href="index0.html">Accéder à la Version 1 (Texte brut)</a></p>
-    </footer>
-
-</body>
-</html>
+        <!-- 5. TRANSPORTS -->
+        <div id="transports" class="tab-content">
+            <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🎫</div>
+                    <h3>Transports (Imagine R)</h3>
+                    <p>Abonnements étudiants à tarifs préférentiels.</p>
+                    <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧺</div>
+                    <h3>Aide Alimentaire</h3>
+                    <p>Distributions de pani
