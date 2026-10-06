@@ -1,75 +1,115 @@
-* {
-    box-sizing: border-box;
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
     margin: 0;
     padding: 0;
-    font-family: system-ui, -apple-system, sans-serif;
-}
-
-body {
-    background-color: #f4f6f9;
     color: #333;
-    line-height: 1.6;
 }
 
 header {
     background: linear-gradient(135deg, #1e3c72, #2a5298);
     color: white;
     text-align: center;
-    padding: 3rem 1rem;
+    padding: 40px 20px;
 }
 
-nav {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    background-color: #ffffff;
-    padding: 1rem;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
+header h1 {
+    margin: 0;
+    font-size: 2.2rem;
 }
 
-nav a {
-    text-decoration: none;
-    color: #1e3c72;
-    font-weight: bold;
-    padding: 0.5rem 1rem;
+header p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-top: 10px;
 }
 
 main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1rem;
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-.grid {
+.section-title {
+    font-size: 1.8rem;
+    color: #1e3c72;
+    border-bottom: 3px solid #1e3c72;
+    padding-bottom: 8px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+/* Grille de cartes */
+.grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1rem;
+    gap: 20px;
 }
 
+/* Carte individuelle */
 .card {
     background: white;
-    border-radius: 8px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.tag {
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    background-color: #e2e8f0;
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.btn {
+/* Grandes Icônes */
+.card-icon {
+    font-size: 3.5rem;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.card p {
+    font-size: 0.95rem;
+    color: #666;
+    line-height: 1.4;
+    flex-grow: 1;
+    margin-bottom: 20px;
+}
+
+/* Boutons de redirection */
+.card-btn {
     display: inline-block;
-    margin-top: 1rem;
-    background-color: #2a5298;
+    background-color: #1e3c72;
     color: white;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.card-btn:hover {
+    background-color: #2a5298;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    background: #e9ecef;
+    margin-top: 50px;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #1e3c72;
+    font-weight: bold;
 }
