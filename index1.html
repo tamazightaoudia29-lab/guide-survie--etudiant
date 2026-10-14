@@ -550,6 +550,7 @@
                 <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
                 <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
                 <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
+                <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs Étudiants</button>
                 <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
                 <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
             </div>
@@ -586,6 +587,11 @@
             <button class="category-btn" onclick="openCategory(event, 'transports')">
                 <span class="category-icon">🚆</span>
                 <span class="category-title">Transports & Vie</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'travail')">
+                <span class="category-icon">💼</span>
+                <span class="category-title">Travail & Jobs</span>
             </button>
         </nav>
 
@@ -743,16 +749,35 @@
                     <p>Distributions de paniers repas gratuits (Linkee, Cop1...).</p>
                     <a href="https://www.linkee.co/" target="_blank" class="card-btn">Trouver une distribution</a>
                 </div>
+            </div>
+        </div>
+
+        <!-- 6. TRAVAIL & JOBS ÉTUDIANTS (NOUVELLE SECTION SPÉCIFIQUE) -->
+        <div id="travail" class="tab-content">
+            <h2 class="section-title">💼 Travail, Jobs Étudiants & Règles Algériennes</h2>
+            <div class="grid-container">
+                <div class="card algeria-highlight">
+                    <div class="card-icon">📄</div>
+                    <h3>Autorisation Provisoire de Travail (APT)</h3>
+                    <p>Pour les étudiants algériens, l'exercice d'une activité salariée est réglementé : <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong> avant de commencer tout emploi. C'est l'employeur qui doit en faire la demande auprès de la DREETS.</p>
+                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">En savoir plus sur l'APT</a>
+                </div>
+                <div class="card algeria-highlight">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Plafond des 803 Heures par An</h3>
+                    <p>Le temps de travail cumulé est strictement limité à <strong>803 heures par an</strong> (ce qui correspond à 60% de la durée légale annuelle). <strong>Attention :</strong> dépasser ce quota ou travailler sans APT expose l'étudiant à des problèmes graves lors du renouvellement de son titre de séjour à la préfecture.</p>
+                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">Consulter la règle</a>
+                </div>
                 <div class="card">
                     <div class="card-icon">💼</div>
-                    <h3>Jobs Étudiants</h3>
-                    <p>Emplois à temps partiel compatibles avec tes études sur Jobaviz.</p>
-                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir les offres</a>
+                    <h3>Plateformes de Recherche (Jobaviz)</h3>
+                    <p>Consulte les offres de jobs étudiants compatibles avec ton emploi du temps universitaire pour arrondir tes fins de mois en toute légalité.</p>
+                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir Jobaviz</a>
                 </div>
             </div>
         </div>
 
-        <!-- 6. FAQ (FOIRE AUX QUESTIONS DÉTAILLÉE + FOCUS ALGÉRIE) -->
+        <!-- 7. FAQ (FOIRE AUX QUESTIONS DÉTAILLÉE + FOCUS ALGÉRIE) -->
         <div id="faq" class="tab-content">
             <h2 class="section-title">❓ Foire Aux Questions (FAQ Détaillée)</h2>
             <div class="faq-container">
@@ -780,45 +805,31 @@
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>3. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
+                        <span>3. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p><strong>Délai :</strong> Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant la date de ton arrivée en France pour valider ton visa long séjour valant titre de séjour (VLS-TS).</p>
-                        <p><strong>Procédure étape par étape :</strong></p>
-                        <ul>
-                            <li>Rends-toi sur la plateforme officielle de l'Administration des Étrangers en France (ANEF).</li>
-                            <li>Munis-toi de ton numéro de visa, de la date de ton arrivée en France et de ton adresse e-mail.</li>
-                            <li>Renseigne les informations demandées concernant ton passeport et ton domicile en France.</li>
-                            <li>Paye la taxe de séjour en ligne par timbre fiscal électronique.</li>
-                            <li>Télécharge ton attestation de validation.</li>
-                        </ul>
+                        <p>Oui, tu peux travailler, mais <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong> (demandée par l'employeur). Tu es limité à un maximum de <strong>803 heures par an</strong>. Ne dépasse jamais ce quota sous peine de refus de renouvellement ou de sanctions de la part de la préfecture.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>4. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
+                        <span>4. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p><strong>Qu'est-ce que c'est ?</strong> Visale est une caution locative gratuite accordée par Action Logement qui se porte garante auprès de ton propriétaire en cas d'impayés de loyer.</p>
-                        <p><strong>Comment l'obtenir :</strong></p>
-                        <ul>
-                            <li>Crée un compte personnel sur le site officiel <strong>visale.fr</strong> avant de signer ton bail.</li>
-                            <li>Constitue ton dossier en ligne avec tes justificatifs.</li>
-                            <li>Obtiens ton <em>"Visa Visale"</em> et transmets-le à ton propriétaire.</li>
-                        </ul>
+                        <p><strong>Délai :</strong> Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant la date de ton arrivée en France pour valider ton visa long séjour valant titre de séjour (VLS-TS) en ligne sur la plateforme ANEF.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>5. Qu'est-ce que la CVEC et qui est concerné ?</span>
+                        <span>5. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>La Contribution Vie Étudiante et de Campus (CVEC) est obligatoire pour les étudiants en formation initiale (environ 100 € par an). Les boursiers du Crous en sont exonérés, mais tous doivent se connecter sur <strong>cvec.etudiant.gouv.fr</strong> pour récupérer l'attestation obligatoire pour l'université.</p>
+                        <p>Crée un compte sur le site officiel <strong>visale.fr</strong> avant de signer ton bail. Action Logement se portera garant pour toi auprès de ton propriétaire en cas d'impayés de loyer.</p>
                     </div>
                 </div>
 
@@ -828,14 +839,14 @@
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong> dans la rubrique <strong>"Prendre rendez-vous"</strong> avec le service social pour obtenir un rendez-vous rapide ou demander une aide d'urgence.</p>
+                        <p>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong> dans la rubrique <strong>"Prendre rendez-vous"</strong> avec le service social.</p>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- 7. CONTACT PAR E-MAIL -->
+        <!-- 8. CONTACT PAR E-MAIL -->
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
