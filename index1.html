@@ -186,7 +186,7 @@
         }
 
         .card.algeria-highlight {
-            border: 2px solid #006233; /* Distinction visuelle élégante pour les particularités algériennes */
+            border: 2px solid #006233; /* Distinction visuelle élégante */
         }
 
         .card-icon {
@@ -733,15 +733,22 @@
             </div>
         </div>
 
-        <!-- 5. TRANSPORTS -->
+        <!-- 5. TRANSPORTS (AVEC LA RÉDUCTION CSS / PASSE NAVIGO À -75%) -->
         <div id="transports" class="tab-content">
             <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🎫</div>
                     <h3>Transports (Imagine R)</h3>
-                    <p>Abonnements étudiants à tarifs préférentiels.</p>
+                    <p>Abonnements étudiants à tarifs préférentiels en Île-de-France pour les jeunes.</p>
                     <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
+                </div>
+                <div class="card" style="border: 2px solid #1e3c72;">
+                    <div class="card-icon">📉</div>
+                    <h3>Réduction Passe Navigo (-75% via la CSS)</h3>
+                    <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la <strong>Tarification Solidarité Transport</strong> : ton Passe Navigo mensuel te revient à seulement <strong>~22 €</strong> au lieu du tarif plein pot !</p>
+                    <p style="font-size: 0.85rem; color: #555; text-align: left;"><strong>Procédure :</strong> Une fois ta attestation CSS active (obtenue via Ameli ou la CAF), connecte-toi sur le site officiel <em>solidaritetransport.fr</em> ou appelle leur service pour faire valoir tes droits et l'activer sur ton passe.</p>
+                    <a href="https://www.solidaritetransport.fr/" target="_blank" class="card-btn">Faire la demande</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🧺</div>
@@ -752,7 +759,7 @@
             </div>
         </div>
 
-        <!-- 6. TRAVAIL & JOBS ÉTUDIANTS (NOUVELLE SECTION SPÉCIFIQUE) -->
+        <!-- 6. TRAVAIL & JOBS ÉTUDIANTS -->
         <div id="travail" class="tab-content">
             <h2 class="section-title">💼 Travail, Jobs Étudiants & Règles Algériennes</h2>
             <div class="grid-container">
@@ -784,7 +791,17 @@
                 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>1. Quelles sont les particularités de l'Accord franco-algérien de 1968 ?</span>
+                        <span>1. Comment obtenir la réduction de 75% sur le Passe Navigo avec la CSS ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la réduction Solidarité Transport. Il te suffit de te rendre sur le site <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande en ligne ou par téléphone. Ton forfait mensuel passera à environ 22 €.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>2. Quelles sont les particularités de l'Accord franco-algérien de 1968 ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
@@ -795,17 +812,17 @@
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>2. Comment s'inscrire à la Sécurité sociale avec la convention Algérie ?</span>
+                        <span>3. Comment s'inscrire à la Sécurité sociale avec la convention Algérie ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Grâce à l'accord bilatéral de Sécurité sociale entre la France et l'Algérie, tu dois t'inscrire sur <strong>etudiant-etranger.ameli.fr</strong> dès ton arrivée en fournissant les justificatifs et documents requis (comme le formulaire bilatéral adéquat si applicable).</p>
+                        <p>Grâce à l'accord bilatéral de Sécurité sociale entre la France et l'Algérie, tu dois t'inscrire sur <strong>etudiant-etranger.ameli.fr</strong> dès ton arrivée en fournissant les justificatifs et documents requis.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>3. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
+                        <span>4. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
@@ -815,7 +832,7 @@
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>4. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
+                        <span>5. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
@@ -825,21 +842,11 @@
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>5. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
+                        <span>6. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
                         <p>Crée un compte sur le site officiel <strong>visale.fr</strong> avant de signer ton bail. Action Logement se portera garant pour toi auprès de ton propriétaire en cas d'impayés de loyer.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>6. Comment contacter une assistante sociale du Crous en urgence ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong> dans la rubrique <strong>"Prendre rendez-vous"</strong> avec le service social.</p>
                     </div>
                 </div>
 
