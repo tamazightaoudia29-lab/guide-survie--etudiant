@@ -509,7 +509,6 @@
             <p id="auth-error" class="auth-error"></p>
             
             <div class="auth-toggle">
-                <!-- ID CORRIGÉ ICI -->
                 <span id="auth-toggle-text" onclick="toggleAuthMode()">Déjà un compte ? Connecte-toi</span>
             </div>
         </div>
@@ -847,3 +846,99 @@
                 };
 
                 localStorage.setItem('user_' + user, JSON.stringify(profileData));
+                localStorage.setItem('currentUser', user);
+                localStorage.setItem('isLoggedIn', 'true');
+                showSite(firstname, lastname);
+            } else {
+                const storedDataRaw = localStorage.getItem('user_' + user);
+                if (storedDataRaw) {
+                    const storedData = JSON.parse(storedDataRaw);
+                    if (storedData.password === pass) {
+                        localStorage.setItem('currentUser', user);
+                        localStorage.setItem('isLoggedIn', 'true');
+                        showSite(storedData.firstname, storedData.lastname);
+                        return;
+                    }
+                }
+                errorElement.innerText = "Identifiant ou mot de passe incorrect.";
+                errorElement.style.display = 'block';
+            }
+        }
+
+        function showSite(firstname, lastname) {
+            document.body.classList.remove('logged-out');
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('user-top-bar').style.display = 'flex';
+            
+            if (firstname && lastname) {
+                document.getElementById('welcome-user-message').innerText = `👋 Bonjour, ${firstname} ${lastname}`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                const currentUser = localStorage.getItem('currentUser');
+                const storedDataRaw = localStorage.getItem('user_' + currentUser);
+                if (storedDataRaw) {
+                    const storedData = JSON.parse(storedDataRaw);
+                    showSite(storedData.firstname, storedData.lastname);
+                } else {
+                    showSite("Étudiant", "");
+                }
+            }
+        }
+
+        // Navigation entre les onglets
+        function openCategory(evt, categoryName) {
+            var contents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            var buttons = document.getElementsByClassName("category-btn");
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(categoryName).classList.add("active");
+            
+            if(evt && evt.currentTarget && evt.currentTarget.classList.contains('category-btn')) {
+                evt.currentTarget.classList.add("active");
+            }
+            
+            document.getElementById('dropdown-menu').classList.remove('show');
+        }
+
+        // Ouvrir / fermer le menu des trois points (hamburger)
+        function toggleMenu() {
+            document.getElementById('dropdown-menu').classList.toggle('show');
+        }
+
+        // Ouvrir / fermer les questions de la FAQ
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            item.classList.toggle('active');
+        }
+
+        // Fermer le menu déroulant si on clique en dehors
+        window.onclick = function(event) {
+            if (!event.target.matches('.hamburger-dots')) {
+                var dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
