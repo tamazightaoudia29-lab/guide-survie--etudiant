@@ -5,131 +5,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de Survie Étudiant — Version 2</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        /* Styles pour l'écran de connexion / inscription */
-        .auth-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .auth-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .auth-box h2 {
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        .auth-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .auth-form input {
-            padding: 0.8rem;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
-
-        .auth-btn {
-            background-color: #007bff;
-            color: white;
-            padding: 0.8rem;
-            border: none;
-            border-radius: 6px;
-            font-size: 1rem;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .auth-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .auth-toggle {
-            margin-top: 1rem;
-            font-size: 0.9rem;
-        }
-
-        .auth-toggle span {
-            color: #007bff;
-            cursor: pointer;
-            text-decoration: underline;
-        }
-
-        .auth-error {
-            color: red;
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            display: none;
-        }
-
-        .logout-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            float: right;
-            margin: 10px;
-        }
-
-        /* Masquer le site tant qu'on n'est pas connecté */
-        body.logged-out main, 
-        body.logged-out header, 
-        body.logged-out footer {
-            display: none;
-        }
-    </style>
 </head>
 <body class="logged-out">
 
-    <!-- ÉCRAN D'AUTHENTIFICATION -->
+    <!-- ÉCRAN D'AUTHENTIFICATION / PROFIL -->
     <div id="auth-modal" class="auth-overlay">
         <div class="auth-box">
-            <h2 id="auth-title">Inscription</h2>
+            <div class="auth-header-icon">🎓</div>
+            <h2 id="auth-title">Crée ton profil étudiant</h2>
+            <p id="auth-subtitle" class="auth-subtitle">Rejoins le guide pour accéder à toutes les ressources.</p>
+            
             <form id="auth-form" class="auth-form" onsubmit="handleAuth(event)">
-                <input type="text" id="username" placeholder="Identifiant / E-mail" required>
-                <input type="password" id="password" placeholder="Mot de passe" required>
-                <button type="submit" id="auth-submit-btn" class="auth-btn">S'inscrire</button>
+                <!-- Champs supplémentaires pour le profil (visibles uniquement à l'inscription) -->
+                <div id="profile-fields" class="profile-fields">
+                    <div class="input-group">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" id="firstname" placeholder="Ex: Tamazight" autocomplete="given-name">
+                    </div>
+                    <div class="input-group">
+                        <label for="lastname">Nom</label>
+                        <input type="text" id="lastname" placeholder="Ex: Aoudia" autocomplete="family-name">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="username">Identifiant ou E-mail</label>
+                    <input type="email" id="username" placeholder="ton.email@domaine.com" required autocomplete="username">
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" placeholder="••••••••••••" required autocomplete="current-password">
+                </div>
+
+                <button type="submit" id="auth-submit-btn" class="auth-btn">Créer mon compte</button>
             </form>
+
             <p id="auth-error" class="auth-error"></p>
-            <p class="auth-toggle">
-                <span id="auth-toggle-text">Déjà un compte ? Connectez-vous</span>
-            </p>
+            
+            <div class="auth-toggle">
+                <span id="auth-toggle-text" onclick="toggleAuthMode()">Déjà un compte ? Connecte-toi</span>
+            </div>
         </div>
     </div>
 
-    <!-- BOUTON DÉCONNEXION -->
-    <button id="logout-btn" class="logout-btn" onclick="logout()" style="display:none;">Déconnexion</button>
+    <!-- BARRE UTILISATEUR & DÉCONNEXION -->
+    <div id="user-top-bar" class="user-top-bar" style="display:none;">
+        <span id="welcome-user-message">👤 Bienvenue</span>
+        <button id="logout-btn" class="logout-btn" onclick="logout()">Déconnexion</button>
+    </div>
 
     <header>
         <h1>🎓 Guide de Survie Étudiante & Internationale</h1>
-        <p>Cliquez sur une catégorie pour afficher les ressources associées.</p>
+        <p>Clique sur une catégorie pour afficher les ressources associées.</p>
     </header>
 
     <main>
 
-        <!-- MENU AVEC ICÔNES ET INTITULÉS -->
+        <!-- MENU DES CATÉGORIES -->
         <nav class="categories-nav">
             <button class="category-btn active" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
@@ -314,65 +247,104 @@
         <p>Guide mis à jour — Version 2 | <a href="index0.html">Voir la Version 1</a></p>
     </footer>
 
-    <!-- SCRIPT POUR L'AUTHENTIFICATION ET LES CATÉGORIES -->
+    <!-- SCRIPT DE GESTION DU PROFIL ET DE L'AUTHENTIFICATION -->
     <script>
         let isSignup = true;
 
-        // Basculer entre Inscription et Connexion
-        document.getElementById('auth-toggle-text').addEventListener('click', function() {
+        function toggleAuthMode() {
             isSignup = !isSignup;
-            document.getElementById('auth-title').innerText = isSignup ? "Inscription" : "Connexion";
-            document.getElementById('auth-submit-btn').innerText = isSignup ? "S'inscrire" : "Se connecter";
-            this.innerText = isSignup ? "Déjà un compte ? Connectez-vous" : "Pas encore de compte ? Inscrivez-vous";
-            document.getElementById('auth-error').style.display = 'none';
-        });
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const toggleText = document.getElementById('auth-toggle-text');
+            const profileFields = document.getElementById('profile-fields');
 
-        // Gérer la soumission du formulaire (Inscription / Connexion)
+            if (isSignup) {
+                title.innerText = "Crée ton profil étudiant";
+                subtitle.innerText = "Rejoins le guide pour accéder à toutes les ressources.";
+                submitBtn.innerText = "Créer mon compte";
+                toggleText.innerText = "Déjà un compte ? Connecte-toi";
+                profileFields.style.display = "block";
+                document.getElementById('firstname').required = true;
+                document.getElementById('lastname').required = true;
+            } else {
+                title.innerText = "Bon retour !";
+                subtitle.innerText = "Connecte-toi à ton espace personnel.";
+                submitBtn.innerText = "Se connecter";
+                toggleText.innerText = "Pas encore de compte ? Crée-le ici";
+                profileFields.style.display = "none";
+                document.getElementById('firstname').required = false;
+                document.getElementById('lastname').required = false;
+            }
+            document.getElementById('auth-error').style.display = 'none';
+        }
+
         function handleAuth(e) {
             e.preventDefault();
-            const user = document.getElementById('username').value;
+            const user = document.getElementById('username').value.trim();
             const pass = document.getElementById('password').value;
             const errorElement = document.getElementById('auth-error');
 
             if (isSignup) {
-                // Inscription : sauvegarder dans localStorage
-                localStorage.setItem('user_' + user, pass);
+                const firstname = document.getElementById('firstname').value.trim();
+                const lastname = document.getElementById('lastname').value.trim();
+
+                // Enregistrer les infos du profil
+                const profileData = {
+                    password: pass,
+                    firstname: firstname,
+                    lastname: lastname
+                };
+
+                localStorage.setItem('user_' + user, JSON.stringify(profileData));
+                localStorage.setItem('currentUser', user);
                 localStorage.setItem('isLoggedIn', 'true');
-                showSite();
+                showSite(firstname, lastname);
             } else {
-                // Connexion : vérifier les identifiants
-                const storedPass = localStorage.getItem('user_' + user);
-                if (storedPass && storedPass === pass) {
-                    localStorage.setItem('isLoggedIn', 'true');
-                    showSite();
+                const storedDataRaw = localStorage.getItem('user_' + user);
+                if (storedDataRaw) {
+                    const storedData = JSON.parse(storedDataRaw);
+                    if (storedData.password === pass) {
+                        localStorage.setItem('currentUser', user);
+                        localStorage.setItem('isLoggedIn', 'true');
+                        showSite(storedData.firstname, storedData.lastname);
+                        return;
+                    }
+                }
+                errorElement.innerText = "Identifiant ou mot de passe incorrect.";
+                errorElement.style.display = 'block';
+            }
+        }
+
+        function showSite(firstname, lastname) {
+            document.body.classList.remove('logged-out');
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('user-top-bar').style.display = 'flex';
+            
+            if (firstname && lastname) {
+                document.getElementById('welcome-user-message').innerText = `👋 Bonjour, ${firstname} ${lastname}`;
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('currentUser');
+            location.reload();
+        }
+
+        window.onload = function() {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                const currentUser = localStorage.getItem('currentUser');
+                const storedDataRaw = localStorage.getItem('user_' + currentUser);
+                if (storedDataRaw) {
+                    const storedData = JSON.parse(storedDataRaw);
+                    showSite(storedData.firstname, storedData.lastname);
                 } else {
-                    errorElement.innerText = "Identifiant ou mot de passe incorrect.";
-                    errorElement.style.display = 'block';
+                    showSite("Étudiant", "");
                 }
             }
         }
 
-        // Afficher le contenu du site si connecté
-        function showSite() {
-            document.body.classList.remove('logged-out');
-            document.getElementById('auth-modal').style.display = 'none';
-            document.getElementById('logout-btn').style.display = 'block';
-        }
-
-        // Se déconnecter
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            location.reload();
-        }
-
-        // Vérifier au chargement si l'utilisateur est déjà connecté
-        window.onload = function() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                showSite();
-            }
-        };
-
-        // Navigation entre catégories
         function openCategory(evt, categoryName) {
             var contents = document.getElementsByClassName("tab-content");
             for (var i = 0; i < contents.length; i++) {
