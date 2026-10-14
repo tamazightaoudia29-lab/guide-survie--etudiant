@@ -185,6 +185,10 @@
             justify-content: space-between;
         }
 
+        .card.algeria-highlight {
+            border: 2px solid #006233; /* Distinction visuelle élégante pour les particularités algériennes */
+        }
+
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: 10px;
@@ -557,7 +561,7 @@
 
     <main>
 
-        <!-- MENU DES CATÉGORIES PRINCIPALES (SANS FAQ NI CONTACT) -->
+        <!-- MENU DES CATÉGORIES PRINCIPALES -->
         <nav class="categories-nav">
             <button class="category-btn active" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
@@ -600,8 +604,14 @@
                 <div class="card">
                     <div class="card-icon">🏛️</div>
                     <h3>Titre de Séjour</h3>
-                    <p>Demandes de renouvellement et suivi de dossier en ligne.</p>
+                    <p>Demandes de renouvellement et suivi de dossier en ligne sur l'ANEF.</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
+                </div>
+                <div class="card algeria-highlight">
+                    <div class="card-icon">🇩🇿</div>
+                    <h3>Accord Franco-Algérien</h3>
+                    <p>Règles spécifiques de 1968 régissant le séjour, la circulation et le statut des étudiants algériens.</p>
+                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2257" target="_blank" class="card-btn">En savoir plus</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🏦</div>
@@ -625,7 +635,7 @@
                 <div class="card">
                     <div class="card-icon">🏢</div>
                     <h3>Logement Crous</h3>
-                    <p>Réserve une chambre ou un studio en résidence universitaire Crous.</p>
+                    <p>Réserve une chambre ou un studio en résidence universitaire Crous via le DSE.</p>
                     <a href="https://www.trouverunlogement.lescrous.fr/" target="_blank" class="card-btn">Trouver un logement</a>
                 </div>
                 <div class="card">
@@ -658,6 +668,12 @@
                     <h3>Sécurité Sociale (Ameli)</h3>
                     <p>Inscription gratuite pour les étudiants internationaux.</p>
                     <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">S'inscrire à Ameli</a>
+                </div>
+                <div class="card algeria-highlight">
+                    <div class="card-icon">🇩🇿</div>
+                    <h3>Protocole Sécu Algérie</h3>
+                    <p>Dispositions de la convention bilatérale franco-algérienne de sécurité sociale pour la prise en charge des soins.</p>
+                    <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">Détails Ameli</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🏥</div>
@@ -736,14 +752,35 @@
             </div>
         </div>
 
-        <!-- 6. FAQ (FOIRE AUX QUESTIONS TRÈS DÉTAILLÉE) -->
+        <!-- 6. FAQ (FOIRE AUX QUESTIONS DÉTAILLÉE + FOCUS ALGÉRIE) -->
         <div id="faq" class="tab-content">
             <h2 class="section-title">❓ Foire Aux Questions (FAQ Détaillée)</h2>
             <div class="faq-container">
                 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>1. Dans quel délai et comment dois-je valider mon visa VLS-TS ?</span>
+                        <span>1. Quelles sont les particularités de l'Accord franco-algérien de 1968 ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Le cadre juridique :</strong> Les ressortissants algériens en France sont régis par l'<strong>Accord franco-algérien du 27 décembre 1968</strong> (et non par le CESEDA général applicable aux autres pays hors UE).</p>
+                        <p>Cet accord encadre spécifiquement les conditions de délivrance et de renouvellement du certificat de résidence d'un an portant la mention "étudiant".</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>2. Comment s'inscrire à la Sécurité sociale avec la convention Algérie ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Grâce à l'accord bilatéral de Sécurité sociale entre la France et l'Algérie, tu dois t'inscrire sur <strong>etudiant-etranger.ameli.fr</strong> dès ton arrivée en fournissant les justificatifs et documents requis (comme le formulaire bilatéral adéquat si applicable).</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>3. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
@@ -754,71 +791,44 @@
                             <li>Munis-toi de ton numéro de visa, de la date de ton arrivée en France et de ton adresse e-mail.</li>
                             <li>Renseigne les informations demandées concernant ton passeport et ton domicile en France.</li>
                             <li>Paye la taxe de séjour en ligne par timbre fiscal électronique.</li>
-                            <li>Télécharge ton attestation de validation, qui te sera demandée pour toutes tes démarches (CAF, Sécurité sociale, etc.).</li>
+                            <li>Télécharge ton attestation de validation.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>2. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
+                        <span>4. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p><strong>Qu'est-ce que c'est ?</strong> Visale (Visa pour le Logement et l'Emploi) est une caution locative gratuite accordée par Action Logement qui se porte garante auprès de ton propriétaire en cas d'impayés de loyer.</p>
+                        <p><strong>Qu'est-ce que c'est ?</strong> Visale est une caution locative gratuite accordée par Action Logement qui se porte garante auprès de ton propriétaire en cas d'impayés de loyer.</p>
                         <p><strong>Comment l'obtenir :</strong></p>
                         <ul>
-                            <li>Crée un compte personnel sur le site officiel <strong>visale.fr</strong> avant même de signer ton bail de location.</li>
-                            <li>Constitue ton dossier en ligne en téléversant tes justificatifs (pièce d'identité, justificatif de scolarité ou visa).</li>
-                            <li>Obtiens ton <em>"Visa Visale"</em> certifié en quelques jours.</li>
-                            <li>Transmets ce document à ton futur propriétaire ou bailleur pour valider ton dossier de location.</li>
+                            <li>Crée un compte personnel sur le site officiel <strong>visale.fr</strong> avant de signer ton bail.</li>
+                            <li>Constitue ton dossier en ligne avec tes justificatifs.</li>
+                            <li>Obtiens ton <em>"Visa Visale"</em> et transmets-le à ton propriétaire.</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>3. Qu'est-ce que la CVEC et qui est concerné par son paiement ?</span>
+                        <span>5. Qu'est-ce que la CVEC et qui est concerné ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p><strong>Définition :</strong> La Contribution Vie Étudiante et de Campus (CVEC) est une taxe obligatoire instaurée pour favoriser l'accueil, la santé, le sport et la culture des étudiants.</p>
-                        <p><strong>Montant et Exonération :</strong></p>
-                        <ul>
-                            <li>Le tarif est fixé à environ 100 € par an (revalorisé chaque année).</li>
-                            <li><strong>Sont exonérés (ne payent pas) :</strong> Les étudiants boursiers sur critères sociaux gérés par le Crous, les réfugiés et les bénéficiaires de la protection subsidiaire.</li>
-                            <li>Même si tu es exonéré(e), tu dois obligatoirement te connecter sur le site <strong>cvec.etudiant.gouv.fr</strong> pour récupérer ton attestation d'acquittement ou d'exonération, indispensable pour finaliser ton inscription universitaire.</li>
-                        </ul>
+                        <p>La Contribution Vie Étudiante et de Campus (CVEC) est obligatoire pour les étudiants en formation initiale (environ 100 € par an). Les boursiers du Crous en sont exonérés, mais tous doivent se connecter sur <strong>cvec.etudiant.gouv.fr</strong> pour récupérer l'attestation obligatoire pour l'université.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>4. Comment contacter une assistante sociale du Crous en cas d'urgence financière ?</span>
+                        <span>6. Comment contacter une assistante sociale du Crous en urgence ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Si tu traverses une période difficile (loyer impayé, précarité alimentaire, urgence médicale), le Crous met à disposition des services sociaux gratuits :</p>
-                        <ul>
-                            <li>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong>.</li>
-                            <li>Clique sur la rubrique <strong>"Prendre rendez-vous"</strong> puis sélectionne le service social.</li>
-                            <li>Tu peux également te renseigner auprès de l'accueil de ton Crous régional pour obtenir un rendez-vous d'urgence rapide ou demander une aide financière ponctuelle (AFEX).</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>5. Comment fonctionne l'aide au logement (APL) de la CAF ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>L'Aide Personnalisée au Logement (APL) versée par la Caisse d'Allocations Familiales (CAF) t'aide à réduire ton loyer mensuel.</p>
-                        <p><strong>Conseils pratiques :</strong></p>
-                        <ul>
-                            <li>Fais ta simulation et ta demande en ligne dès ton emménagement sur <strong>caf.fr</strong> (les aides ne sont pas rétroactives, chaque mois perdu ne se rattrape pas).</li>
-                            <li>Prépare ton bail, ton RIB à ton nom, ton acte de naissance traduit (pour les étudiants internationaux) et ton attestation de loyer remplie par le propriétaire.</li>
-                        </ul>
+                        <p>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong> dans la rubrique <strong>"Prendre rendez-vous"</strong> avec le service social pour obtenir un rendez-vous rapide ou demander une aide d'urgence.</p>
                     </div>
                 </div>
 
@@ -829,7 +839,7 @@
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
-                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ détaillée ? Envoie-moi un message direct !</p>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ ? Envoie-moi un message !</p>
                 <!-- Formulaire connecté à ton Formspree -->
                 <form action="https://formspree.io/f/maeqlnre" method="POST" class="contact-form">
                     <input type="text" name="name" placeholder="Ton nom et prénom" required>
