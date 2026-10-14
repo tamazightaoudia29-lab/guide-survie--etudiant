@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de Survie Étudiante — Version 2</title>
     <style>
-        /* --- TOUT LE CSS INTÉGRÉ POUR ÉVITER LES BOGUES --- */
+        /* --- STYLES GÉNÉRAUX --- */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f4f7f6;
@@ -19,6 +19,7 @@
             color: white;
             text-align: center;
             padding: 30px 20px;
+            position: relative;
         }
 
         header h1 {
@@ -30,6 +31,69 @@
             font-size: 1rem;
             opacity: 0.9;
             margin-top: 8px;
+        }
+
+        /* --- MENU HAMBURGER (TROIS POINTS) --- */
+        .menu-icon-container {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            cursor: pointer;
+            z-index: 100;
+        }
+
+        .hamburger-dots {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .hamburger-dots:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Menu déroulant */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 50px;
+            background: white;
+            color: #333;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-radius: 8px;
+            overflow: hidden;
+            width: 200px;
+            text-align: left;
+            z-index: 200;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a, .dropdown-menu button {
+            display: block;
+            width: 100%;
+            padding: 12px 15px;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 0.95rem;
+            color: #333;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .dropdown-menu a:hover, .dropdown-menu button:hover {
+            background-color: #f1f1f1;
+            color: #1e3c72;
         }
 
         main {
@@ -154,20 +218,83 @@
             background-color: #2a5298;
         }
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            background: #e9ecef;
-            margin-top: 40px;
-            font-size: 0.9rem;
+        /* --- FAQ ACCORDÉON --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        footer a {
-            color: #1e3c72;
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 15px 20px;
             font-weight: bold;
+            color: #1e3c72;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* --- DESIGN MODERNE DE LA FENÊTRE DE CONNEXION / PROFIL --- */
+        .faq-question:hover {
+            background-color: #f8f9fa;
+        }
+
+        .faq-answer {
+            padding: 0 20px 15px 20px;
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* --- FORMULAIRE DE CONTACT --- */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            height: 120px;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #1e3c72;
+        }
+
+        /* --- DESIGN DE LA FENÊTRE DE CONNEXION / PROFIL --- */
         .auth-overlay {
             position: fixed;
             top: 0;
@@ -323,6 +450,19 @@
             background-color: #c82333;
         }
 
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #e9ecef;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
         /* Masquer le site principal si déconnecté */
         body.logged-out main, 
         body.logged-out header, 
@@ -342,7 +482,6 @@
             <p id="auth-subtitle" class="auth-subtitle">Rejoins le guide pour accéder à toutes les ressources.</p>
             
             <form id="auth-form" class="auth-form" onsubmit="handleAuth(event)">
-                <!-- Champs supplémentaires pour le profil -->
                 <div id="profile-fields" class="profile-fields">
                     <div class="input-group">
                         <label for="firstname">Prénom</label>
@@ -382,13 +521,27 @@
     </div>
 
     <header>
+        <!-- MENU 3 POINTS (HAMBURGER) -->
+        <div class="menu-icon-container">
+            <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
+            <div id="dropdown-menu" class="dropdown-menu">
+                <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
+                <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
+                <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
+                <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
+                <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
+                <button onclick="openCategory(event, 'faq')">❓ FAQ</button>
+                <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
+            </div>
+        </div>
+
         <h1>🎓 Guide de Survie Étudiante & Internationale</h1>
         <p>Clique sur une catégorie pour afficher les ressources associées.</p>
     </header>
 
     <main>
 
-        <!-- MENU DES CATÉGORIES -->
+        <!-- MENU DES CATÉGORIES PRINCIPALES -->
         <nav class="categories-nav">
             <button class="category-btn active" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
@@ -413,6 +566,16 @@
             <button class="category-btn" onclick="openCategory(event, 'transports')">
                 <span class="category-icon">🚆</span>
                 <span class="category-title">Transports & Vie</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'faq')">
+                <span class="category-icon">❓</span>
+                <span class="category-title">FAQ</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'contact')">
+                <span class="category-icon">✉️</span>
+                <span class="category-title">Contact</span>
             </button>
         </nav>
 
@@ -557,134 +720,3 @@
                     <h3>Aide Alimentaire</h3>
                     <p>Distributions de paniers repas gratuits (Linkee, Cop1...).</p>
                     <a href="https://www.linkee.co/" target="_blank" class="card-btn">Trouver une distribution</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">💼</div>
-                    <h3>Jobs Étudiants</h3>
-                    <p>Emplois à temps partiel compatibles avec tes études sur Jobaviz.</p>
-                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir les offres</a>
-                </div>
-            </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>Guide mis à jour — Version 2 | <a href="index0.html">Voir la Version 1</a></p>
-    </footer>
-
-    <!-- SCRIPT DE GESTION DU PROFIL ET DE L'AUTHENTIFICATION -->
-    <script>
-        let isSignup = true;
-
-        function toggleAuthMode() {
-            isSignup = !isSignup;
-            const title = document.getElementById('auth-title');
-            const subtitle = document.getElementById('auth-subtitle');
-            const submitBtn = document.getElementById('auth-submit-btn');
-            const toggleText = document.getElementById('auth-toggle-text');
-            const profileFields = document.getElementById('profile-fields');
-
-            if (isSignup) {
-                title.innerText = "Crée ton profil étudiant";
-                subtitle.innerText = "Rejoins le guide pour accéder à toutes les ressources.";
-                submitBtn.innerText = "Créer mon compte";
-                toggleText.innerText = "Déjà un compte ? Connecte-toi";
-                profileFields.style.display = "block";
-                document.getElementById('firstname').required = true;
-                document.getElementById('lastname').required = true;
-            } else {
-                title.innerText = "Bon retour !";
-                subtitle.innerText = "Connecte-toi à ton espace personnel.";
-                submitBtn.innerText = "Se connecter";
-                toggleText.innerText = "Pas encore de compte ? Crée-le ici";
-                profileFields.style.display = "none";
-                document.getElementById('firstname').required = false;
-                document.getElementById('lastname').required = false;
-            }
-            document.getElementById('auth-error').style.display = 'none';
-        }
-
-        function handleAuth(e) {
-            e.preventDefault();
-            const user = document.getElementById('username').value.trim();
-            const pass = document.getElementById('password').value;
-            const errorElement = document.getElementById('auth-error');
-
-            if (isSignup) {
-                const firstname = document.getElementById('firstname').value.trim();
-                const lastname = document.getElementById('lastname').value.trim();
-
-                const profileData = {
-                    password: pass,
-                    firstname: firstname,
-                    lastname: lastname
-                };
-
-                localStorage.setItem('user_' + user, JSON.stringify(profileData));
-                localStorage.setItem('currentUser', user);
-                localStorage.setItem('isLoggedIn', 'true');
-                showSite(firstname, lastname);
-            } else {
-                const storedDataRaw = localStorage.getItem('user_' + user);
-                if (storedDataRaw) {
-                    const storedData = JSON.parse(storedDataRaw);
-                    if (storedData.password === pass) {
-                        localStorage.setItem('currentUser', user);
-                        localStorage.setItem('isLoggedIn', 'true');
-                        showSite(storedData.firstname, storedData.lastname);
-                        return;
-                    }
-                }
-                errorElement.innerText = "Identifiant ou mot de passe incorrect.";
-                errorElement.style.display = 'block';
-            }
-        }
-
-        function showSite(firstname, lastname) {
-            document.body.classList.remove('logged-out');
-            document.getElementById('auth-modal').style.display = 'none';
-            document.getElementById('user-top-bar').style.display = 'flex';
-            
-            if (firstname && lastname) {
-                document.getElementById('welcome-user-message').innerText = `👋 Bonjour, ${firstname} ${lastname}`;
-            }
-        }
-
-        function logout() {
-            localStorage.removeItem('isLoggedIn');
-            localStorage.removeItem('currentUser');
-            location.reload();
-        }
-
-        window.onload = function() {
-            if (localStorage.getItem('isLoggedIn') === 'true') {
-                const currentUser = localStorage.getItem('currentUser');
-                const storedDataRaw = localStorage.getItem('user_' + currentUser);
-                if (storedDataRaw) {
-                    const storedData = JSON.parse(storedDataRaw);
-                    showSite(storedData.firstname, storedData.lastname);
-                } else {
-                    showSite("Étudiant", "");
-                }
-            }
-        }
-
-        function openCategory(evt, categoryName) {
-            var contents = document.getElementsByClassName("tab-content");
-            for (var i = 0; i < contents.length; i++) {
-                contents[i].classList.remove("active");
-            }
-
-            var buttons = document.getElementsByClassName("category-btn");
-            for (var i = 0; i < buttons.length; i++) {
-                buttons[i].classList.remove("active");
-            }
-
-            document.getElementById(categoryName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-        }
-    </script>
-
-</body>
-</html>
