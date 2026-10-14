@@ -509,6 +509,7 @@
             <p id="auth-error" class="auth-error"></p>
             
             <div class="auth-toggle">
+                <!-- ID CORRIGÉ ICI -->
                 <span id="auth-toggle-text" onclick="toggleAuthMode()">Déjà un compte ? Connecte-toi</span>
             </div>
         </div>
@@ -574,4 +575,275 @@
             </button>
 
             <button class="category-btn" onclick="openCategory(event, 'contact')">
-                <span class="category-icon
+                <span class="category-icon">✉️</span>
+                <span class="category-title">Contact</span>
+            </button>
+        </nav>
+
+        <!-- SECTIONS DE CONTENU -->
+
+        <!-- 1. DÉMARCHES -->
+        <div id="demarches" class="tab-content active">
+            <h2 class="section-title">📋 Démarches Administratives</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🛂</div>
+                    <h3>Validation du Visa (VLS-TS)</h3>
+                    <p>Obligatoire dans les 3 mois suivant ton arrivée en France sur la plateforme ANEF.</p>
+                    <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Valider mon visa</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏛️</div>
+                    <h3>Titre de Séjour</h3>
+                    <p>Demandes de renouvellement et suivi de dossier en ligne.</p>
+                    <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏦</div>
+                    <h3>Compte Bancaire</h3>
+                    <p>Indispensable pour recevoir la CAF, la bourse et tes remboursements de santé.</p>
+                    <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">En savoir plus</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📑</div>
+                    <h3>Attestation CVEC</h3>
+                    <p>Contribution Vie Étudiante et de Campus à obtenir avant l'inscription.</p>
+                    <a href="https://cvec.etudiant.gouv.fr/" target="_blank" class="card-btn">Obtenir la CVEC</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. LOGEMENT -->
+        <div id="logement" class="tab-content">
+            <h2 class="section-title">🏠 Logement & Crous</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🏢</div>
+                    <h3>Logement Crous</h3>
+                    <p>Réserve une chambre ou un studio en résidence universitaire Crous.</p>
+                    <a href="https://www.trouverunlogement.lescrous.fr/" target="_blank" class="card-btn">Trouver un logement</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🛡️</div>
+                    <h3>Garant Visale</h3>
+                    <p>Caution locative gratuite accordée par Action Logement.</p>
+                    <a href="https://www.visale.fr/" target="_blank" class="card-btn">Demander Visale</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔑</div>
+                    <h3>Résidences Privées</h3>
+                    <p>Plateformes de recherche de logements étudiants privés.</p>
+                    <a href="https://www.studapart.com/" target="_blank" class="card-btn">Voir Studapart</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📞</div>
+                    <h3>Carte des Crous</h3>
+                    <p>Coordonnées directes des gestionnaires et secrétariats régionaux.</p>
+                    <a href="https://www.etudiant.gouv.fr/fr/vos-crous-1139" target="_blank" class="card-btn">Contacter mon Crous</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. SANTÉ -->
+        <div id="sante" class="tab-content">
+            <h2 class="section-title">🩺 Santé & Accompagnement</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">💳</div>
+                    <h3>Sécurité Sociale (Ameli)</h3>
+                    <p>Inscription gratuite pour les étudiants internationaux.</p>
+                    <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">S'inscrire à Ameli</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏥</div>
+                    <h3>Mutuelle CSS</h3>
+                    <p>Prise en charge des soins pour les revenus modestes.</p>
+                    <a href="https://www.ameli.fr/assure/droits-demarches/difficultes-acces-droits-soins/complementaire-sante-solidaire" target="_blank" class="card-btn">Tester son éligibilité</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📅</div>
+                    <h3>Doctolib</h3>
+                    <p>Rendez-vous médicaux rapides chez des praticiens proches de chez toi.</p>
+                    <a href="https://www.doctolib.fr/" target="_blank" class="card-btn">Prendre RDV</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧠</div>
+                    <h3>Soutien Psychologique</h3>
+                    <p>Séances de psy gratuites via Santé Psy Étudiant.</p>
+                    <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Santé Psy Étudiant</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. BOURSES -->
+        <div id="bourses" class="tab-content">
+            <h2 class="section-title">💶 Bourses & Aides Financières</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Dossier Social Étudiant</h3>
+                    <p>Demande de bourse sur critères sociaux et de logement Crous.</p>
+                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Faire le DSE</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🏠</div>
+                    <h3>Aide au Logement (CAF)</h3>
+                    <p>Calcule et demande ton APL en ligne.</p>
+                    <a href="https://www.caf.fr/" target="_blank" class="card-btn">Demander l'APL</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🆘</div>
+                    <h3>Aides Ponctuelles Crous</h3>
+                    <p>Rendez-vous avec une assistante sociale en cas de besoin urgent.</p>
+                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV Social</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🍽️</div>
+                    <h3>Repas Crous à 1 €</h3>
+                    <p>Repas complets à tarif réduit pour les étudiants boursiers/précaires.</p>
+                    <a href="https://www.lescrous.fr/" target="_blank" class="card-btn">Infos Restos U</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. TRANSPORTS -->
+        <div id="transports" class="tab-content">
+            <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🎫</div>
+                    <h3>Transports (Imagine R)</h3>
+                    <p>Abonnements étudiants à tarifs préférentiels.</p>
+                    <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🧺</div>
+                    <h3>Aide Alimentaire</h3>
+                    <p>Distributions de paniers repas gratuits (Linkee, Cop1...).</p>
+                    <a href="https://www.linkee.co/" target="_blank" class="card-btn">Trouver une distribution</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">💼</div>
+                    <h3>Jobs Étudiants</h3>
+                    <p>Emplois à temps partiel compatibles avec tes études sur Jobaviz.</p>
+                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir les offres</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. FAQ (FOIRE AUX QUESTIONS) -->
+        <div id="faq" class="tab-content">
+            <h2 class="section-title">❓ Foire Aux Questions (FAQ)</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Dans quel délai dois-je valider mon visa VLS-TS ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Tu dois impérativement valider ton visa dans les 3 mois suivant ton arrivée en France directement en ligne sur la plateforme ANEF.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Comment obtenir la garantie Visale gratuitement ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Il suffit de créer un compte sur le site officiel visale.fr avant de signer ton bail de location. Action Logement se portera garant pour toi.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Qu'est-ce que la CVEC et qui doit la payer ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        La Contribution Vie Étudiante et de Campus (CVEC) est obligatoire pour tous les étudiants inscrits en formation initiale dans un établissement supérieur en France (sauf boursiers exonérés).
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>Comment contacter une assistante sociale du Crous en urgence ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Tu peux prendre rendez-vous en ligne via ton espace sur messervices.etudiant.gouv.fr dans la rubrique "Prendre rendez-vous" avec le service social.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. CONTACT PAR E-MAIL -->
+        <div id="contact" class="tab-content">
+            <h2 class="section-title">✉️ Contacte-moi</h2>
+            <div class="contact-container">
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ ? Envoie-moi un message !</p>
+                <!-- Formulaire connecté à ton Formspree -->
+                <form action="https://formspree.io/f/maeqlnre" method="POST" class="contact-form">
+                    <input type="text" name="name" placeholder="Ton nom et prénom" required>
+                    <input type="email" name="email" placeholder="Ton adresse e-mail" required>
+                    <textarea name="message" placeholder="Écris ton message ou ta question ici..." required></textarea>
+                    <button type="submit" class="auth-btn">Envoyer le message</button>
+                </form>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>Guide mis à jour — Version 2 | <a href="index0.html">Voir la Version 1</a></p>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT -->
+    <script>
+        let isSignup = true;
+
+        function toggleAuthMode() {
+            isSignup = !isSignup;
+            const title = document.getElementById('auth-title');
+            const subtitle = document.getElementById('auth-subtitle');
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const toggleText = document.getElementById('auth-toggle-text');
+            const profileFields = document.getElementById('profile-fields');
+
+            if (isSignup) {
+                title.innerText = "Crée ton profil étudiant";
+                subtitle.innerText = "Rejoins le guide pour accéder à toutes les ressources.";
+                submitBtn.innerText = "Créer mon compte";
+                toggleText.innerText = "Déjà un compte ? Connecte-toi";
+                profileFields.style.display = "block";
+                document.getElementById('firstname').required = true;
+                document.getElementById('lastname').required = true;
+            } else {
+                title.innerText = "Bon retour !";
+                subtitle.innerText = "Connecte-toi à ton espace personnel.";
+                submitBtn.innerText = "Se connecter";
+                toggleText.innerText = "Pas encore de compte ? Crée-le ici";
+                profileFields.style.display = "none";
+                document.getElementById('firstname').required = false;
+                document.getElementById('lastname').required = false;
+            }
+            document.getElementById('auth-error').style.display = 'none';
+        }
+
+        function handleAuth(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value.trim();
+            const pass = document.getElementById('password').value;
+            const errorElement = document.getElementById('auth-error');
+
+            if (isSignup) {
+                const firstname = document.getElementById('firstname').value.trim();
+                const lastname = document.getElementById('lastname').value.trim();
+
+                const profileData = {
+                    password: pass,
+                    firstname: firstname,
+                    lastname: lastname
+                };
+
+                localStorage.setItem('user_' + user, JSON.stringify(profileData));
