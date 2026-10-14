@@ -68,7 +68,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border-radius: 8px;
             overflow: hidden;
-            width: 200px;
+            width: 220px;
             text-align: left;
             z-index: 200;
         }
@@ -120,7 +120,7 @@
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            min-width: 120px;
+            min-width: 130px;
             transition: all 0.2s ease;
         }
 
@@ -218,30 +218,32 @@
             background-color: #2a5298;
         }
 
-        /* --- FAQ ACCORDÉON --- */
+        /* --- FAQ ACCORDÉON DÉTAILLÉE --- */
         .faq-container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 15px;
         }
 
         .faq-item {
             background: white;
-            border-radius: 8px;
+            border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             overflow: hidden;
+            border-left: 4px solid #1e3c72;
         }
 
         .faq-question {
-            padding: 15px 20px;
+            padding: 18px 20px;
             font-weight: bold;
             color: #1e3c72;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            font-size: 1.05rem;
         }
 
         .faq-question:hover {
@@ -249,11 +251,25 @@
         }
 
         .faq-answer {
-            padding: 0 20px 15px 20px;
+            padding: 0 20px 20px 20px;
             font-size: 0.95rem;
-            color: #555;
-            line-height: 1.5;
+            color: #444;
+            line-height: 1.6;
             display: none;
+        }
+
+        .faq-answer p {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 6px;
         }
 
         .faq-item.active .faq-answer {
@@ -530,7 +546,7 @@
                 <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
                 <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
                 <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
-                <button onclick="openCategory(event, 'faq')">❓ FAQ</button>
+                <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
                 <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
             </div>
         </div>
@@ -541,7 +557,7 @@
 
     <main>
 
-        <!-- MENU DES CATÉGORIES PRINCIPALES -->
+        <!-- MENU DES CATÉGORIES PRINCIPALES (SANS FAQ NI CONTACT) -->
         <nav class="categories-nav">
             <button class="category-btn active" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
@@ -566,16 +582,6 @@
             <button class="category-btn" onclick="openCategory(event, 'transports')">
                 <span class="category-icon">🚆</span>
                 <span class="category-title">Transports & Vie</span>
-            </button>
-
-            <button class="category-btn" onclick="openCategory(event, 'faq')">
-                <span class="category-icon">❓</span>
-                <span class="category-title">FAQ</span>
-            </button>
-
-            <button class="category-btn" onclick="openCategory(event, 'contact')">
-                <span class="category-icon">✉️</span>
-                <span class="category-title">Contact</span>
             </button>
         </nav>
 
@@ -730,49 +736,92 @@
             </div>
         </div>
 
-        <!-- 6. FAQ (FOIRE AUX QUESTIONS) -->
+        <!-- 6. FAQ (FOIRE AUX QUESTIONS TRÈS DÉTAILLÉE) -->
         <div id="faq" class="tab-content">
-            <h2 class="section-title">❓ Foire Aux Questions (FAQ)</h2>
+            <h2 class="section-title">❓ Foire Aux Questions (FAQ Détaillée)</h2>
             <div class="faq-container">
+                
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Dans quel délai dois-je valider mon visa VLS-TS ?</span>
+                        <span>1. Dans quel délai et comment dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        Tu dois impérativement valider ton visa dans les 3 mois suivant ton arrivée en France directement en ligne sur la plateforme ANEF.
+                        <p><strong>Délai :</strong> Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant la date de ton arrivée en France pour valider ton visa long séjour valant titre de séjour (VLS-TS).</p>
+                        <p><strong>Procédure étape par étape :</strong></p>
+                        <ul>
+                            <li>Rends-toi sur la plateforme officielle de l'Administration des Étrangers en France (ANEF).</li>
+                            <li>Munis-toi de ton numéro de visa, de la date de ton arrivée en France et de ton adresse e-mail.</li>
+                            <li>Renseigne les informations demandées concernant ton passeport et ton domicile en France.</li>
+                            <li>Paye la taxe de séjour en ligne par timbre fiscal électronique.</li>
+                            <li>Télécharge ton attestation de validation, qui te sera demandée pour toutes tes démarches (CAF, Sécurité sociale, etc.).</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Comment obtenir la garantie Visale gratuitement ?</span>
+                        <span>2. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        Il suffit de créer un compte sur le site officiel visale.fr avant de signer ton bail de location. Action Logement se portera garant pour toi.
+                        <p><strong>Qu'est-ce que c'est ?</strong> Visale (Visa pour le Logement et l'Emploi) est une caution locative gratuite accordée par Action Logement qui se porte garante auprès de ton propriétaire en cas d'impayés de loyer.</p>
+                        <p><strong>Comment l'obtenir :</strong></p>
+                        <ul>
+                            <li>Crée un compte personnel sur le site officiel <strong>visale.fr</strong> avant même de signer ton bail de location.</li>
+                            <li>Constitue ton dossier en ligne en téléversant tes justificatifs (pièce d'identité, justificatif de scolarité ou visa).</li>
+                            <li>Obtiens ton <em>"Visa Visale"</em> certifié en quelques jours.</li>
+                            <li>Transmets ce document à ton futur propriétaire ou bailleur pour valider ton dossier de location.</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Qu'est-ce que la CVEC et qui doit la payer ?</span>
+                        <span>3. Qu'est-ce que la CVEC et qui est concerné par son paiement ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        La Contribution Vie Étudiante et de Campus (CVEC) est obligatoire pour tous les étudiants inscrits en formation initiale dans un établissement supérieur en France (sauf boursiers exonérés).
+                        <p><strong>Définition :</strong> La Contribution Vie Étudiante et de Campus (CVEC) est une taxe obligatoire instaurée pour favoriser l'accueil, la santé, le sport et la culture des étudiants.</p>
+                        <p><strong>Montant et Exonération :</strong></p>
+                        <ul>
+                            <li>Le tarif est fixé à environ 100 € par an (revalorisé chaque année).</li>
+                            <li><strong>Sont exonérés (ne payent pas) :</strong> Les étudiants boursiers sur critères sociaux gérés par le Crous, les réfugiés et les bénéficiaires de la protection subsidiaire.</li>
+                            <li>Même si tu es exonéré(e), tu dois obligatoirement te connecter sur le site <strong>cvec.etudiant.gouv.fr</strong> pour récupérer ton attestation d'acquittement ou d'exonération, indispensable pour finaliser ton inscription universitaire.</li>
+                        </ul>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>Comment contacter une assistante sociale du Crous en urgence ?</span>
+                        <span>4. Comment contacter une assistante sociale du Crous en cas d'urgence financière ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        Tu peux prendre rendez-vous en ligne via ton espace sur messervices.etudiant.gouv.fr dans la rubrique "Prendre rendez-vous" avec le service social.
+                        <p>Si tu traverses une période difficile (loyer impayé, précarité alimentaire, urgence médicale), le Crous met à disposition des services sociaux gratuits :</p>
+                        <ul>
+                            <li>Connecte-toi à ton espace personnel sur <strong>messervices.etudiant.gouv.fr</strong>.</li>
+                            <li>Clique sur la rubrique <strong>"Prendre rendez-vous"</strong> puis sélectionne le service social.</li>
+                            <li>Tu peux également te renseigner auprès de l'accueil de ton Crous régional pour obtenir un rendez-vous d'urgence rapide ou demander une aide financière ponctuelle (AFEX).</li>
+                        </ul>
                     </div>
                 </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <span>5. Comment fonctionne l'aide au logement (APL) de la CAF ?</span>
+                        <span>▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>L'Aide Personnalisée au Logement (APL) versée par la Caisse d'Allocations Familiales (CAF) t'aide à réduire ton loyer mensuel.</p>
+                        <p><strong>Conseils pratiques :</strong></p>
+                        <ul>
+                            <li>Fais ta simulation et ta demande en ligne dès ton emménagement sur <strong>caf.fr</strong> (les aides ne sont pas rétroactives, chaque mois perdu ne se rattrape pas).</li>
+                            <li>Prépare ton bail, ton RIB à ton nom, ton acte de naissance traduit (pour les étudiants internationaux) et ton attestation de loyer remplie par le propriétaire.</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -780,7 +829,7 @@
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
-                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ ? Envoie-moi un message !</p>
+                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ détaillée ? Envoie-moi un message direct !</p>
                 <!-- Formulaire connecté à ton Formspree -->
                 <form action="https://formspree.io/f/maeqlnre" method="POST" class="contact-form">
                     <input type="text" name="name" placeholder="Ton nom et prénom" required>
