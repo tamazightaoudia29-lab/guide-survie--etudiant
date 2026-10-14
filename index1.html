@@ -3,8 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide de Survie Étudiant — Version 2</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Guide de Survie Étudiante — Version 2</title>
+    <style>
+        /* --- TOUT LE CSS INTÉGRÉ POUR ÉVITER LES BOGUES --- */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        main {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* MENU DES BOUTONS DE CATÉGORIES */
+        .categories-nav {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            min-width: 120px;
+            transition: all 0.2s ease;
+        }
+
+        .category-btn:hover {
+            border-color: #1e3c72;
+            transform: translateY(-3px);
+        }
+
+        .category-btn.active {
+            background-color: #1e3c72;
+            border-color: #1e3c72;
+            color: white;
+        }
+
+        .category-icon {
+            font-size: 2.2rem;
+            margin-bottom: 8px;
+        }
+
+        .category-title {
+            font-weight: bold;
+            font-size: 0.95rem;
+        }
+
+        /* MASQUER / AFFICHER LES SECTIONS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GRILLE ET CARTES */
+        .section-title {
+            font-size: 1.5rem;
+            color: #1e3c72;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: #2c3e50;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+
+        .card-btn {
+            display: inline-block;
+            background-color: #1e3c72;
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.85rem;
+        }
+
+        .card-btn:hover {
+            background-color: #2a5298;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #e9ecef;
+            margin-top: 40px;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #1e3c72;
+            font-weight: bold;
+        }
+
+        /* --- DESIGN MODERNE DE LA FENÊTRE DE CONNEXION / PROFIL --- */
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(30, 60, 114, 0.92), rgba(42, 82, 152, 0.95));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+        }
+
+        .auth-box {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 16px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            width: 90%;
+            max-width: 420px;
+            text-align: center;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-header-icon {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .auth-box h2 {
+            margin: 0 0 8px 0;
+            font-size: 1.6rem;
+            color: #1e3c72;
+        }
+
+        .auth-subtitle {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            text-align: left;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .auth-form input {
+            padding: 12px 14px;
+            border: 1px solid #dcdcdc;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s;
+            background-color: #fafafa;
+        }
+
+        .auth-form input:focus {
+            border-color: #1e3c72;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
+        }
+
+        .auth-btn {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .auth-btn:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .auth-toggle {
+            margin-top: 20px;
+            font-size: 0.9rem;
+        }
+
+        .auth-toggle span {
+            color: #1e3c72;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+        }
+
+        .auth-error {
+            color: #dc3545;
+            font-size: 0.85rem;
+            margin-top: 12px;
+            background-color: #f8d7da;
+            padding: 8px;
+            border-radius: 6px;
+            display: none;
+        }
+
+        /* Barre supérieure utilisateur */
+        .user-top-bar {
+            background-color: #ffffff;
+            padding: 10px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #e0e0e0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        #welcome-user-message {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 0.95rem;
+        }
+
+        .logout-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85rem;
+            transition: background-color 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Masquer le site principal si déconnecté */
+        body.logged-out main, 
+        body.logged-out header, 
+        body.logged-out footer,
+        body.logged-out .user-top-bar {
+            display: none !important;
+        }
+    </style>
 </head>
 <body class="logged-out">
 
@@ -16,7 +342,7 @@
             <p id="auth-subtitle" class="auth-subtitle">Rejoins le guide pour accéder à toutes les ressources.</p>
             
             <form id="auth-form" class="auth-form" onsubmit="handleAuth(event)">
-                <!-- Champs supplémentaires pour le profil (visibles uniquement à l'inscription) -->
+                <!-- Champs supplémentaires pour le profil -->
                 <div id="profile-fields" class="profile-fields">
                     <div class="input-group">
                         <label for="firstname">Prénom</label>
@@ -289,7 +615,6 @@
                 const firstname = document.getElementById('firstname').value.trim();
                 const lastname = document.getElementById('lastname').value.trim();
 
-                // Enregistrer les infos du profil
                 const profileData = {
                     password: pass,
                     firstname: firstname,
