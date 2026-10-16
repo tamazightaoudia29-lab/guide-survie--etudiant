@@ -5,17 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de Survie Étudiante — Version 2</title>
     <style>
-        /* --- STYLES GÉNÉRAUX --- */
+        /* --- STYLES GÉNÉRAUX & VARIABLES DE THÈME --- */
+        :root {
+            --bg-color: #f4f7f6;
+            --text-color: #333;
+            --card-bg: #fff;
+            --header-bg: linear-gradient(135deg, #1e3c72, #2a5298);
+            --border-color: #e0e0e0;
+            --nav-bg: #fff;
+            --topbar-bg: #ffffff;
+            --card-text: #666;
+            --card-title: #2c3e50;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg: #1e1e1e;
+            --header-bg: linear-gradient(135deg, #0b192c, #1e3c72);
+            --border-color: #333;
+            --nav-bg: #1e1e1e;
+            --topbar-bg: #1a1a1a;
+            --card-text: #aaa;
+            --card-title: #ffffff;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
+            background-color: var(--bg-color);
             margin: 0;
             padding: 0;
-            color: #333;
+            color: var(--text-color);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: var(--header-bg);
             color: white;
             text-align: center;
             padding: 30px 20px;
@@ -33,27 +58,29 @@
             margin-top: 8px;
         }
 
-        /* --- MENU HAMBURGER (TROIS POINTS) --- */
-        .menu-icon-container {
+        /* --- CONTRÔLES HAUT DE PAGE (MODE SOMBRE & MENU) --- */
+        .header-controls {
             position: absolute;
             top: 20px;
             right: 25px;
-            cursor: pointer;
+            display: flex;
+            gap: 10px;
+            align-items: center;
             z-index: 100;
         }
 
-        .hamburger-dots {
+        .theme-toggle-btn, .hamburger-dots {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
-            font-size: 1.5rem;
-            padding: 8px 14px;
+            font-size: 1.2rem;
+            padding: 8px 12px;
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
         }
 
-        .hamburger-dots:hover {
+        .theme-toggle-btn:hover, .hamburger-dots:hover {
             background: rgba(255, 255, 255, 0.4);
         }
 
@@ -63,14 +90,15 @@
             position: absolute;
             right: 0;
             top: 50px;
-            background: white;
-            color: #333;
+            background: var(--card-bg);
+            color: var(--text-color);
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border-radius: 8px;
             overflow: hidden;
             width: 220px;
             text-align: left;
             z-index: 200;
+            border: 1px solid var(--border-color);
         }
 
         .dropdown-menu.show {
@@ -85,14 +113,14 @@
             border: none;
             text-align: left;
             font-size: 0.95rem;
-            color: #333;
+            color: var(--text-color);
             cursor: pointer;
             text-decoration: none;
             transition: background 0.2s;
         }
 
         .dropdown-menu a:hover, .dropdown-menu button:hover {
-            background-color: #f1f1f1;
+            background-color: rgba(30, 60, 114, 0.1);
             color: #1e3c72;
         }
 
@@ -106,22 +134,23 @@
         .categories-nav {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 12px;
             flex-wrap: wrap;
             margin-bottom: 30px;
         }
 
         .category-btn {
-            background: white;
-            border: 2px solid #e0e0e0;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 15px 20px;
+            padding: 12px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            min-width: 130px;
+            min-width: 110px;
             transition: all 0.2s ease;
+            color: var(--text-color);
         }
 
         .category-btn:hover {
@@ -136,13 +165,13 @@
         }
 
         .category-icon {
-            font-size: 2.2rem;
-            margin-bottom: 8px;
+            font-size: 2rem;
+            margin-bottom: 6px;
         }
 
         .category-title {
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
         }
 
         /* MASQUER / AFFICHER LES SECTIONS */
@@ -175,7 +204,7 @@
         }
 
         .card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -183,10 +212,11 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border: 1px solid var(--border-color);
         }
 
         .card.algeria-highlight {
-            border: 2px solid #006233; /* Distinction visuelle élégante */
+            border: 2px solid #006233;
         }
 
         .card-icon {
@@ -197,12 +227,12 @@
         .card h3 {
             margin: 0 0 10px 0;
             font-size: 1.1rem;
-            color: #2c3e50;
+            color: var(--card-title);
         }
 
         .card p {
             font-size: 0.9rem;
-            color: #666;
+            color: var(--card-text);
             line-height: 1.4;
             margin-bottom: 15px;
         }
@@ -222,6 +252,74 @@
             background-color: #2a5298;
         }
 
+        /* --- TO-DO LIST INTERACTIVE --- */
+        .todo-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .todo-form {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .todo-form input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .todo-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-color);
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .todo-item.completed span {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+
+        .todo-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .todo-delete {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
         /* --- FAQ ACCORDÉON DÉTAILLÉE --- */
         .faq-container {
             max-width: 850px;
@@ -232,11 +330,13 @@
         }
 
         .faq-item {
-            background: white;
+            background: var(--card-bg);
             border-radius: 10px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.05);
             overflow: hidden;
             border-left: 4px solid #1e3c72;
+            border: 1px solid var(--border-color);
+            border-left-width: 4px;
         }
 
         .faq-question {
@@ -251,29 +351,15 @@
         }
 
         .faq-question:hover {
-            background-color: #f8f9fa;
+            background-color: rgba(30, 60, 114, 0.05);
         }
 
         .faq-answer {
             padding: 0 20px 20px 20px;
             font-size: 0.95rem;
-            color: #444;
+            color: var(--card-text);
             line-height: 1.6;
             display: none;
-        }
-
-        .faq-answer p {
-            margin-top: 8px;
-            margin-bottom: 8px;
-        }
-
-        .faq-answer ul {
-            margin-top: 8px;
-            padding-left: 20px;
-        }
-
-        .faq-answer li {
-            margin-bottom: 6px;
         }
 
         .faq-item.active .faq-answer {
@@ -284,10 +370,11 @@
         .contact-container {
             max-width: 600px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
         }
 
         .contact-form {
@@ -298,7 +385,9 @@
 
         .contact-form input, .contact-form textarea {
             padding: 12px;
-            border: 1px solid #ddd;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
             border-radius: 6px;
             font-size: 0.95rem;
             outline: none;
@@ -308,10 +397,6 @@
         .contact-form textarea {
             resize: vertical;
             height: 120px;
-        }
-
-        .contact-form input:focus, .contact-form textarea:focus {
-            border-color: #1e3c72;
         }
 
         /* --- DESIGN DE LA FENÊTRE DE CONNEXION / PROFIL --- */
@@ -338,6 +423,7 @@
             max-width: 420px;
             text-align: center;
             animation: slideUp 0.4s ease-out;
+            color: #333;
         }
 
         @keyframes slideUp {
@@ -387,14 +473,7 @@
             border-radius: 8px;
             font-size: 0.95rem;
             outline: none;
-            transition: all 0.2s;
             background-color: #fafafa;
-        }
-
-        .auth-form input:focus {
-            border-color: #1e3c72;
-            background-color: #fff;
-            box-shadow: 0 0 0 3px rgba(30, 60, 114, 0.1);
         }
 
         .auth-btn {
@@ -407,12 +486,11 @@
             cursor: pointer;
             font-weight: bold;
             margin-top: 10px;
-            transition: opacity 0.2s, transform 0.1s;
+            transition: opacity 0.2s;
         }
 
         .auth-btn:hover {
             opacity: 0.95;
-            transform: translateY(-1px);
         }
 
         .auth-toggle {
@@ -439,13 +517,12 @@
 
         /* Barre supérieure utilisateur */
         .user-top-bar {
-            background-color: #ffffff;
+            background-color: var(--topbar-bg);
             padding: 10px 25px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid #e0e0e0;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            border-bottom: 1px solid var(--border-color);
         }
 
         #welcome-user-message {
@@ -463,17 +540,13 @@
             cursor: pointer;
             font-weight: bold;
             font-size: 0.85rem;
-            transition: background-color 0.2s;
-        }
-
-        .logout-btn:hover {
-            background-color: #c82333;
         }
 
         footer {
             text-align: center;
             padding: 25px;
-            background: #e9ecef;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
             margin-top: 40px;
             font-size: 0.9rem;
         }
@@ -541,18 +614,22 @@
     </div>
 
     <header>
-        <!-- MENU 3 POINTS (HAMBURGER) -->
-        <div class="menu-icon-container">
-            <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
-            <div id="dropdown-menu" class="dropdown-menu">
-                <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
-                <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
-                <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
-                <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
-                <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
-                <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs Étudiants</button>
-                <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
-                <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
+        <!-- CONTRÔLES HAUT DE PAGE (MODE SOMBRE & MENU) -->
+        <div class="header-controls">
+            <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()" title="Changer le mode d'affichage">🌙</button>
+            <div style="position: relative;">
+                <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
+                <div id="dropdown-menu" class="dropdown-menu">
+                    <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
+                    <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
+                    <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
+                    <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
+                    <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
+                    <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs</button>
+                    <button onclick="openCategory(event, 'todo')">✅ Ma To-Do List</button>
+                    <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
+                    <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
+                </div>
             </div>
         </div>
 
@@ -571,7 +648,7 @@
 
             <button class="category-btn" onclick="openCategory(event, 'logement')">
                 <span class="category-icon">🏠</span>
-                <span class="category-title">Logement & Crous</span>
+                <span class="category-title">Logement</span>
             </button>
 
             <button class="category-btn" onclick="openCategory(event, 'sante')">
@@ -581,17 +658,22 @@
 
             <button class="category-btn" onclick="openCategory(event, 'bourses')">
                 <span class="category-icon">💶</span>
-                <span class="category-title">Bourses & Aides</span>
+                <span class="category-title">Bourses</span>
             </button>
 
             <button class="category-btn" onclick="openCategory(event, 'transports')">
                 <span class="category-icon">🚆</span>
-                <span class="category-title">Transports & Vie</span>
+                <span class="category-title">Transports</span>
             </button>
 
             <button class="category-btn" onclick="openCategory(event, 'travail')">
                 <span class="category-icon">💼</span>
-                <span class="category-title">Travail & Jobs</span>
+                <span class="category-title">Travail</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'todo')">
+                <span class="category-icon">✅</span>
+                <span class="category-title">To-Do List</span>
             </button>
         </nav>
 
@@ -733,21 +815,21 @@
             </div>
         </div>
 
-        <!-- 5. TRANSPORTS (AVEC LA RÉDUCTION CSS / PASSE NAVIGO À -75%) -->
+        <!-- 5. TRANSPORTS -->
         <div id="transports" class="tab-content">
             <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🎫</div>
                     <h3>Transports (Imagine R)</h3>
-                    <p>Abonnements étudiants à tarifs préférentiels en Île-de-France pour les jeunes.</p>
+                    <p>Abonnements étudiants à tarifs préférentiels en Île-de-France.</p>
                     <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
                 </div>
-                <div class="card" style="border: 2px solid #1e3c72;">
+                <div class="card">
                     <div class="card-icon">📉</div>
                     <h3>Réduction Passe Navigo (-75% via la CSS)</h3>
-                    <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la <strong>Tarification Solidarité Transport</strong> : ton Passe Navigo mensuel te revient à seulement <strong>~22 €</strong> au lieu du tarif plein pot !</p>
-                    <p style="font-size: 0.85rem; color: #555; text-align: left;"><strong>Procédure :</strong> Une fois ta attestation CSS active (obtenue via Ameli ou la CAF), connecte-toi sur le site officiel <em>solidaritetransport.fr</em> ou appelle leur service pour faire valoir tes droits et l'activer sur ton passe.</p>
+                    <p>Si tu bénéficies de la CSS, ton Passe Navigo mensuel revient à <strong>~22 €</strong>.</p>
+                    <p style="font-size: 0.85rem; color: var(--card-text); text-align: left;"><strong>Procédure :</strong> Va sur <em>solidaritetransport.fr</em> avec ton attestation CSS pour activer la réduction.</p>
                     <a href="https://www.solidaritetransport.fr/" target="_blank" class="card-btn">Faire la demande</a>
                 </div>
                 <div class="card">
@@ -766,25 +848,42 @@
                 <div class="card algeria-highlight">
                     <div class="card-icon">📄</div>
                     <h3>Autorisation Provisoire de Travail (APT)</h3>
-                    <p>Pour les étudiants algériens, l'exercice d'une activité salariée est réglementé : <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong> avant de commencer tout emploi. C'est l'employeur qui doit en faire la demande auprès de la DREETS.</p>
+                    <p>Pour les étudiants algériens, l'exercice d'une activité salariée est réglementé : <strong>l'APT est obligatoire</strong> avant de commencer tout emploi (demandée par l'employeur auprès de la DREETS).</p>
                     <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">En savoir plus sur l'APT</a>
                 </div>
                 <div class="card algeria-highlight">
                     <div class="card-icon">⏱️</div>
                     <h3>Plafond des 803 Heures par An</h3>
-                    <p>Le temps de travail cumulé est strictement limité à <strong>803 heures par an</strong> (ce qui correspond à 60% de la durée légale annuelle). <strong>Attention :</strong> dépasser ce quota ou travailler sans APT expose l'étudiant à des problèmes graves lors du renouvellement de son titre de séjour à la préfecture.</p>
+                    <p>Le temps de travail cumulé est limité à <strong>803 heures par an</strong> (60% de la durée légale). Ne dépasse jamais ce quota sous peine de risques avec la préfecture lors du renouvellement.</p>
                     <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">Consulter la règle</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">💼</div>
                     <h3>Plateformes de Recherche (Jobaviz)</h3>
-                    <p>Consulte les offres de jobs étudiants compatibles avec ton emploi du temps universitaire pour arrondir tes fins de mois en toute légalité.</p>
+                    <p>Consulte les offres de jobs étudiants compatibles avec ton emploi du temps universitaire.</p>
                     <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir Jobaviz</a>
                 </div>
             </div>
         </div>
 
-        <!-- 7. FAQ (FOIRE AUX QUESTIONS DÉTAILLÉE + FOCUS ALGÉRIE) -->
+        <!-- 7. TO-DO LIST PERSONNELLE (INTERACTIVE) -->
+        <div id="todo" class="tab-content">
+            <h2 class="section-title">✅ Ma To-Do List Étudiante</h2>
+            <div class="todo-container">
+                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Organise tes démarches et suis ton avancement pas à pas. Tes tâches sont sauvegardées automatiquement sur ton profil !</p>
+                
+                <form class="todo-form" onsubmit="addTodo(event)">
+                    <input type="text" id="todo-input" placeholder="Ajouter une nouvelle tâche (ex: Valider mon visa ANEF)..." required>
+                    <button type="submit" class="card-btn" style="padding: 12px 20px;">Ajouter</button>
+                </form>
+
+                <ul id="todo-list" class="todo-list">
+                    <!-- Les tâches s'afficheront ici dynamiquement -->
+                </ul>
+            </div>
+        </div>
+
+        <!-- 8. FAQ -->
         <div id="faq" class="tab-content">
             <h2 class="section-title">❓ Foire Aux Questions (FAQ Détaillée)</h2>
             <div class="faq-container">
@@ -795,7 +894,7 @@
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la réduction Solidarité Transport. Il te suffit de te rendre sur le site <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande en ligne ou par téléphone. Ton forfait mensuel passera à environ 22 €.</p>
+                        <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la réduction Solidarité Transport. Rends-toi sur <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande. Ton forfait mensuel passera à environ 22 €.</p>
                     </div>
                 </div>
 
@@ -805,60 +904,38 @@
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p><strong>Le cadre juridique :</strong> Les ressortissants algériens en France sont régis par l'<strong>Accord franco-algérien du 27 décembre 1968</strong> (et non par le CESEDA général applicable aux autres pays hors UE).</p>
-                        <p>Cet accord encadre spécifiquement les conditions de délivrance et de renouvellement du certificat de résidence d'un an portant la mention "étudiant".</p>
+                        <p>Les ressortissants algériens en France sont régis par l'<strong>Accord franco-algérien du 27 décembre 1968</strong> (et non par le CESEDA général). Cet accord encadre la délivrance et le renouvellement du certificat de résidence étudiant.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>3. Comment s'inscrire à la Sécurité sociale avec la convention Algérie ?</span>
+                        <span>3. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Grâce à l'accord bilatéral de Sécurité sociale entre la France et l'Algérie, tu dois t'inscrire sur <strong>etudiant-etranger.ameli.fr</strong> dès ton arrivée en fournissant les justificatifs et documents requis.</p>
+                        <p>Oui, mais <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong>. Tu es limité à un maximum de <strong>803 heures par an</strong>. Ne dépasse pas ce quota pour éviter des problèmes lors du renouvellement en préfecture.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>4. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
+                        <span>4. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Oui, tu peux travailler, mais <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong> (demandée par l'employeur). Tu es limité à un maximum de <strong>803 heures par an</strong>. Ne dépasse jamais ce quota sous peine de refus de renouvellement ou de sanctions de la part de la préfecture.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>5. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p><strong>Délai :</strong> Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant la date de ton arrivée en France pour valider ton visa long séjour valant titre de séjour (VLS-TS) en ligne sur la plateforme ANEF.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>6. Comment obtenir la garantie Visale gratuitement pour mon logement ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Crée un compte sur le site officiel <strong>visale.fr</strong> avant de signer ton bail. Action Logement se portera garant pour toi auprès de ton propriétaire en cas d'impayés de loyer.</p>
+                        <p>Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant ton arrivée en France pour valider ton visa sur la plateforme ANEF avec un timbre fiscal électronique.</p>
                     </div>
                 </div>
 
             </div>
         </div>
 
-        <!-- 8. CONTACT PAR E-MAIL -->
+        <!-- 9. CONTACT -->
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
-                <p style="text-align: center; color: #666; margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ou la FAQ ? Envoie-moi un message !</p>
-                <!-- Formulaire connecté à ton Formspree -->
+                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ? Envoie-moi un message !</p>
                 <form action="https://formspree.io/f/maeqlnre" method="POST" class="contact-form">
                     <input type="text" name="name" placeholder="Ton nom et prénom" required>
                     <input type="email" name="email" placeholder="Ton adresse e-mail" required>
@@ -950,6 +1027,7 @@
             if (firstname && lastname) {
                 document.getElementById('welcome-user-message').innerText = `👋 Bonjour, ${firstname} ${lastname}`;
             }
+            loadTodos();
         }
 
         function logout() {
@@ -958,7 +1036,86 @@
             location.reload();
         }
 
+        // --- GESTION DU MODE SOMBRE ---
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const themeBtn = document.getElementById('theme-btn');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeBtn.innerText = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeBtn.innerText = '☀️';
+            }
+        }
+
+        // --- GESTION DE LA TO-DO LIST ---
+        function getTodoKey() {
+            const currentUser = localStorage.getItem('currentUser') || 'guest';
+            return 'todos_' + currentUser;
+        }
+
+        function loadTodos() {
+            const list = document.getElementById('todo-list');
+            list.innerHTML = '';
+            const todos = JSON.parse(localStorage.getItem(getTodoKey()) || '[]');
+            
+            if (todos.length === 0) {
+                list.innerHTML = '<p style="text-align:center; color: var(--card-text);">Aucune tâche pour le moment. Ajoute-en une ci-dessus !</p>';
+                return;
+            }
+
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
+                li.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" ${todo.completed ? 'checked' : ''} onclick="toggleTodo(${index})">
+                        <span>${todo.text}</span>
+                    </div>
+                    <button class="todo-delete" onclick="deleteTodo(${index})">Supprimer</button>
+                `;
+                list.appendChild(li);
+            });
+        }
+
+        function addTodo(e) {
+            e.preventDefault();
+            const input = document.getElementById('todo-input');
+            const text = input.value.trim();
+            if (!text) return;
+
+            const todos = JSON.parse(localStorage.getItem(getTodoKey()) || '[]');
+            todos.push({ text: text, completed: false });
+            localStorage.setItem(getTodoKey(), JSON.stringify(todos));
+            input.value = '';
+            loadTodos();
+        }
+
+        function toggleTodo(index) {
+            const todos = JSON.parse(localStorage.getItem(getTodoKey()) || '[]');
+            todos[index].completed = !todos[index].completed;
+            localStorage.setItem(getTodoKey(), JSON.stringify(todos));
+            loadTodos();
+        }
+
+        function deleteTodo(index) {
+            const todos = JSON.parse(localStorage.getItem(getTodoKey()) || '[]');
+            todos.splice(index, 1);
+            localStorage.setItem(getTodoKey(), JSON.stringify(todos));
+            loadTodos();
+        }
+
         window.onload = function() {
+            // Charger le thème enregistré
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('theme-btn').innerText = '☀️';
+            }
+
             if (localStorage.getItem('isLoggedIn') === 'true') {
                 const currentUser = localStorage.getItem('currentUser');
                 const storedDataRaw = localStorage.getItem('user_' + currentUser);
@@ -1005,7 +1162,7 @@
 
         // Fermer le menu déroulant si on clique en dehors
         window.onclick = function(event) {
-            if (!event.target.matches('.hamburger-dots')) {
+            if (!event.target.matches('.hamburger-dots') && !event.target.matches('.theme-toggle-btn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-menu");
                 for (var i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
