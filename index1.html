@@ -95,7 +95,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border-radius: 8px;
             overflow: hidden;
-            width: 220px;
+            width: 240px;
             text-align: left;
             z-index: 200;
             border: 1px solid var(--border-color);
@@ -134,7 +134,7 @@
         .categories-nav {
             display: flex;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             flex-wrap: wrap;
             margin-bottom: 30px;
         }
@@ -143,12 +143,12 @@
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 10px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            min-width: 110px;
+            min-width: 100px;
             transition: all 0.2s ease;
             color: var(--text-color);
         }
@@ -165,13 +165,13 @@
         }
 
         .category-icon {
-            font-size: 2rem;
-            margin-bottom: 6px;
+            font-size: 1.8rem;
+            margin-bottom: 4px;
         }
 
         .category-title {
             font-weight: bold;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
         /* MASQUER / AFFICHER LES SECTIONS */
@@ -616,13 +616,14 @@
             <div style="position: relative;">
                 <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
                 <div id="dropdown-menu" class="dropdown-menu">
+                    <button onclick="openCategory(event, 'premiers-pas')">🧳 Premiers Pas en France</button>
                     <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
                     <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
                     <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
                     <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
                     <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
                     <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs</button>
-                    <button onclick="openCategory(event, 'aide-alimentaire')">🧺 Aide Alimentaire & Sociale</button>
+                    <button onclick="openCategory(event, 'aide-alimentaire')">🧺 Aide Alimentaire</button>
                     <button onclick="openCategory(event, 'todo')">✅ Ma To-Do List</button>
                     <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
                     <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
@@ -638,7 +639,12 @@
 
         <!-- MENU DES CATÉGORIES PRINCIPALES -->
         <nav class="categories-nav">
-            <button class="category-btn active" onclick="openCategory(event, 'demarches')">
+            <button class="category-btn active" onclick="openCategory(event, 'premiers-pas')">
+                <span class="category-icon">🧳</span>
+                <span class="category-title">Premiers Pas</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
                 <span class="category-title">Démarches</span>
             </button>
@@ -681,8 +687,40 @@
 
         <!-- SECTIONS DE CONTENU -->
 
+        <!-- 0. PREMIERS PAS EN FRANCE (NOUVELLE SECTION ÉTAPE PAR ÉTAPE) -->
+        <div id="premiers-pas" class="tab-content active">
+            <h2 class="section-title">🧳 Premiers Pas en France : Guide Étape par Étape</h2>
+            <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
+                Tu viens d'atterrir en France ? Voici exactement par quoi commencer dès tes premiers jours pour t'installer sereinement et éviter les pièges :
+            </p>
+            <div class="grid-container">
+                
+                <div class="card">
+                    <div class="card-icon">📱</div>
+                    <h3>1. Téléphone & Carte SIM (Le piège à éviter)</h3>
+                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (les tarifs y sont excessivement chers). Heureusement, il y a du wifi gratuit partout dans les aéroports et gares pour te guider.<br><br>Si tu achètes une carte <em>Lyca Mobile</em> en arrivant, pense à l'enregistrer rapidement avant la fin du délai pour ne pas perdre ton numéro temporaire. Ensuite, pour faire des économies durables d'étudiant, il est conseillé de t'inscrire chez un opérateur comme <strong>Lebara</strong>.</p>
+                    <a href="https://aklam.io/7OisvZ4u" target="_blank" class="card-btn">Profiter de -50% (2 1ers mois)</a>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">🏦</div>
+                    <h3>2. Ouverture de Compte Bancaire</h3>
+                    <p>C'est l'une des premières démarches administratives urgentes pour déposer l'argent que tu as ramené avec toi et recevoir tes aides (CAF, bourses, remboursements).<br><br><strong>Les meilleures banques étudiantes :</strong> <em>LCL</em> et <em>BNP Paribas</em> proposent d'excellentes offres.<br><strong>Documents requis :</strong> Un justificatif de retrait de devises de ton pays d'origine, ta pièce d'identité et un justificatif de domicile ou d'hébergement.</p>
+                    <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">Trouver une agence</a>
+                </div>
+
+                <div class="card algeria-highlight">
+                    <div class="card-icon">🇩🇿</div>
+                    <h3>3. Procédure Titre de Séjour (Visa)</h3>
+                    <p>Il faut impérativement effectuer cette démarche les premiers jours avant l'expiration de ton visa.<br><br>• <strong>Pour les étudiants internationaux classiques :</strong> Valide ton visa VLS-TS en ligne sur le site de l'ANEF avec un timbre fiscal.<br>• <strong>Pour les étudiants algériens :</strong> Vous n'êtes pas concernés par la validation simple du visa en ligne. Vous devez directement effectuer votre demande de certificat de résidence sur le site dédié de l'ANEF.</p>
+                    <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
+                </div>
+
+            </div>
+        </div>
+
         <!-- 1. DÉMARCHES -->
-        <div id="demarches" class="tab-content active">
+        <div id="demarches" class="tab-content">
             <h2 class="section-title">📋 Démarches Administratives</h2>
             <div class="grid-container">
                 <div class="card">
