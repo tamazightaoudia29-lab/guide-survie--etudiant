@@ -58,7 +58,7 @@
             margin-top: 8px;
         }
 
-        /* --- CONTRÔLES HAUT DE PAGE (MODE SOMBRE & MENU) --- */
+        /* --- CONTRÔLES HAUT DE PAGE (URGENCE, MODE SOMBRE & MENU) --- */
         .header-controls {
             position: absolute;
             top: 20px;
@@ -69,7 +69,7 @@
             z-index: 100;
         }
 
-        .theme-toggle-btn, .hamburger-dots {
+        .emergency-btn, .theme-toggle-btn, .hamburger-dots {
             background: rgba(255, 255, 255, 0.2);
             border: none;
             color: white;
@@ -78,6 +78,19 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background 0.2s;
+        }
+
+        .emergency-btn {
+            background: #dc3545;
+            font-weight: bold;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .emergency-btn:hover {
+            background: #b02a37;
         }
 
         .theme-toggle-btn:hover, .hamburger-dots:hover {
@@ -95,7 +108,7 @@
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border-radius: 8px;
             overflow: hidden;
-            width: 240px;
+            width: 250px;
             text-align: left;
             z-index: 200;
             border: 1px solid var(--border-color);
@@ -134,7 +147,7 @@
         .categories-nav {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
             margin-bottom: 30px;
         }
@@ -143,12 +156,12 @@
             background: var(--card-bg);
             border: 2px solid var(--border-color);
             border-radius: 12px;
-            padding: 10px 14px;
+            padding: 10px 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            min-width: 100px;
+            min-width: 95px;
             transition: all 0.2s ease;
             color: var(--text-color);
         }
@@ -165,13 +178,13 @@
         }
 
         .category-icon {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             margin-bottom: 4px;
         }
 
         .category-title {
             font-weight: bold;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
         }
 
         /* MASQUER / AFFICHER LES SECTIONS */
@@ -252,6 +265,69 @@
 
         .card-btn:hover {
             background-color: #2a5298;
+        }
+
+        /* --- CALCULATEUR DE BUDGET INTERACTIF --- */
+        .budget-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .budget-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .budget-row label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            flex: 1;
+        }
+
+        .budget-row input {
+            width: 130px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            border-radius: 6px;
+            font-size: 0.95rem;
+            text-align: right;
+            outline: none;
+        }
+
+        .budget-result {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .budget-result h3 {
+            margin: 0 0 10px 0;
+            color: #1e3c72;
+        }
+
+        .budget-result p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 0;
         }
 
         /* --- TO-DO LIST INTERACTIVE --- */
@@ -610,17 +686,22 @@
     </div>
 
     <header>
-        <!-- CONTRÔLES HAUT DE PAGE (MODE SOMBRE & MENU) -->
+        <!-- CONTRÔLES HAUT DE PAGE (URGENCE, MODE SOMBRE & MENU) -->
         <div class="header-controls">
+            <button class="emergency-btn" onclick="openCategory(event, 'urgence')" title="Numéros d'urgence">🚨 Urgences</button>
             <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()" title="Changer le mode d'affichage">🌙</button>
             <div style="position: relative;">
                 <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
                 <div id="dropdown-menu" class="dropdown-menu">
-                    <button onclick="openCategory(event, 'premiers-pas')">🧳 Premiers Pas en France</button>
+                    <button onclick="openCategory(event, 'urgence')">🚨 Numéros d'Urgence</button>
+                    <button onclick="openCategory(event, 'premiers-pas')">🧳 Premiers Pas</button>
                     <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
                     <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
                     <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
                     <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
+                    <button onclick="openCategory(event, 'budget')">🧮 Calculateur Budget</button>
+                    <button onclick="openCategory(event, 'culture')">🎟️ Culture, Loisirs & Sport</button>
+                    <button onclick="openCategory(event, 'etudes')">💻 Réussite & Numérique</button>
                     <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
                     <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs</button>
                     <button onclick="openCategory(event, 'aide-alimentaire')">🧺 Aide Alimentaire</button>
@@ -654,14 +735,19 @@
                 <span class="category-title">Logement</span>
             </button>
 
-            <button class="category-btn" onclick="openCategory(event, 'sante')">
-                <span class="category-icon">🩺</span>
-                <span class="category-title">Santé</span>
+            <button class="category-btn" onclick="openCategory(event, 'budget')">
+                <span class="category-icon">🧮</span>
+                <span class="category-title">Budget</span>
             </button>
 
-            <button class="category-btn" onclick="openCategory(event, 'bourses')">
-                <span class="category-icon">💶</span>
-                <span class="category-title">Bourses</span>
+            <button class="category-btn" onclick="openCategory(event, 'culture')">
+                <span class="category-icon">🎟️</span>
+                <span class="category-title">Culture & Sport</span>
+            </button>
+
+            <button class="category-btn" onclick="openCategory(event, 'etudes')">
+                <span class="category-icon">💻</span>
+                <span class="category-title">Études & Outils</span>
             </button>
 
             <button class="category-btn" onclick="openCategory(event, 'transports')">
@@ -687,39 +773,75 @@
 
         <!-- SECTIONS DE CONTENU -->
 
-        <!-- 0. PREMIERS PAS EN FRANCE (NOUVELLE SECTION ÉTAPE PAR ÉTAPE) -->
+        <!-- 0. URGENSES / NUMÉROS UTILES -->
+        <div id="urgence" class="tab-content">
+            <h2 class="section-title" style="color: #dc3545;">🚨 Numéros d'Urgence & Aide en 1 Clic</h2>
+            <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
+                En cas de situation d'urgence vitale, médicale, sécuritaire ou de détresse psychologique, voici les numéros à composer immédiatement (appels gratuits 24h/24 et 7j/7) :
+            </p>
+            <div class="grid-container">
+                <div class="card" style="border-top: 4px solid #dc3545;">
+                    <div class="card-icon">🇪🇺</div>
+                    <h3>112 — Urgence Européenne</h3>
+                    <p>Numéro d'urgence unique valable dans toute l'Union Européenne pour joindre les secours rapidement.</p>
+                    <a href="tel:112" class="card-btn" style="background-color: #dc3545;">Appeler le 112</a>
+                </div>
+                <div class="card" style="border-top: 4px solid #dc3545;">
+                    <div class="card-icon">🚑</div>
+                    <h3>15 — SAMU (Urgences Médicales)</h3>
+                    <p>En cas de problème médical grave ou d'urgence vitale nécessitant une ambulance ou un médecin urgentiste.</p>
+                    <a href="tel:15" class="card-btn" style="background-color: #dc3545;">Appeler le 15</a>
+                </div>
+                <div class="card" style="border-top: 4px solid #dc3545;">
+                    <div class="card-icon">👮</div>
+                    <h3>17 — Police Secours</h3>
+                    <p>En cas d'agression, de cambriolage ou de situation nécessitant l'intervention immédiate des forces de l'ordre.</p>
+                    <a href="tel:17" class="card-btn" style="background-color: #dc3545;">Appeler le 17</a>
+                </div>
+                <div class="card" style="border-top: 4px solid #dc3545;">
+                    <div class="card-icon">🚒</div>
+                    <h3>18 — Pompiers</h3>
+                    <p>Pour tout incendie, accident domestique ou situation de péril immédiat nécessitant les sapeurs-pompiers.</p>
+                    <a href="tel:18" class="card-btn" style="background-color: #dc3545;">Appeler le 18</a>
+                </div>
+                <div class="card" style="border-top: 4px solid #1e3c72;">
+                    <div class="card-icon">🧠</div>
+                    <h3>Soutien Psychologique d'Urgence</h3>
+                    <p>Ligne d'écoute et de soutien psychologique dédiée aux étudiants en détresse via le dispositif Santé Psy Étudiant.</p>
+                    <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Accéder à Santé Psy</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. PREMIERS PAS EN FRANCE -->
         <div id="premiers-pas" class="tab-content active">
             <h2 class="section-title">🧳 Premiers Pas en France : Guide Étape par Étape</h2>
             <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
                 Tu viens d'atterrir en France ? Voici exactement par quoi commencer dès tes premiers jours pour t'installer sereinement et éviter les pièges :
             </p>
             <div class="grid-container">
-                
                 <div class="card">
                     <div class="card-icon">📱</div>
                     <h3>1. Téléphone & Carte SIM (Le piège à éviter)</h3>
-                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (les tarifs y sont excessivement chers). Heureusement, il y a du wifi gratuit partout dans les aéroports et gares pour te guider.<br><br>Si tu achètes une carte <em>Lyca Mobile</em> en arrivant, pense à l'enregistrer rapidement avant la fin du délai pour ne pas perdre ton numéro temporaire. Ensuite, pour faire des économies durables d'étudiant, il est conseillé de t'inscrire chez un opérateur comme <strong>Lebara</strong>.</p>
-                    <a href="https://aklam.io/7OisvZ4u" target="_blank" class="card-btn">Profiter de -50% (2 1ers mois)</a>
+                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (les tarifs y sont excessivement chers). Profite du wifi des gares/aéroports.<br><br>Si tu prends <em>Lyca Mobile</em> en arrivant, enregistre-la rapidement. Ensuite, pour des offres étudiantes moins chères, choisis <strong>Lebara</strong>.</p>
+                    <a href="https://aklam.io/7OisvZ4u" target="_blank" class="card-btn">Profiter de -50% (Lebara)</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">🏦</div>
                     <h3>2. Ouverture de Compte Bancaire</h3>
-                    <p>C'est l'une des premières démarches administratives urgentes pour déposer l'argent que tu as ramené avec toi et recevoir tes aides (CAF, bourses, remboursements).<br><br><strong>Les meilleures banques étudiantes :</strong> <em>LCL</em> et <em>BNP Paribas</em> proposent d'excellentes offres.<br><strong>Documents requis :</strong> Un justificatif de retrait de devises de ton pays d'origine, ta pièce d'identité et un justificatif de domicile ou d'hébergement.</p>
+                    <p>Indispensable pour déposer ton argent et recevoir la CAF/bourses.<br><br><strong>Meilleures banques étudiantes :</strong> <em>LCL</em> et <em>BNP Paribas</em>.<br><strong>Documents :</strong> Justificatif de retrait du pays d'origine, pièce d'identité et justificatif de domicile ou d'hébergement.</p>
                     <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">Trouver une agence</a>
                 </div>
-
                 <div class="card algeria-highlight">
                     <div class="card-icon">🇩🇿</div>
                     <h3>3. Procédure Titre de Séjour (Visa)</h3>
-                    <p>Il faut impérativement effectuer cette démarche les premiers jours avant l'expiration de ton visa.<br><br>• <strong>Pour les étudiants internationaux classiques :</strong> Valide ton visa VLS-TS en ligne sur le site de l'ANEF avec un timbre fiscal.<br>• <strong>Pour les étudiants algériens :</strong> Vous n'êtes pas concernés par la validation simple du visa en ligne. Vous devez directement effectuer votre demande de certificat de résidence sur le site dédié de l'ANEF.</p>
+                    <p>À faire d'urgence les premiers jours avant l'expiration du visa.<br><br>• <strong>Étudiants internationaux :</strong> Valide ton visa VLS-TS en ligne sur l'ANEF.<br>• <strong>Étudiants algériens :</strong> Vous n'êtes pas concernés par cette validation simple ; faites directement votre demande de certificat de résidence sur l'ANEF.</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
                 </div>
-
             </div>
         </div>
 
-        <!-- 1. DÉMARCHES -->
+        <!-- 2. DÉMARCHES -->
         <div id="demarches" class="tab-content">
             <h2 class="section-title">📋 Démarches Administratives</h2>
             <div class="grid-container">
@@ -756,7 +878,7 @@
             </div>
         </div>
 
-        <!-- 2. LOGEMENT -->
+        <!-- 3. LOGEMENT -->
         <div id="logement" class="tab-content">
             <h2 class="section-title">🏠 Logement & Crous</h2>
             <div class="grid-container">
@@ -787,75 +909,98 @@
             </div>
         </div>
 
-        <!-- 3. SANTÉ -->
-        <div id="sante" class="tab-content">
-            <h2 class="section-title">🩺 Santé & Accompagnement</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <div class="card-icon">💳</div>
-                    <h3>Sécurité Sociale (Ameli)</h3>
-                    <p>Inscription gratuite pour les étudiants internationaux.</p>
-                    <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">S'inscrire à Ameli</a>
+        <!-- 4. CALCULATEUR DE BUDGET (NOUVEAU) -->
+        <div id="budget" class="tab-content">
+            <h2 class="section-title">🧮 Simulateur de Budget Étudiant</h2>
+            <div class="budget-container">
+                <p style="text-align: center; color: var(--card-text); margin-bottom: 25px;">Estime facilement ton reste à vivre mensuel en France en renseignant tes dépenses et tes ressources financières :</p>
+                
+                <div class="budget-form">
+                    <div class="budget-row">
+                        <label>🏠 Loyer (après APL) :</label>
+                        <input type="number" id="b-loyer" value="400" oninput="calculateBudget()">
+                    </div>
+                    <div class="budget-row">
+                        <label>🛒 Courses alimentaires :</label>
+                        <input type="number" id="b-courses" value="150" oninput="calculateBudget()">
+                    </div>
+                    <div class="budget-row">
+                        <label>🚆 Transports (Navigo...) :</label>
+                        <input type="number" id="b-transport" value="38" oninput="calculateBudget()">
+                    </div>
+                    <div class="budget-row">
+                        <label>📱 Téléphone & Internet :</label>
+                        <input type="number" id="b-telecom" value="20" oninput="calculateBudget()">
+                    </div>
+                    <div class="budget-row">
+                        <label>🎉 Loisirs & Divers :</label>
+                        <input type="number" id="b-loisirs" value="50" oninput="calculateBudget()">
+                    </div>
+                    <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
+                    <div class="budget-row">
+                        <label>💶 Revenus totaux (Bourse, CAF, Job, Parents) :</label>
+                        <input type="number" id="b-revenus" value="850" oninput="calculateBudget()">
+                    </div>
                 </div>
-                <div class="card algeria-highlight">
-                    <div class="card-icon">🇩🇿</div>
-                    <h3>Protocole Sécu Algérie</h3>
-                    <p>Dispositions de la convention bilatérale franco-algérienne de sécurité sociale pour la prise en charge des soins.</p>
-                    <a href="https://etudiant-etranger.ameli.fr/" target="_blank" class="card-btn">Détails Ameli</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏥</div>
-                    <h3>Mutuelle CSS</h3>
-                    <p>Prise en charge des soins pour les revenus modestes.</p>
-                    <a href="https://www.ameli.fr/assure/droits-demarches/difficultes-acces-droits-soins/complementaire-sante-solidaire" target="_blank" class="card-btn">Tester son éligibilité</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">📅</div>
-                    <h3>Doctolib</h3>
-                    <p>Rendez-vous médicaux rapides chez des praticiens proches de chez toi.</p>
-                    <a href="https://www.doctolib.fr/" target="_blank" class="card-btn">Prendre RDV</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🧠</div>
-                    <h3>Soutien Psychologique</h3>
-                    <p>Séances de psy gratuites via Santé Psy Étudiant.</p>
-                    <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Santé Psy Étudiant</a>
+
+                <div class="budget-result" id="budget-result-box">
+                    <h3>Reste à vivre estimé :</h3>
+                    <p id="budget-output">-- €</p>
                 </div>
             </div>
         </div>
 
-        <!-- 4. BOURSES -->
-        <div id="bourses" class="tab-content">
-            <h2 class="section-title">💶 Bourses & Aides Financières</h2>
+        <!-- 5. CULTURE, LOISIRS & SPORT (NOUVEAU) -->
+        <div id="culture" class="tab-content">
+            <h2 class="section-title">🎟️ Bons Plans Culture, Loisirs & Sport</h2>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🎓</div>
-                    <h3>Dossier Social Étudiant</h3>
-                    <p>Demande de bourse sur critères sociaux et de logement Crous.</p>
-                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Faire le DSE</a>
+                    <div class="card-icon">🎨</div>
+                    <h3>Pass Culture & Carte Culture</h3>
+                    <p>Profite de subventions, de places de cinéma à tarif réduit, de théâtres et d'expositions gratuites ou à prix cassés réservés aux jeunes et étudiants.</p>
+                    <a href="https://pass.culture.fr/" target="_blank" class="card-btn">Découvrir le Pass Culture</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🏠</div>
-                    <h3>Aide au Logement (CAF)</h3>
-                    <p>Calcule et demande ton APL en ligne.</p>
-                    <a href="https://www.caf.fr/" target="_blank" class="card-btn">Demander l'APL</a>
+                    <div class="card-icon">⚽</div>
+                    <h3>Sport Universitaire (SUAPS)</h3>
+                    <p>Pratique des dizaines d'activités sportives (fitness, natation, sports collectifs, arts martiaux) directement sur ton campus pour une quinzaine d'euros par an seulement.</p>
+                    <a href="https://www.etudiant.gouv.fr/fr/sport-et-sante-1681" target="_blank" class="card-btn">Trouver le SUAPS</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🆘</div>
-                    <h3>Aides Ponctuelles Crous</h3>
-                    <p>Rendez-vous avec une assistante sociale en cas de besoin urgent.</p>
-                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV Social</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🍽️</div>
-                    <h3>Repas Crous à 1 €</h3>
-                    <p>Repas complets à tarif réduit pour les étudiants boursiers/précaires.</p>
-                    <a href="https://www.lescrous.fr/" target="_blank" class="card-btn">Infos Restos U</a>
+                    <div class="card-icon">📚</div>
+                    <h3>Bibliothèques & Espaces de Révision</h3>
+                    <p>Accède gratuitement à des espaces de travail studieux et calmes, comme les Bibliothèques Universitaires (BU) ou la célèbre BPI du Centre Pompidou à Paris.</p>
+                    <a href="https://www.bpi.fr/" target="_blank" class="card-btn">Infos BPI & Bibliothèques</a>
                 </div>
             </div>
         </div>
 
-        <!-- 5. TRANSPORTS -->
+        <!-- 6. RÉUSSITE & OUTILS NUMÉRIQUES (NOUVEAU) -->
+        <div id="etudes" class="tab-content">
+            <h2 class="section-title">💻 Réussite Étudiante & Outils Numériques</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <div class="card-icon">🗣️</div>
+                    <h3>Apprentissage des Langues (FLE)</h3>
+                    <p>Améliore ton français (Français Langue Étrangère) ou apprends de nouvelles langues grâce à des plateformes et cours de soutien en ligne recommandés pour les étudiants.</p>
+                    <a href="https://www.fle.fr/" target="_blank" class="card-btn">Ressources FLE</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📄</div>
+                    <h3>CV & Lettre de Motivation (Normes Françaises)</h3>
+                    <p>Conseils clés pour rédiger ton CV sur une seule page, structurer ta lettre de motivation formelle et valoriser tes compétences académiques et professionnelles.</p>
+                    <a href="https://www.welcomethejungle.com/fr/articles/modele-cv-etudiant" target="_blank" class="card-btn">Modèles & Astuces CV</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📂</div>
+                    <h3>Outils Bureautiques & Collaboratifs</h3>
+                    <p>La panoplie indispensable pour réussir tes travaux de groupe : suites bureautiques (LibreOffice, Google Docs) et outils de stockage et partage collaboratif.</p>
+                    <a href="https://www.libreoffice.org/download/download/" target="_blank" class="card-btn">Télécharger LibreOffice</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. TRANSPORTS -->
         <div id="transports" class="tab-content">
             <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
             <div class="grid-container">
@@ -875,7 +1020,7 @@
             </div>
         </div>
 
-        <!-- 6. TRAVAIL & JOBS ÉTUDIANTS -->
+        <!-- 8. TRAVAIL & JOBS ÉTUDIANTS -->
         <div id="travail" class="tab-content">
             <h2 class="section-title">💼 Travail, Jobs Étudiants & Règles Algériennes</h2>
             <div class="grid-container">
@@ -900,60 +1045,53 @@
             </div>
         </div>
 
-        <!-- 7. AIDE ALIMENTAIRE ET SOCIALE -->
+        <!-- 9. AIDE ALIMENTAIRE ET SOCIALE -->
         <div id="aide-alimentaire" class="tab-content">
             <h2 class="section-title">🧺 Aide Alimentaire, Kits d'Hygiène & Soutien Social</h2>
             <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
                 Plusieurs organismes et associations se mobilisent pour aider les étudiants à subvenir à leurs besoins alimentaires et leur fournir des kits d'hygiène essentiels. Voici toutes les solutions pour en bénéficier :
             </p>
             <div class="grid-container">
-                
                 <div class="card">
                     <div class="card-icon">🍲</div>
                     <h3>Les Restos du Cœur & Secours (Populaire / Catholique)</h3>
                     <p>Présents dans presque toutes les villes, ils organisent des distributions hebdomadaires de denrées alimentaires et de kits d'hygiène.<br><br><strong>Comment faire :</strong> Il suffit de se rendre sur place muni de tes papiers (pièce d'identité et certificat de scolarité) pour t'inscrire et bénéficier chaque semaine de cette aide.</p>
                     <a href="https://www.restosducoeur.org/" target="_blank" class="card-btn">Trouver un centre</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">📦</div>
                     <h3>Association Linkee</h3>
                     <p>Spécialisée dans la distribution de colis alimentaires frais et de qualité pour les étudiants.<br><br><strong>Comment faire :</strong> L'inscription se fait directement en ligne sur leur plateforme pour réserver ton panier et le récupérer lors des permanences près de chez toi.</p>
                     <a href="https://www.linkee.co/" target="_blank" class="card-btn">S'inscrire sur Linkee</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">🎒</div>
                     <h3>Association Cop1</h3>
                     <p>Grande association étudiante qui organise très régulièrement des distributions massives de paniers repas et de produits d'hygiène gratuits.<br><br><strong>Comment faire :</strong> Rends-toi sur leur site web pour t'inscrire aux prochaines sessions de distribution.</p>
                     <a href="https://cop1.fr/" target="_blank" class="card-btn">Voir le site de Cop1</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">🏛️</div>
                     <h3>La Maison de l'Étudiant (Université)</h3>
                     <p>Des distributions alimentaires et solidaires ont lieu chaque semaine ou chaque mois au sein même des universités.<br><br><strong>Comment faire :</strong> Il suffit de se renseigner directement auprès de l'accueil de ton campus ou de la vie étudiante de ton université.</p>
                     <a href="https://www.etudiant.gouv.fr/" target="_blank" class="card-btn">Infos Étudiant.gouv</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">📱</div>
                     <h3>Du Beurre Dans Leurs Épinards</h3>
                     <p>Une association formidable active sur les réseaux sociaux qui organise des coups de pouce alimentaires et solidaires pour les étudiants.<br><br><strong>Comment faire :</strong> Reste branché(e) sur leur story et leurs publications Instagram pour choper les liens d'inscription dès leur ouverture !</p>
                     <a href="https://www.instagram.com/dubeurredansleursepinards?rpxt=ejNxcnJxN2Mzbm5s" target="_blank" class="card-btn">Voir leur Instagram</a>
                 </div>
-
                 <div class="card">
                     <div class="card-icon">🤝</div>
                     <h3>Assistante Sociale du Crous (Aide Financière)</h3>
                     <p>Si tu es réellement dans le besoin financier (loyer, charges, courses), l'assistante sociale peut t'attribuer une aide d'urgence sous forme d'argent ou de chèques services / tickets restaurants.<br><br><strong>Comment faire :</strong> Prends rendez-vous en ligne via ton espace personnel.</p>
                     <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV sur MesServices</a>
                 </div>
-
             </div>
         </div>
 
-        <!-- 8. TO-DO LIST PERSONNELLE -->
+        <!-- 10. TO-DO LIST PERSONNELLE -->
         <div id="todo" class="tab-content">
             <h2 class="section-title">✅ Ma To-Do List Étudiante</h2>
             <div class="todo-container">
@@ -970,11 +1108,10 @@
             </div>
         </div>
 
-        <!-- 9. FAQ -->
+        <!-- 11. FAQ -->
         <div id="faq" class="tab-content">
             <h2 class="section-title">❓ Foire Aux Questions (FAQ Détaillée)</h2>
             <div class="faq-container">
-                
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
                         <span>1. Comment obtenir la réduction de 75% sur le Passe Navigo avec la CSS ?</span>
@@ -984,7 +1121,6 @@
                         <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la réduction Solidarité Transport. Rends-toi sur <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande. Ton forfait mensuel passera à environ 22 €.</p>
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
                         <span>2. Quelles sont les particularités de l'Accord franco-algérien de 1968 ?</span>
@@ -994,7 +1130,6 @@
                         <p>Les ressortissants algériens en France sont régis par l'<strong>Accord franco-algérien du 27 décembre 1968</strong> (et non par le CESEDA général). Cet accord encadre la délivrance et le renouvellement du certificat de résidence étudiant.</p>
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
                         <span>3. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
@@ -1004,7 +1139,6 @@
                         <p>Oui, mais <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong>. Tu es limité à un maximum de <strong>803 heures par an</strong>. Ne dépasse pas ce quota pour éviter des problèmes lors du renouvellement en préfecture.</p>
                     </div>
                 </div>
-
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
                         <span>4. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
@@ -1014,11 +1148,10 @@
                         <p>Tu disposes d'un délai impératif de <strong>3 mois</strong> suivant ton arrivée en France pour valider ton visa sur la plateforme ANEF avec un timbre fiscal électronique.</p>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- 10. CONTACT -->
+        <!-- 12. CONTACT -->
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
@@ -1115,12 +1248,38 @@
                 document.getElementById('welcome-user-message').innerText = `👋 Bonjour, ${firstname} ${lastname}`;
             }
             loadTodos();
+            calculateBudget();
         }
 
         function logout() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('currentUser');
             location.reload();
+        }
+
+        // --- CALCULATEUR DE BUDGET ---
+        function calculateBudget() {
+            const loyer = parseFloat(document.getElementById('b-loyer').value) || 0;
+            const courses = parseFloat(document.getElementById('b-courses').value) || 0;
+            const transport = parseFloat(document.getElementById('b-transport').value) || 0;
+            const telecom = parseFloat(document.getElementById('b-telecom').value) || 0;
+            const loisirs = parseFloat(document.getElementById('b-loisirs').value) || 0;
+            const revenus = parseFloat(document.getElementById('b-revenus').value) || 0;
+
+            const totalDepenses = loyer + courses + transport + telecom + loisirs;
+            const resteAVivre = revenus - totalDepenses;
+
+            const outputEl = document.getElementById('budget-output');
+            const resultBox = document.getElementById('budget-result-box');
+
+            outputEl.innerText = resteAVivre + " €";
+            if (resteAVivre >= 0) {
+                resultBox.style.backgroundColor = "rgba(40, 167, 69, 0.1)";
+                outputEl.style.color = "#28a745";
+            } else {
+                resultBox.style.backgroundColor = "rgba(220, 53, 69, 0.1)";
+                outputEl.style.color = "#dc3545";
+            }
         }
 
         // --- GESTION DU MODE SOMBRE ---
@@ -1249,7 +1408,7 @@
 
         // Fermer le menu déroulant si on clique en dehors
         window.onclick = function(event) {
-            if (!event.target.matches('.hamburger-dots') && !event.target.matches('.theme-toggle-btn')) {
+            if (!event.target.matches('.hamburger-dots') && !event.target.matches('.theme-toggle-btn') && !event.target.matches('.emergency-btn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-menu");
                 for (var i = 0; i < dropdowns.length; i++) {
                     var openDropdown = dropdowns[i];
