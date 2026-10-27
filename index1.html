@@ -5,33 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de Survie Étudiante — Version 2</title>
     <style>
-        /* --- STYLES GÉNÉRAUX & VARIABLES DE THÈME --- */
+        /* --- STYLES GÉNÉRAUX & DESIGN AMÉLIORÉ --- */
         :root {
-            --bg-color: #f4f7f6;
-            --text-color: #333;
-            --card-bg: #fff;
-            --header-bg: linear-gradient(135deg, #1e3c72, #2a5298);
-            --border-color: #e0e0e0;
-            --nav-bg: #fff;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #0f172a, #1e3a8a);
+            --border-color: #e2e8f0;
             --topbar-bg: #ffffff;
-            --card-text: #666;
-            --card-title: #2c3e50;
+            --card-text: #475569;
+            --card-title: #0f172a;
+            --primary-color: #2563eb;
+            --primary-hover: #1d4ed8;
         }
 
         [data-theme="dark"] {
-            --bg-color: #121212;
-            --text-color: #e0e0e0;
-            --card-bg: #1e1e1e;
-            --header-bg: linear-gradient(135deg, #0b192c, #1e3c72);
-            --border-color: #333;
-            --nav-bg: #1e1e1e;
-            --topbar-bg: #1a1a1a;
-            --card-text: #aaa;
-            --card-title: #ffffff;
+            --bg-color: #0f172a;
+            --text-color: #f1f5f9;
+            --card-bg: #1e293b;
+            --header-bg: linear-gradient(135deg, #020617, #0f172a);
+            --border-color: #334155;
+            --topbar-bg: #1e293b;
+            --card-text: #94a3b8;
+            --card-title: #f8fafc;
+            --primary-color: #3b82f6;
+            --primary-hover: #2563eb;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--bg-color);
             margin: 0;
             padding: 0;
@@ -43,22 +45,25 @@
             background: var(--header-bg);
             color: white;
             text-align: center;
-            padding: 30px 20px;
+            padding: 35px 20px;
             position: relative;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
         }
 
         header p {
-            font-size: 1rem;
-            opacity: 0.9;
+            font-size: 1.05rem;
+            opacity: 0.85;
             margin-top: 8px;
         }
 
-        /* --- CONTRÔLES HAUT DE PAGE (URGENCE, MODE SOMBRE & MENU) --- */
+        /* --- CONTRÔLES HAUT DE PAGE --- */
         .header-controls {
             position: absolute;
             top: 20px;
@@ -70,34 +75,36 @@
         }
 
         .emergency-btn, .theme-toggle-btn, .hamburger-dots {
-            background: rgba(255, 255, 255, 0.2);
-            border: none;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            font-size: 1.2rem;
-            padding: 8px 12px;
-            border-radius: 8px;
+            font-size: 1.1rem;
+            padding: 8px 14px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: all 0.2s;
+            backdrop-filter: blur(4px);
         }
 
         .emergency-btn {
-            background: #dc3545;
+            background: #ef4444;
+            border-color: #dc2626;
             font-weight: bold;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             display: flex;
             align-items: center;
-            gap: 5px;
+            gap: 6px;
         }
 
         .emergency-btn:hover {
-            background: #b02a37;
+            background: #dc2626;
         }
 
         .theme-toggle-btn:hover, .hamburger-dots:hover {
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Menu déroulant */
+        /* Menu déroulant épuré */
         .dropdown-menu {
             display: none;
             position: absolute;
@@ -105,10 +112,10 @@
             top: 50px;
             background: var(--card-bg);
             color: var(--text-color);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            border-radius: 8px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
             overflow: hidden;
-            width: 250px;
+            width: 220px;
             text-align: left;
             z-index: 200;
             border: 1px solid var(--border-color);
@@ -118,10 +125,10 @@
             display: block;
         }
 
-        .dropdown-menu a, .dropdown-menu button {
+        .dropdown-menu button {
             display: block;
             width: 100%;
-            padding: 12px 15px;
+            padding: 12px 18px;
             background: none;
             border: none;
             text-align: left;
@@ -132,14 +139,14 @@
             transition: background 0.2s;
         }
 
-        .dropdown-menu a:hover, .dropdown-menu button:hover {
-            background-color: rgba(30, 60, 114, 0.1);
-            color: #1e3c72;
+        .dropdown-menu button:hover {
+            background-color: rgba(59, 130, 246, 0.1);
+            color: var(--primary-color);
         }
 
         main {
-            max-width: 1100px;
-            margin: 30px auto;
+            max-width: 1200px;
+            margin: 35px auto;
             padding: 0 20px;
         }
 
@@ -147,44 +154,47 @@
         .categories-nav {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .category-btn {
             background: var(--card-bg);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 12px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
-            min-width: 95px;
-            transition: all 0.2s ease;
+            min-width: 100px;
+            transition: all 0.25s ease;
             color: var(--text-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .category-btn:hover {
-            border-color: #1e3c72;
+            border-color: var(--primary-color);
             transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
         }
 
         .category-btn.active {
-            background-color: #1e3c72;
-            border-color: #1e3c72;
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
             color: white;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
         }
 
         .category-icon {
-            font-size: 1.6rem;
-            margin-bottom: 4px;
+            font-size: 1.7rem;
+            margin-bottom: 6px;
         }
 
         .category-title {
-            font-weight: bold;
-            font-size: 0.75rem;
+            font-weight: 600;
+            font-size: 0.8rem;
         }
 
         /* MASQUER / AFFICHER LES SECTIONS */
@@ -198,90 +208,95 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(8px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* GRILLE ET CARTES */
         .section-title {
-            font-size: 1.5rem;
-            color: #1e3c72;
-            margin-bottom: 20px;
+            font-size: 1.6rem;
+            color: var(--card-title);
+            margin-bottom: 25px;
             text-align: center;
+            font-weight: 700;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            gap: 22px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border: 1px solid var(--border-color);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .card.algeria-highlight {
-            border: 2px solid #006233;
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
         }
 
         .card-icon {
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .card h3 {
             margin: 0 0 10px 0;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
             color: var(--card-title);
+            font-weight: 700;
         }
 
         .card p {
-            font-size: 0.9rem;
+            font-size: 0.92rem;
             color: var(--card-text);
-            line-height: 1.4;
-            margin-bottom: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
             text-align: left;
         }
 
         .card-btn {
             display: inline-block;
-            background-color: #1e3c72;
+            background-color: var(--primary-color);
             color: white;
             text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.85rem;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
             margin-top: auto;
+            transition: background-color 0.2s;
         }
 
         .card-btn:hover {
-            background-color: #2a5298;
+            background-color: var(--primary-hover);
         }
 
-        /* --- CALCULATEUR DE BUDGET INTERACTIF --- */
+        /* --- CALCULATEUR DE BUDGET --- */
         .budget-container {
             max-width: 700px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
         .budget-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
             margin-bottom: 25px;
         }
 
@@ -301,11 +316,11 @@
 
         .budget-row input {
             width: 130px;
-            padding: 10px;
+            padding: 10px 14px;
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 0.95rem;
             text-align: right;
             outline: none;
@@ -313,47 +328,48 @@
 
         .budget-result {
             background: var(--bg-color);
-            padding: 20px;
-            border-radius: 8px;
+            padding: 22px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
             text-align: center;
         }
 
         .budget-result h3 {
-            margin: 0 0 10px 0;
-            color: #1e3c72;
+            margin: 0 0 8px 0;
+            color: var(--primary-color);
+            font-size: 1.1rem;
         }
 
         .budget-result p {
-            font-size: 1.2rem;
-            font-weight: bold;
+            font-size: 1.3rem;
+            font-weight: 800;
             margin: 0;
         }
 
-        /* --- TO-DO LIST INTERACTIVE --- */
+        /* --- TO-DO LIST --- */
         .todo-container {
             max-width: 700px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
         .todo-form {
             display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
+            gap: 12px;
+            margin-bottom: 25px;
         }
 
         .todo-form input {
             flex: 1;
-            padding: 12px;
+            padding: 12px 16px;
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 6px;
+            border-radius: 10px;
             font-size: 0.95rem;
             outline: none;
         }
@@ -364,7 +380,7 @@
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
         }
 
         .todo-item {
@@ -372,27 +388,33 @@
             justify-content: space-between;
             align-items: center;
             background: var(--bg-color);
-            padding: 12px 15px;
-            border-radius: 8px;
+            padding: 14px 18px;
+            border-radius: 12px;
             border: 1px solid var(--border-color);
         }
 
         .todo-item.completed span {
             text-decoration: line-through;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
         .todo-delete {
-            background: #dc3545;
+            background: #ef4444;
             color: white;
             border: none;
-            padding: 6px 10px;
-            border-radius: 6px;
+            padding: 6px 12px;
+            border-radius: 8px;
             cursor: pointer;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: background 0.2s;
         }
 
-        /* --- FAQ ACCORDÉON DÉTAILLÉE --- */
+        .todo-delete:hover {
+            background: #dc2626;
+        }
+
+        /* --- FAQ --- */
         .faq-container {
             max-width: 850px;
             margin: 0 auto;
@@ -403,18 +425,17 @@
 
         .faq-item {
             background: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border-radius: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             overflow: hidden;
-            border-left: 4px solid #1e3c72;
             border: 1px solid var(--border-color);
-            border-left-width: 4px;
+            border-left: 5px solid var(--primary-color);
         }
 
         .faq-question {
-            padding: 18px 20px;
-            font-weight: bold;
-            color: #1e3c72;
+            padding: 20px;
+            font-weight: 700;
+            color: var(--card-title);
             cursor: pointer;
             display: flex;
             justify-content: space-between;
@@ -423,7 +444,7 @@
         }
 
         .faq-question:hover {
-            background-color: rgba(30, 60, 114, 0.05);
+            background-color: rgba(59, 130, 246, 0.03);
         }
 
         .faq-answer {
@@ -438,29 +459,29 @@
             display: block;
         }
 
-        /* --- FORMULAIRE DE CONTACT --- */
+        /* --- CONTACT --- */
         .contact-container {
             max-width: 600px;
             margin: 0 auto;
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
         }
 
         .contact-form input, .contact-form textarea {
-            padding: 12px;
+            padding: 12px 16px;
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 6px;
+            border-radius: 10px;
             font-size: 0.95rem;
             outline: none;
             font-family: inherit;
@@ -468,34 +489,35 @@
 
         .contact-form textarea {
             resize: vertical;
-            height: 120px;
+            height: 130px;
         }
 
-        /* --- DESIGN DE LA FENÊTRE DE CONNEXION / PROFIL --- */
+        /* --- AUTH MODAL --- */
         .auth-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(30, 60, 114, 0.92), rgba(42, 82, 152, 0.95));
+            background: rgba(15, 23, 42, 0.85);
             display: flex;
             justify-content: center;
             align-items: center;
             z-index: 1000;
-            backdrop-filter: blur(6px);
+            backdrop-filter: blur(8px);
         }
 
         .auth-box {
-            background: white;
-            padding: 35px 30px;
-            border-radius: 16px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
             width: 90%;
             max-width: 420px;
             text-align: center;
             animation: slideUp 0.4s ease-out;
-            color: #333;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
         }
 
         @keyframes slideUp {
@@ -505,17 +527,17 @@
 
         .auth-header-icon {
             font-size: 3rem;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .auth-box h2 {
             margin: 0 0 8px 0;
             font-size: 1.6rem;
-            color: #1e3c72;
+            color: var(--card-title);
         }
 
         .auth-subtitle {
-            color: #666;
+            color: var(--card-text);
             font-size: 0.9rem;
             margin-bottom: 25px;
         }
@@ -523,74 +545,74 @@
         .auth-form {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 16px;
             text-align: left;
         }
 
         .input-group {
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
         }
 
         .input-group label {
             font-size: 0.85rem;
-            font-weight: bold;
-            color: #444;
+            font-weight: 600;
+            color: var(--card-text);
         }
 
         .auth-form input {
             padding: 12px 14px;
-            border: 1px solid #dcdcdc;
-            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             font-size: 0.95rem;
             outline: none;
-            background-color: #fafafa;
+            background-color: var(--bg-color);
+            color: var(--text-color);
         }
 
         .auth-btn {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            background: var(--primary-color);
             color: white;
             padding: 12px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             margin-top: 10px;
-            transition: opacity 0.2s;
+            transition: background 0.2s;
         }
 
         .auth-btn:hover {
-            opacity: 0.95;
+            background: var(--primary-hover);
         }
 
         .auth-toggle {
-            margin-top: 20px;
+            margin-top: 22px;
             font-size: 0.9rem;
         }
 
         .auth-toggle span {
-            color: #1e3c72;
+            color: var(--primary-color);
             cursor: pointer;
             font-weight: 600;
             text-decoration: underline;
         }
 
         .auth-error {
-            color: #dc3545;
+            color: #ef4444;
             font-size: 0.85rem;
             margin-top: 12px;
-            background-color: #f8d7da;
-            padding: 8px;
-            border-radius: 6px;
+            background-color: rgba(239, 68, 68, 0.1);
+            padding: 10px;
+            border-radius: 8px;
             display: none;
         }
 
-        /* Barre supérieure utilisateur */
         .user-top-bar {
             background-color: var(--topbar-bg);
-            padding: 10px 25px;
+            padding: 12px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -599,36 +621,46 @@
 
         #welcome-user-message {
             font-weight: 600;
-            color: #1e3c72;
+            color: var(--primary-color);
             font-size: 0.95rem;
         }
 
         .logout-btn {
-            background-color: #dc3545;
+            background-color: #ef4444;
             color: white;
             border: none;
-            padding: 6px 12px;
-            border-radius: 6px;
+            padding: 6px 14px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background-color: #dc2626;
         }
 
         footer {
             text-align: center;
-            padding: 25px;
+            padding: 30px;
             background: var(--card-bg);
             border-top: 1px solid var(--border-color);
-            margin-top: 40px;
+            margin-top: 50px;
             font-size: 0.9rem;
+            color: var(--card-text);
         }
 
         footer a {
-            color: #1e3c72;
-            font-weight: bold;
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
         }
 
-        /* Masquer le site principal si déconnecté */
+        footer a:hover {
+            text-decoration: underline;
+        }
+
         body.logged-out main, 
         body.logged-out header, 
         body.logged-out footer,
@@ -639,7 +671,7 @@
 </head>
 <body class="logged-out">
 
-    <!-- ÉCRAN D'AUTHENTIFICATION / PROFIL -->
+    <!-- ÉCRAN D'AUTHENTIFICATION -->
     <div id="auth-modal" class="auth-overlay">
         <div class="auth-box">
             <div class="auth-header-icon">🎓</div>
@@ -650,11 +682,11 @@
                 <div id="profile-fields" class="profile-fields">
                     <div class="input-group">
                         <label for="firstname">Prénom</label>
-                        <input type="text" id="firstname" placeholder="Ex: Tamazight" autocomplete="given-name">
+                        <input type="text" id="firstname" placeholder="Ex: Thomas" autocomplete="given-name">
                     </div>
                     <div class="input-group">
                         <label for="lastname">Nom</label>
-                        <input type="text" id="lastname" placeholder="Ex: Aoudia" autocomplete="family-name">
+                        <input type="text" id="lastname" placeholder="Ex: Martin" autocomplete="family-name">
                     </div>
                 </div>
 
@@ -679,14 +711,14 @@
         </div>
     </div>
 
-    <!-- BARRE UTILISATEUR & DÉCONNEXION -->
+    <!-- BARRE UTILISATEUR -->
     <div id="user-top-bar" class="user-top-bar" style="display:none;">
         <span id="welcome-user-message">👤 Bienvenue</span>
         <button id="logout-btn" class="logout-btn" onclick="logout()">Déconnexion</button>
     </div>
 
     <header>
-        <!-- CONTRÔLES HAUT DE PAGE (URGENCE, MODE SOMBRE & MENU) -->
+        <!-- CONTRÔLES HAUT DE PAGE -->
         <div class="header-controls">
             <button class="emergency-btn" onclick="openCategory(event, 'urgence')" title="Numéros d'urgence">🚨 Urgences</button>
             <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()" title="Changer le mode d'affichage">🌙</button>
@@ -694,18 +726,6 @@
                 <button class="hamburger-dots" onclick="toggleMenu()">⋮</button>
                 <div id="dropdown-menu" class="dropdown-menu">
                     <button onclick="openCategory(event, 'urgence')">🚨 Numéros d'Urgence</button>
-                    <button onclick="openCategory(event, 'premiers-pas')">🧳 Premiers Pas</button>
-                    <button onclick="openCategory(event, 'demarches')">📋 Démarches</button>
-                    <button onclick="openCategory(event, 'logement')">🏠 Logement & Crous</button>
-                    <button onclick="openCategory(event, 'sante')">🩺 Santé</button>
-                    <button onclick="openCategory(event, 'bourses')">💶 Bourses & Aides</button>
-                    <button onclick="openCategory(event, 'budget')">🧮 Calculateur Budget</button>
-                    <button onclick="openCategory(event, 'culture')">🎟️ Culture, Loisirs & Sport</button>
-                    <button onclick="openCategory(event, 'etudes')">💻 Réussite & Numérique</button>
-                    <button onclick="openCategory(event, 'transports')">🚆 Transports</button>
-                    <button onclick="openCategory(event, 'travail')">💼 Travail & Jobs</button>
-                    <button onclick="openCategory(event, 'aide-alimentaire')">🧺 Aide Alimentaire</button>
-                    <button onclick="openCategory(event, 'todo')">✅ Ma To-Do List</button>
                     <button onclick="openCategory(event, 'faq')">❓ FAQ Détaillée</button>
                     <button onclick="openCategory(event, 'contact')">✉️ Contact</button>
                 </div>
@@ -713,7 +733,7 @@
         </div>
 
         <h1>🎓 Guide de Survie Étudiante & Internationale</h1>
-        <p>Clique sur une catégorie pour afficher les ressources associées.</p>
+        <p>Toutes les clés pour réussir ton installation et ta vie étudiante en France.</p>
     </header>
 
     <main>
@@ -724,47 +744,38 @@
                 <span class="category-icon">🧳</span>
                 <span class="category-title">Premiers Pas</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'demarches')">
                 <span class="category-icon">📋</span>
                 <span class="category-title">Démarches</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'logement')">
                 <span class="category-icon">🏠</span>
                 <span class="category-title">Logement</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'budget')">
                 <span class="category-icon">🧮</span>
                 <span class="category-title">Budget</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'culture')">
                 <span class="category-icon">🎟️</span>
                 <span class="category-title">Culture & Sport</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'etudes')">
                 <span class="category-icon">💻</span>
                 <span class="category-title">Études & Outils</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'transports')">
                 <span class="category-icon">🚆</span>
                 <span class="category-title">Transports</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'travail')">
                 <span class="category-icon">💼</span>
-                <span class="category-title">Travail</span>
+                <span class="category-title">Travail & Jobs</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'aide-alimentaire')">
                 <span class="category-icon">🧺</span>
                 <span class="category-title">Alimentation</span>
             </button>
-
             <button class="category-btn" onclick="openCategory(event, 'todo')">
                 <span class="category-icon">✅</span>
                 <span class="category-title">To-Do List</span>
@@ -773,38 +784,38 @@
 
         <!-- SECTIONS DE CONTENU -->
 
-        <!-- 0. URGENSES / NUMÉROS UTILES -->
+        <!-- 0. URGENSES -->
         <div id="urgence" class="tab-content">
-            <h2 class="section-title" style="color: #dc3545;">🚨 Numéros d'Urgence & Aide en 1 Clic</h2>
+            <h2 class="section-title" style="color: #ef4444;">🚨 Numéros d'Urgence & Aide en 1 Clic</h2>
             <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
-                En cas de situation d'urgence vitale, médicale, sécuritaire ou de détresse psychologique, voici les numéros à composer immédiatement (appels gratuits 24h/24 et 7j/7) :
+                En cas de situation d'urgence vitale, médicale, sécuritaire ou de détresse psychologique, compose immédiatement ces numéros gratuits (24h/24 et 7j/7) :
             </p>
             <div class="grid-container">
-                <div class="card" style="border-top: 4px solid #dc3545;">
+                <div class="card" style="border-top: 4px solid #ef4444;">
                     <div class="card-icon">🇪🇺</div>
                     <h3>112 — Urgence Européenne</h3>
                     <p>Numéro d'urgence unique valable dans toute l'Union Européenne pour joindre les secours rapidement.</p>
-                    <a href="tel:112" class="card-btn" style="background-color: #dc3545;">Appeler le 112</a>
+                    <a href="tel:112" class="card-btn" style="background-color: #ef4444;">Appeler le 112</a>
                 </div>
-                <div class="card" style="border-top: 4px solid #dc3545;">
+                <div class="card" style="border-top: 4px solid #ef4444;">
                     <div class="card-icon">🚑</div>
                     <h3>15 — SAMU (Urgences Médicales)</h3>
                     <p>En cas de problème médical grave ou d'urgence vitale nécessitant une ambulance ou un médecin urgentiste.</p>
-                    <a href="tel:15" class="card-btn" style="background-color: #dc3545;">Appeler le 15</a>
+                    <a href="tel:15" class="card-btn" style="background-color: #ef4444;">Appeler le 15</a>
                 </div>
-                <div class="card" style="border-top: 4px solid #dc3545;">
+                <div class="card" style="border-top: 4px solid #ef4444;">
                     <div class="card-icon">👮</div>
                     <h3>17 — Police Secours</h3>
                     <p>En cas d'agression, de cambriolage ou de situation nécessitant l'intervention immédiate des forces de l'ordre.</p>
-                    <a href="tel:17" class="card-btn" style="background-color: #dc3545;">Appeler le 17</a>
+                    <a href="tel:17" class="card-btn" style="background-color: #ef4444;">Appeler le 17</a>
                 </div>
-                <div class="card" style="border-top: 4px solid #dc3545;">
+                <div class="card" style="border-top: 4px solid #ef4444;">
                     <div class="card-icon">🚒</div>
                     <h3>18 — Pompiers</h3>
                     <p>Pour tout incendie, accident domestique ou situation de péril immédiat nécessitant les sapeurs-pompiers.</p>
-                    <a href="tel:18" class="card-btn" style="background-color: #dc3545;">Appeler le 18</a>
+                    <a href="tel:18" class="card-btn" style="background-color: #ef4444;">Appeler le 18</a>
                 </div>
-                <div class="card" style="border-top: 4px solid #1e3c72;">
+                <div class="card" style="border-top: 4px solid var(--primary-color);">
                     <div class="card-icon">🧠</div>
                     <h3>Soutien Psychologique d'Urgence</h3>
                     <p>Ligne d'écoute et de soutien psychologique dédiée aux étudiants en détresse via le dispositif Santé Psy Étudiant.</p>
@@ -822,20 +833,20 @@
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">📱</div>
-                    <h3>1. Téléphone & Carte SIM (Le piège à éviter)</h3>
-                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (les tarifs y sont excessivement chers). Profite du wifi des gares/aéroports.<br><br>Si tu prends <em>Lyca Mobile</em> en arrivant, enregistre-la rapidement. Ensuite, pour des offres étudiantes moins chères, choisis <strong>Lebara</strong>.</p>
-                    <a href="https://aklam.io/7OisvZ4u" target="_blank" class="card-btn">Profiter de -50% (Lebara)</a>
+                    <h3>1. Téléphone & Carte SIM</h3>
+                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (tarifs excessifs). Profite du wifi des gares/aéroports.<br><br>Si tu prends <em>Lyca Mobile</em> en arrivant, enregistre-la rapidement. Pour des forfaits étudiants économiques sur le long terme, choisis un opérateur comme <strong>Lebara</strong>.</p>
+                    <a href="https://www.google.com/search?q=Lebara+forfait+etudiant" target="_blank" class="card-btn">Offres Lebara</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🏦</div>
                     <h3>2. Ouverture de Compte Bancaire</h3>
                     <p>Indispensable pour déposer ton argent et recevoir la CAF/bourses.<br><br><strong>Meilleures banques étudiantes :</strong> <em>LCL</em> et <em>BNP Paribas</em>.<br><strong>Documents :</strong> Justificatif de retrait du pays d'origine, pièce d'identité et justificatif de domicile ou d'hébergement.</p>
-                    <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">Trouver une agence</a>
+                    <a href="https://www.google.com/search?q=banque+etudiante+LCL+BNP" target="_blank" class="card-btn">Trouver une agence</a>
                 </div>
-                <div class="card algeria-highlight">
-                    <div class="card-icon">🇩🇿</div>
+                <div class="card">
+                    <div class="card-icon">🛂</div>
                     <h3>3. Procédure Titre de Séjour (Visa)</h3>
-                    <p>À faire d'urgence les premiers jours avant l'expiration du visa.<br><br>• <strong>Étudiants internationaux :</strong> Valide ton visa VLS-TS en ligne sur l'ANEF.<br>• <strong>Étudiants algériens :</strong> Vous n'êtes pas concernés par cette validation simple ; faites directement votre demande de certificat de résidence sur l'ANEF.</p>
+                    <p>À faire d'urgence les premiers jours avant l'expiration de ton visa sur la plateforme officielle de l'Administration des Étrangers en France (ANEF).</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
                 </div>
             </div>
@@ -857,22 +868,10 @@
                     <p>Demandes de renouvellement et suivi de dossier en ligne sur l'ANEF.</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
                 </div>
-                <div class="card algeria-highlight">
-                    <div class="card-icon">🇩🇿</div>
-                    <h3>Accord Franco-Algérien</h3>
-                    <p>Règles spécifiques de 1968 régissant le séjour, la circulation et le statut des étudiants algériens.</p>
-                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2257" target="_blank" class="card-btn">En savoir plus</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏦</div>
-                    <h3>Compte Bancaire</h3>
-                    <p>Indispensable pour recevoir la CAF, la bourse et tes remboursements de santé.</p>
-                    <a href="https://www.google.com/search?q=banques+etudiantes+france" target="_blank" class="card-btn">En savoir plus</a>
-                </div>
                 <div class="card">
                     <div class="card-icon">📑</div>
                     <h3>Attestation CVEC</h3>
-                    <p>Contribution Vie Étudiante et de Campus à obtenir avant l'inscription.</p>
+                    <p>Contribution Vie Étudiante et de Campus à obtenir avant l'inscription universitaire.</p>
                     <a href="https://cvec.etudiant.gouv.fr/" target="_blank" class="card-btn">Obtenir la CVEC</a>
                 </div>
             </div>
@@ -880,36 +879,45 @@
 
         <!-- 3. LOGEMENT -->
         <div id="logement" class="tab-content">
-            <h2 class="section-title">🏠 Logement & Crous</h2>
+            <h2 class="section-title">🏠 Logement & Résidences Étudiantes</h2>
+            <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
+                Trouver un logement en France peut être complexe. Voici un large choix de plateformes et de résidences pour t'aider dans ta recherche :
+            </p>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🏢</div>
                     <h3>Logement Crous</h3>
-                    <p>Réserve une chambre ou un studio en résidence universitaire Crous via le DSE.</p>
-                    <a href="https://www.trouverunlogement.lescrous.fr/" target="_blank" class="card-btn">Trouver un logement</a>
+                    <p>Chambres et studios universitaires publics via le Dossier Social Étudiant (DSE).</p>
+                    <a href="https://www.google.com/search?q=trouverunlogement.lescrous.fr" target="_blank" class="card-btn">Rechercher au Crous</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🛡️</div>
                     <h3>Garant Visale</h3>
-                    <p>Caution locative gratuite accordée par Action Logement.</p>
+                    <p>Caution locative gratuite accordée par Action Logement pour sécuriser ton bail.</p>
                     <a href="https://www.visale.fr/" target="_blank" class="card-btn">Demander Visale</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🔑</div>
-                    <h3>Résidences Privées</h3>
-                    <p>Plateformes de recherche de logements étudiants privés.</p>
-                    <a href="https://www.studapart.com/" target="_blank" class="card-btn">Voir Studapart</a>
+                    <div class="card-icon">🏡</div>
+                    <h3>Résidences Privées & Gestionnaires</h3>
+                    <p>Un large choix de résidences étudiantes partenaires à travers la France :<br>
+                    • <strong>Fac Habitat & Arpej</strong><br>
+                    • <strong>Studefi & Espacil</strong><br>
+                    • <strong>Les Estudines & Nexity Studea</strong><br>
+                    • <strong>Cardinal Campus & Kley</strong><br>
+                    • <strong>Campsea & Studelites</strong><br>
+                    • <strong>Les Belles Années</strong></p>
+                    <a href="https://www.google.com/search?q=residence+etudiante+privee+france" target="_blank" class="card-btn">Explorer les résidences</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📞</div>
-                    <h3>Carte des Crous</h3>
-                    <p>Coordonnées directes des gestionnaires et secrétariats régionaux.</p>
-                    <a href="https://www.etudiant.gouv.fr/fr/vos-crous-1139" target="_blank" class="card-btn">Contacter mon Crous</a>
+                    <div class="card-icon">🔍</div>
+                    <h3>Plateformes Généralistes</h3>
+                    <p>Consulte également les annonces vérifiées sur <strong>SeLoger</strong>, <strong>Studapart</strong> ou <strong>Lokaviz</strong> pour multiplier tes chances.</p>
+                    <a href="https://www.seloger.com/" target="_blank" class="card-btn">Voir SeLoger</a>
                 </div>
             </div>
         </div>
 
-        <!-- 4. CALCULATEUR DE BUDGET (NOUVEAU) -->
+        <!-- 4. CALCULATEUR DE BUDGET -->
         <div id="budget" class="tab-content">
             <h2 class="section-title">🧮 Simulateur de Budget Étudiant</h2>
             <div class="budget-container">
@@ -950,51 +958,55 @@
             </div>
         </div>
 
-        <!-- 5. CULTURE, LOISIRS & SPORT (NOUVEAU) -->
+        <!-- 5. CULTURE, LOISIRS & SPORT -->
         <div id="culture" class="tab-content">
             <h2 class="section-title">🎟️ Bons Plans Culture, Loisirs & Sport</h2>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🎨</div>
-                    <h3>Pass Culture & Carte Culture</h3>
-                    <p>Profite de subventions, de places de cinéma à tarif réduit, de théâtres et d'expositions gratuites ou à prix cassés réservés aux jeunes et étudiants.</p>
+                    <h3>Pass Culture</h3>
+                    <p>Profite de subventions, de places de cinéma à tarif réduit, de théâtres et d'expositions gratuites ou à prix cassés pour les jeunes.</p>
                     <a href="https://pass.culture.fr/" target="_blank" class="card-btn">Découvrir le Pass Culture</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">⚽</div>
                     <h3>Sport Universitaire (SUAPS)</h3>
-                    <p>Pratique des dizaines d'activités sportives (fitness, natation, sports collectifs, arts martiaux) directement sur ton campus pour une quinzaine d'euros par an seulement.</p>
-                    <a href="https://www.etudiant.gouv.fr/fr/sport-et-sante-1681" target="_blank" class="card-btn">Trouver le SUAPS</a>
+                    <p>Pratique des dizaines d'activités sportives (fitness, natation, sports collectifs, escalade) directement sur ton campus à tarif préférentiel étudiant.</p>
+                    <a href="https://www.google.com/search?q=SUAPS+sport+universitaire+france" target="_blank" class="card-btn">Trouver le SUAPS</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📚</div>
                     <h3>Bibliothèques & Espaces de Révision</h3>
-                    <p>Accède gratuitement à des espaces de travail studieux et calmes, comme les Bibliothèques Universitaires (BU) ou la célèbre BPI du Centre Pompidou à Paris.</p>
-                    <a href="https://www.bpi.fr/" target="_blank" class="card-btn">Infos BPI & Bibliothèques</a>
+                    <p>Accède gratuitement à un large choix d'espaces de travail calmes et documentés à travers la France :<br>
+                    • <strong>La BPI</strong> (Bibliothèque Publique d'Information au Centre Pompidou à Paris)<br>
+                    • <strong>La Bibliothèque Sainte-Geneviève</strong> (BSG)<br>
+                    • <strong>Les Bibliothèques Universitaires (BU)</strong> de ton campus<br>
+                    • <strong>Les Bibliothèques municipales</strong> de ta ville</p>
+                    <a href="https://www.bpi.fr/" target="_blank" class="card-btn">Découvrir la BPI</a>
                 </div>
             </div>
         </div>
 
-        <!-- 6. RÉUSSITE & OUTILS NUMÉRIQUES (NOUVEAU) -->
+        <!-- 6. RÉUSSITE & OUTILS NUMÉRIQUES -->
         <div id="etudes" class="tab-content">
             <h2 class="section-title">💻 Réussite Étudiante & Outils Numériques</h2>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🗣️</div>
                     <h3>Apprentissage des Langues (FLE)</h3>
-                    <p>Améliore ton français (Français Langue Étrangère) ou apprends de nouvelles langues grâce à des plateformes et cours de soutien en ligne recommandés pour les étudiants.</p>
+                    <p>Améliore ton français (Français Langue Étrangère) grâce à des plateformes et cours de soutien en ligne adaptés aux étudiants internationaux.</p>
                     <a href="https://www.fle.fr/" target="_blank" class="card-btn">Ressources FLE</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📄</div>
-                    <h3>CV & Lettre de Motivation (Normes Françaises)</h3>
-                    <p>Conseils clés pour rédiger ton CV sur une seule page, structurer ta lettre de motivation formelle et valoriser tes compétences académiques et professionnelles.</p>
+                    <h3>CV & Lettre de Motivation</h3>
+                    <p>Conseils clés pour rédiger ton CV aux normes françaises sur une seule page et structurer ta lettre de motivation formelle.</p>
                     <a href="https://www.welcomethejungle.com/fr/articles/modele-cv-etudiant" target="_blank" class="card-btn">Modèles & Astuces CV</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📂</div>
-                    <h3>Outils Bureautiques & Collaboratifs</h3>
-                    <p>La panoplie indispensable pour réussir tes travaux de groupe : suites bureautiques (LibreOffice, Google Docs) et outils de stockage et partage collaboratif.</p>
+                    <h3>Outils Bureautiques (LibreOffice)</h3>
+                    <p>Télécharge gratuitement la suite bureautique indispensable (traitement de texte, tableur) pour rédiger tes mémoires et rapports universitaires.</p>
                     <a href="https://www.libreoffice.org/download/download/" target="_blank" class="card-btn">Télécharger LibreOffice</a>
                 </div>
             </div>
@@ -1007,104 +1019,99 @@
                 <div class="card">
                     <div class="card-icon">🎫</div>
                     <h3>Transports (Imagine R)</h3>
-                    <p>Abonnements étudiants à tarifs préférentiels en Île-de-France.</p>
+                    <p>Abonnements de transports en commun à tarifs préférentiels en Île-de-France pour les jeunes.</p>
                     <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📉</div>
                     <h3>Réduction Passe Navigo (-75% via la CSS)</h3>
-                    <p>Si tu bénéficies de la CSS, ton Passe Navigo mensuel revient à <strong>~22 €</strong>.</p>
-                    <p style="font-size: 0.85rem; color: var(--card-text); text-align: left;"><strong>Procédure :</strong> Va sur <em>solidaritetransport.fr</em> avec ton attestation CSS pour activer la réduction.</p>
+                    <p>Si tu bénéficies de la CSS, ton Passe Navigo mensuel revient à <strong>~22 €</strong>.<br><br><strong>Procédure :</strong> Va sur <em>solidaritetransport.fr</em> avec ton attestation CSS.</p>
                     <a href="https://www.solidaritetransport.fr/" target="_blank" class="card-btn">Faire la demande</a>
                 </div>
             </div>
         </div>
 
-        <!-- 8. TRAVAIL & JOBS ÉTUDIANTS -->
+        <!-- 8. TRAVAIL & JOBS -->
         <div id="travail" class="tab-content">
-            <h2 class="section-title">💼 Travail, Jobs Étudiants & Règles Algériennes</h2>
+            <h2 class="section-title">💼 Travail, Jobs Étudiants & Plateformes de Recherche</h2>
+            <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
+                Retrouve ci-dessous toutes les plateformes de recherche d'emploi et de jobs étudiants pour financer tes études, ainsi que les règles applicables :
+            </p>
             <div class="grid-container">
-                <div class="card algeria-highlight">
-                    <div class="card-icon">📄</div>
-                    <h3>Autorisation Provisoire de Travail (APT)</h3>
-                    <p>Pour les étudiants algériens, l'exercice d'une activité salariée est réglementé : <strong>l'APT est obligatoire</strong> avant de commencer tout emploi (demandée par l'employeur auprès de la DREETS).</p>
-                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">En savoir plus sur l'APT</a>
-                </div>
-                <div class="card algeria-highlight">
-                    <div class="card-icon">⏱️</div>
-                    <h3>Plafond des 803 Heures par An</h3>
-                    <p>Le temps de travail cumulé est limité à <strong>803 heures par an</strong> (60% de la durée légale). Ne dépasse jamais ce quota sous peine de risques avec la préfecture lors du renouvellement.</p>
-                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">Consulter la règle</a>
+                <div class="card">
+                    <div class="card-icon">🔍</div>
+                    <h3>Plateformes Généralistes & Offres</h3>
+                    <p>Explore un large choix de sites pour postuler à des jobs étudiants ou des alternances :<br>
+                    • <strong>LinkedIn & Indeed</strong><br>
+                    • <strong>Hellowork & Welcome to the Jungle</strong><br>
+                    • <strong>1 Jeune 1 Solution</strong><br>
+                    • <strong>Jobaviz</strong> (le portail du Crous)</p>
+                    <a href="https://fr.indeed.com/" target="_blank" class="card-btn">Chercher sur Indeed</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">💼</div>
-                    <h3>Plateformes de Recherche (Jobaviz)</h3>
-                    <p>Consulte les offres de jobs étudiants compatibles avec ton emploi du temps universitaire.</p>
-                    <a href="https://jobaviz.fr/" target="_blank" class="card-btn">Voir Jobaviz</a>
+                    <div class="card-icon">⚡</div>
+                    <h3>Missions Courtes & Services à la Personne</h3>
+                    <p>Pour des missions flexibles adaptées à ton emploi du temps de cours :<br>
+                    • <strong>Side & Student Pop</strong><br>
+                    • <strong>Iziwork</strong><br>
+                    • <strong>Yoojo</strong> (petits boulots et services)</p>
+                    <a href="https://www.studentpop.fr/" target="_blank" class="card-btn">Voir Student Pop</a>
+                </div>
+                <div class="card">
+                    <div class="card-icon">⏱️</div>
+                    <h3>Règles & Quotas de Travail</h3>
+                    <p>Le temps de travail étudiant est réglementé. Pour les étudiants étrangers soumis à autorisation ou formalités spécifiques, veille à respecter les plafonds légaux (et les quotas horaires annuels) pour ne pas rencontrer de difficultés lors du renouvellement en préfecture.</p>
+                    <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">Consulter la réglementation</a>
                 </div>
             </div>
         </div>
 
-        <!-- 9. AIDE ALIMENTAIRE ET SOCIALE -->
+        <!-- 9. AIDE ALIMENTAIRE -->
         <div id="aide-alimentaire" class="tab-content">
             <h2 class="section-title">🧺 Aide Alimentaire, Kits d'Hygiène & Soutien Social</h2>
             <p style="text-align: center; color: var(--card-text); max-width: 800px; margin: 0 auto 25px auto;">
-                Plusieurs organismes et associations se mobilisent pour aider les étudiants à subvenir à leurs besoins alimentaires et leur fournir des kits d'hygiène essentiels. Voici toutes les solutions pour en bénéficier :
+                Plusieurs organismes et associations se mobilisent pour aider les étudiants à subvenir à leurs besoins alimentaires et leur fournir des kits d'hygiène essentiels :
             </p>
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">🍲</div>
                     <h3>Les Restos du Cœur & Secours (Populaire / Catholique)</h3>
-                    <p>Présents dans presque toutes les villes, ils organisent des distributions hebdomadaires de denrées alimentaires et de kits d'hygiène.<br><br><strong>Comment faire :</strong> Il suffit de se rendre sur place muni de tes papiers (pièce d'identité et certificat de scolarité) pour t'inscrire et bénéficier chaque semaine de cette aide.</p>
+                    <p>Distributions hebdomadaires de denrées et kits d'hygiène.<br><br><strong>Comment faire :</strong> Rends-toi sur place muni d'une pièce d'identité et d'un certificat de scolarité.</p>
                     <a href="https://www.restosducoeur.org/" target="_blank" class="card-btn">Trouver un centre</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📦</div>
                     <h3>Association Linkee</h3>
-                    <p>Spécialisée dans la distribution de colis alimentaires frais et de qualité pour les étudiants.<br><br><strong>Comment faire :</strong> L'inscription se fait directement en ligne sur leur plateforme pour réserver ton panier et le récupérer lors des permanences près de chez toi.</p>
+                    <p>Distribution de colis alimentaires frais et de qualité pour les étudiants.<br><br><strong>Comment faire :</strong> Inscription en ligne pour réserver ton panier.</p>
                     <a href="https://www.linkee.co/" target="_blank" class="card-btn">S'inscrire sur Linkee</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">🎒</div>
                     <h3>Association Cop1</h3>
-                    <p>Grande association étudiante qui organise très régulièrement des distributions massives de paniers repas et de produits d'hygiène gratuits.<br><br><strong>Comment faire :</strong> Rends-toi sur leur site web pour t'inscrire aux prochaines sessions de distribution.</p>
+                    <p>Distributions massives de paniers repas et produits d'hygiène gratuits.<br><br><strong>Comment faire :</strong> Inscription en ligne sur leur site.</p>
                     <a href="https://cop1.fr/" target="_blank" class="card-btn">Voir le site de Cop1</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🏛️</div>
-                    <h3>La Maison de l'Étudiant (Université)</h3>
-                    <p>Des distributions alimentaires et solidaires ont lieu chaque semaine ou chaque mois au sein même des universités.<br><br><strong>Comment faire :</strong> Il suffit de se renseigner directement auprès de l'accueil de ton campus ou de la vie étudiante de ton université.</p>
-                    <a href="https://www.etudiant.gouv.fr/" target="_blank" class="card-btn">Infos Étudiant.gouv</a>
                 </div>
                 <div class="card">
                     <div class="card-icon">📱</div>
                     <h3>Du Beurre Dans Leurs Épinards</h3>
-                    <p>Une association formidable active sur les réseaux sociaux qui organise des coups de pouce alimentaires et solidaires pour les étudiants.<br><br><strong>Comment faire :</strong> Reste branché(e) sur leur story et leurs publications Instagram pour choper les liens d'inscription dès leur ouverture !</p>
+                    <p>Association active sur les réseaux sociaux pour des coups de pouce alimentaires.<br><br><strong>Comment faire :</strong> Reste branché(e) sur leur Instagram pour choper les liens d'inscription.</p>
                     <a href="https://www.instagram.com/dubeurredansleursepinards?rpxt=ejNxcnJxN2Mzbm5s" target="_blank" class="card-btn">Voir leur Instagram</a>
-                </div>
-                <div class="card">
-                    <div class="card-icon">🤝</div>
-                    <h3>Assistante Sociale du Crous (Aide Financière)</h3>
-                    <p>Si tu es réellement dans le besoin financier (loyer, charges, courses), l'assistante sociale peut t'attribuer une aide d'urgence sous forme d'argent ou de chèques services / tickets restaurants.<br><br><strong>Comment faire :</strong> Prends rendez-vous en ligne via ton espace personnel.</p>
-                    <a href="https://www.messervices.etudiant.gouv.fr/" target="_blank" class="card-btn">Prendre RDV sur MesServices</a>
                 </div>
             </div>
         </div>
 
-        <!-- 10. TO-DO LIST PERSONNELLE -->
+        <!-- 10. TO-DO LIST -->
         <div id="todo" class="tab-content">
             <h2 class="section-title">✅ Ma To-Do List Étudiante</h2>
             <div class="todo-container">
-                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Organise tes démarches et suis ton avancement pas à pas. Tes tâches sont sauvegardées automatiquement sur ton profil !</p>
+                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Organise tes démarches et suis ton avancement pas à pas. Sauvegardé automatiquement sur ton profil !</p>
                 
                 <form class="todo-form" onsubmit="addTodo(event)">
                     <input type="text" id="todo-input" placeholder="Ajouter une nouvelle tâche (ex: Valider mon visa ANEF)..." required>
                     <button type="submit" class="card-btn" style="padding: 12px 20px;">Ajouter</button>
                 </form>
 
-                <ul id="todo-list" class="todo-list">
-                    <!-- Les tâches s'afficheront ici dynamiquement -->
-                </ul>
+                <ul id="todo-list" class="todo-list"></ul>
             </div>
         </div>
 
@@ -1123,25 +1130,7 @@
                 </div>
                 <div class="faq-item">
                     <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>2. Quelles sont les particularités de l'Accord franco-algérien de 1968 ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Les ressortissants algériens en France sont régis par l'<strong>Accord franco-algérien du 27 décembre 1968</strong> (et non par le CESEDA général). Cet accord encadre la délivrance et le renouvellement du certificat de résidence étudiant.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>3. Puis-je travailler en tant qu'étudiant algérien et quelles sont les limites ?</span>
-                        <span>▼</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Oui, mais <strong>l'Autorisation Provisoire de Travail (APT) est obligatoire</strong>. Tu es limité à un maximum de <strong>803 heures par an</strong>. Ne dépasse pas ce quota pour éviter des problèmes lors du renouvellement en préfecture.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question" onclick="toggleFaq(this)">
-                        <span>4. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
+                        <span>2. Dans quel délai dois-je valider mon visa VLS-TS ?</span>
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
@@ -1257,7 +1246,6 @@
             location.reload();
         }
 
-        // --- CALCULATEUR DE BUDGET ---
         function calculateBudget() {
             const loyer = parseFloat(document.getElementById('b-loyer').value) || 0;
             const courses = parseFloat(document.getElementById('b-courses').value) || 0;
@@ -1274,15 +1262,14 @@
 
             outputEl.innerText = resteAVivre + " €";
             if (resteAVivre >= 0) {
-                resultBox.style.backgroundColor = "rgba(40, 167, 69, 0.1)";
-                outputEl.style.color = "#28a745";
+                resultBox.style.backgroundColor = "rgba(16, 185, 129, 0.1)";
+                outputEl.style.color = "#10b981";
             } else {
-                resultBox.style.backgroundColor = "rgba(220, 53, 69, 0.1)";
-                outputEl.style.color = "#dc3545";
+                resultBox.style.backgroundColor = "rgba(239, 68, 68, 0.1)";
+                outputEl.style.color = "#ef4444";
             }
         }
 
-        // --- GESTION DU MODE SOMBRE ---
         function toggleTheme() {
             const currentTheme = document.documentElement.getAttribute('data-theme');
             const themeBtn = document.getElementById('theme-btn');
@@ -1297,7 +1284,6 @@
             }
         }
 
-        // --- GESTION DE LA TO-DO LIST ---
         function getTodoKey() {
             const currentUser = localStorage.getItem('currentUser') || 'guest';
             return 'todos_' + currentUser;
@@ -1317,7 +1303,7 @@
                 const li = document.createElement('li');
                 li.className = `todo-item ${todo.completed ? 'completed' : ''}`;
                 li.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="display: flex; align-items: center; gap: 12px;">
                         <input type="checkbox" ${todo.completed ? 'checked' : ''} onclick="toggleTodo(${index})">
                         <span>${todo.text}</span>
                     </div>
@@ -1355,7 +1341,6 @@
         }
 
         window.onload = function() {
-            // Charger le thème enregistré
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
                 document.documentElement.setAttribute('data-theme', 'dark');
@@ -1374,7 +1359,6 @@
             }
         }
 
-        // Navigation entre les onglets
         function openCategory(evt, categoryName) {
             var contents = document.getElementsByClassName("tab-content");
             for (var i = 0; i < contents.length; i++) {
@@ -1395,18 +1379,15 @@
             document.getElementById('dropdown-menu').classList.remove('show');
         }
 
-        // Ouvrir / fermer le menu des trois points (hamburger)
         function toggleMenu() {
             document.getElementById('dropdown-menu').classList.toggle('show');
         }
 
-        // Ouvrir / fermer les questions de la FAQ
         function toggleFaq(element) {
             const item = element.parentElement;
             item.classList.toggle('active');
         }
 
-        // Fermer le menu déroulant si on clique en dehors
         window.onclick = function(event) {
             if (!event.target.matches('.hamburger-dots') && !event.target.matches('.theme-toggle-btn') && !event.target.matches('.emergency-btn')) {
                 var dropdowns = document.getElementsByClassName("dropdown-menu");
