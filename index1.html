@@ -276,6 +276,8 @@
             font-size: 0.9rem;
             margin-top: auto;
             transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
         }
 
         .card-btn:hover {
@@ -833,15 +835,15 @@
             <div class="grid-container">
                 <div class="card">
                     <div class="card-icon">📱</div>
-                    <h3>1. Téléphone & Carte SIM</h3>
-                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (tarifs excessifs). Profite du wifi des gares/aéroports.<br><br>Si tu prends <em>Lyca Mobile</em> en arrivant, enregistre-la rapidement. Pour des forfaits étudiants économiques sur le long terme, choisis un opérateur comme <strong>Lebara</strong>.</p>
-                    <a href="https://www.google.com/search?q=Lebara+forfait+etudiant" target="_blank" class="card-btn">Offres Lebara</a>
+                    <h3>1. Téléphone & Bons Plans Parrainage</h3>
+                    <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (tarifs excessifs). Profite du wifi des gares/aéroports.<br><br><strong>Offre -50% Lebara :</strong> Je dispose d'un lien de parrainage exclusif pour obtenir -50% sur tes 2 premiers mois. Contacte-moi directement pour que je t'envoie le lien !</p>
+                    <button class="card-btn" onclick="openCategory(event, 'contact')">Demander mon lien Lebara</button>
                 </div>
                 <div class="card">
                     <div class="card-icon">🏦</div>
-                    <h3>2. Ouverture de Compte Bancaire</h3>
-                    <p>Indispensable pour déposer ton argent et recevoir la CAF/bourses.<br><br><strong>Meilleures banques étudiantes :</strong> <em>LCL</em> et <em>BNP Paribas</em>.<br><strong>Documents :</strong> Justificatif de retrait du pays d'origine, pièce d'identité et justificatif de domicile ou d'hébergement.</p>
-                    <a href="https://www.google.com/search?q=banque+etudiante+LCL+BNP" target="_blank" class="card-btn">Trouver une agence</a>
+                    <h3>2. Compte Bancaire & Parrainage (Boursorama / Hello Bank)</h3>
+                    <p>Indispensable pour déposer ton argent et recevoir la CAF/bourses.<br><br><strong>Important :</strong> Pour ouvrir un compte dans une banque en ligne, tu dois obligatoirement posséder un <strong>titre de séjour valide</strong>.<br><br>Tu souhaites toucher une prime de parrainage chez <strong>Boursorama</strong> ou <strong>Hello Bank</strong> ? Écris-moi pour obtenir mes liens d'invitation !</p>
+                    <button class="card-btn" onclick="openCategory(event, 'contact')">Demander mes liens banques</button>
                 </div>
                 <div class="card">
                     <div class="card-icon">🛂</div>
@@ -1125,7 +1127,7 @@
                         <span>▼</span>
                     </div>
                     <div class="faq-answer">
-                        <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu as droit à la réduction Solidarité Transport. Rends-toi sur <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande. Ton forfait mensuel passera à environ 22 €.</p>
+                        <p>Si tu bénéficies de la Complémentaire Santé Solidaire (CSS), tu a droit à la réduction Solidarité Transport. Rends-toi sur <strong>solidaritetransport.fr</strong> muni de ton attestation CSS et de ton numéro de Passe Navigo pour faire la demande. Ton forfait mensuel passera à environ 22 €.</p>
                     </div>
                 </div>
                 <div class="faq-item">
@@ -1144,11 +1146,11 @@
         <div id="contact" class="tab-content">
             <h2 class="section-title">✉️ Contacte-moi</h2>
             <div class="contact-container">
-                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Tu n'as pas trouvé de réponse à ta question dans le guide ? Envoie-moi un message !</p>
+                <p style="text-align: center; color: var(--card-text); margin-bottom: 20px;">Tu souhaites obtenir mes liens de parrainage (Lebara, Boursorama, Hello Bank) ou tu as une question ? Envoie-moi un message !</p>
                 <form action="https://formspree.io/f/maeqlnre" method="POST" class="contact-form">
                     <input type="text" name="name" placeholder="Ton nom et prénom" required>
                     <input type="email" name="email" placeholder="Ton adresse e-mail" required>
-                    <textarea name="message" placeholder="Écris ton message ou ta question ici..." required></textarea>
+                    <textarea name="message" placeholder="Écris ton message ici (ex: Je veux mon lien Lebara / Boursorama...)..." required></textarea>
                     <button type="submit" class="auth-btn">Envoyer le message</button>
                 </form>
             </div>
