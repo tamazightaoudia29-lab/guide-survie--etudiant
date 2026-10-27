@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guide de Survie Étudiante — Version 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* --- STYLES GÉNÉRAUX & DESIGN AMÉLIORÉ --- */
         :root {
@@ -17,6 +18,7 @@
             --card-title: #0f172a;
             --primary-color: #2563eb;
             --primary-hover: #1d4ed8;
+            --icon-bg: #eff6ff;
         }
 
         [data-theme="dark"] {
@@ -30,10 +32,11 @@
             --card-title: #f8fafc;
             --primary-color: #3b82f6;
             --primary-hover: #2563eb;
+            --icon-bg: rgba(59, 130, 246, 0.15);
         }
 
         body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
             margin: 0;
             padding: 0;
@@ -45,14 +48,14 @@
             background: var(--header-bg);
             color: white;
             text-align: center;
-            padding: 35px 20px;
+            padding: 40px 20px;
             position: relative;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.3rem;
             font-weight: 800;
             letter-spacing: -0.025em;
         }
@@ -98,10 +101,12 @@
 
         .emergency-btn:hover {
             background: #dc2626;
+            transform: scale(1.03);
         }
 
         .theme-toggle-btn:hover, .hamburger-dots:hover {
             background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
         }
 
         /* Menu déroulant épuré */
@@ -150,26 +155,37 @@
             padding: 0 20px;
         }
 
-        /* MENU DES BOUTONS DE CATÉGORIES */
+        /* MENU DES BOUTONS DE CATÉGORIES (Mobile scrollable) */
         .categories-nav {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             flex-wrap: wrap;
-            margin-bottom: 35px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .categories-nav {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+            }
         }
 
         .category-btn {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 14px;
-            padding: 12px 14px;
+            padding: 12px 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             cursor: pointer;
             min-width: 100px;
-            transition: all 0.25s ease;
+            flex-shrink: 0;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             color: var(--text-color);
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
@@ -177,18 +193,18 @@
         .category-btn:hover {
             border-color: var(--primary-color);
             transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.1);
         }
 
         .category-btn.active {
             background-color: var(--primary-color);
             border-color: var(--primary-color);
             color: white;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
         }
 
         .category-icon {
-            font-size: 1.7rem;
+            font-size: 1.6rem;
             margin-bottom: 6px;
         }
 
@@ -204,64 +220,78 @@
 
         .tab-content.active {
             display: block;
-            animation: fadeIn 0.3s ease;
+            animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         /* GRILLE ET CARTES */
         .section-title {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             color: var(--card-title);
             margin-bottom: 25px;
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 22px;
+            gap: 24px;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             border: 1px solid var(--border-color);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.07);
+            border-color: var(--primary-color);
         }
 
-        .card-icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
+        .card-icon-wrapper {
+            width: 60px;
+            height: 60px;
+            background: var(--icon-bg);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px auto;
+            font-size: 1.8rem;
+            transition: transform 0.3s;
+        }
+
+        .card:hover .card-icon-wrapper {
+            transform: scale(1.1);
         }
 
         .card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.15rem;
+            margin: 0 0 12px 0;
+            font-size: 1.2rem;
             color: var(--card-title);
             font-weight: 700;
         }
 
         .card p {
-            font-size: 0.92rem;
+            font-size: 0.93rem;
             color: var(--card-text);
-            line-height: 1.5;
-            margin-bottom: 20px;
+            line-height: 1.6;
+            margin-bottom: 22px;
             text-align: left;
         }
 
@@ -270,18 +300,19 @@
             background-color: var(--primary-color);
             color: white;
             text-decoration: none;
-            padding: 10px 18px;
-            border-radius: 10px;
+            padding: 11px 20px;
+            border-radius: 12px;
             font-weight: 600;
             font-size: 0.9rem;
             margin-top: auto;
-            transition: background-color 0.2s;
+            transition: background-color 0.2s, transform 0.2s;
             border: none;
             cursor: pointer;
         }
 
         .card-btn:hover {
             background-color: var(--primary-hover);
+            transform: translateY(-1px);
         }
 
         /* --- CALCULATEUR DE BUDGET --- */
@@ -290,8 +321,8 @@
             margin: 0 auto;
             background: var(--card-bg);
             padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
@@ -322,7 +353,7 @@
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 0.95rem;
             text-align: right;
             outline: none;
@@ -331,7 +362,7 @@
         .budget-result {
             background: var(--bg-color);
             padding: 22px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
             text-align: center;
         }
@@ -343,7 +374,7 @@
         }
 
         .budget-result p {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 800;
             margin: 0;
         }
@@ -354,8 +385,8 @@
             margin: 0 auto;
             background: var(--card-bg);
             padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
@@ -371,7 +402,7 @@
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 0.95rem;
             outline: none;
         }
@@ -391,7 +422,7 @@
             align-items: center;
             background: var(--bg-color);
             padding: 14px 18px;
-            border-radius: 12px;
+            border-radius: 14px;
             border: 1px solid var(--border-color);
         }
 
@@ -405,7 +436,7 @@
             color: white;
             border: none;
             padding: 6px 12px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 0.85rem;
             font-weight: 600;
@@ -467,8 +498,8 @@
             margin: 0 auto;
             background: var(--card-bg);
             padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border-radius: 18px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.03);
             border: 1px solid var(--border-color);
         }
 
@@ -483,7 +514,7 @@
             border: 1px solid var(--border-color);
             background: var(--bg-color);
             color: var(--text-color);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 0.95rem;
             outline: none;
             font-family: inherit;
@@ -517,7 +548,7 @@
             width: 90%;
             max-width: 420px;
             text-align: center;
-            animation: slideUp 0.4s ease-out;
+            animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             color: var(--text-color);
             border: 1px solid var(--border-color);
         }
@@ -566,7 +597,7 @@
         .auth-form input {
             padding: 12px 14px;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 0.95rem;
             outline: none;
             background-color: var(--bg-color);
@@ -578,7 +609,7 @@
             color: white;
             padding: 12px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1rem;
             cursor: pointer;
             font-weight: 700;
@@ -608,7 +639,7 @@
             margin-top: 12px;
             background-color: rgba(239, 68, 68, 0.1);
             padding: 10px;
-            border-radius: 8px;
+            border-radius: 10px;
             display: none;
         }
 
@@ -632,7 +663,7 @@
             color: white;
             border: none;
             padding: 6px 14px;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
             font-size: 0.85rem;
@@ -794,31 +825,31 @@
             </p>
             <div class="grid-container">
                 <div class="card" style="border-top: 4px solid #ef4444;">
-                    <div class="card-icon">🇪🇺</div>
+                    <div class="card-icon-wrapper" style="background: rgba(239, 68, 68, 0.1);">🇪🇺</div>
                     <h3>112 — Urgence Européenne</h3>
                     <p>Numéro d'urgence unique valable dans toute l'Union Européenne pour joindre les secours rapidement.</p>
                     <a href="tel:112" class="card-btn" style="background-color: #ef4444;">Appeler le 112</a>
                 </div>
                 <div class="card" style="border-top: 4px solid #ef4444;">
-                    <div class="card-icon">🚑</div>
+                    <div class="card-icon-wrapper" style="background: rgba(239, 68, 68, 0.1);">🚑</div>
                     <h3>15 — SAMU (Urgences Médicales)</h3>
                     <p>En cas de problème médical grave ou d'urgence vitale nécessitant une ambulance ou un médecin urgentiste.</p>
                     <a href="tel:15" class="card-btn" style="background-color: #ef4444;">Appeler le 15</a>
                 </div>
                 <div class="card" style="border-top: 4px solid #ef4444;">
-                    <div class="card-icon">👮</div>
+                    <div class="card-icon-wrapper" style="background: rgba(239, 68, 68, 0.1);">👮</div>
                     <h3>17 — Police Secours</h3>
                     <p>En cas d'agression, de cambriolage ou de situation nécessitant l'intervention immédiate des forces de l'ordre.</p>
                     <a href="tel:17" class="card-btn" style="background-color: #ef4444;">Appeler le 17</a>
                 </div>
                 <div class="card" style="border-top: 4px solid #ef4444;">
-                    <div class="card-icon">🚒</div>
+                    <div class="card-icon-wrapper" style="background: rgba(239, 68, 68, 0.1);">🚒</div>
                     <h3>18 — Pompiers</h3>
                     <p>Pour tout incendie, accident domestique ou situation de péril immédiat nécessitant les sapeurs-pompiers.</p>
                     <a href="tel:18" class="card-btn" style="background-color: #ef4444;">Appeler le 18</a>
                 </div>
                 <div class="card" style="border-top: 4px solid var(--primary-color);">
-                    <div class="card-icon">🧠</div>
+                    <div class="card-icon-wrapper">🧠</div>
                     <h3>Soutien Psychologique d'Urgence</h3>
                     <p>Ligne d'écoute et de soutien psychologique dédiée aux étudiants en détresse via le dispositif Santé Psy Étudiant.</p>
                     <a href="https://santepsy.etudiant.gouv.fr/" target="_blank" class="card-btn">Accéder à Santé Psy</a>
@@ -834,19 +865,19 @@
             </p>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">📱</div>
+                    <div class="card-icon-wrapper">📱</div>
                     <h3>1. Téléphone & Bons Plans Parrainage</h3>
                     <p><strong>Attention :</strong> N'achète surtout pas de puce à l'aéroport (tarifs excessifs). Profite du wifi des gares/aéroports.<br><br><strong>Offre -50% Lebara :</strong> Je dispose d'un lien de parrainage exclusif pour obtenir -50% sur tes 2 premiers mois. Contacte-moi directement pour que je t'envoie le lien !</p>
                     <button class="card-btn" onclick="openCategory(event, 'contact')">Demander mon lien Lebara</button>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🏦</div>
+                    <div class="card-icon-wrapper">🏦</div>
                     <h3>2. Compte Bancaire & Parrainage (Boursorama / Hello Bank)</h3>
                     <p>Indispensable pour déposer ton argent et recevoir la CAF/bourses.<br><br><strong>Important :</strong> Pour ouvrir un compte bancaire (notamment en ligne), tu dois posséder un <strong>titre de séjour valide</strong>.<br><br>Tu souhaites toucher une prime de parrainage chez <strong>Boursorama</strong> ou <strong>Hello Bank</strong> ? Écris-moi pour obtenir mes liens d'invitation !</p>
                     <button class="card-btn" onclick="openCategory(event, 'contact')">Demander mes liens banques</button>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🛂</div>
+                    <div class="card-icon-wrapper">🛂</div>
                     <h3>3. Procédure Titre de Séjour (Visa)</h3>
                     <p>À faire d'urgence les premiers jours avant l'expiration de ton visa sur la plateforme officielle de l'Administration des Étrangers en France (ANEF).</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
@@ -859,25 +890,25 @@
             <h2 class="section-title">📋 Démarches Administratives & Bancaires</h2>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🛂</div>
+                    <div class="card-icon-wrapper">🛂</div>
                     <h3>Validation du Visa (VLS-TS)</h3>
                     <p>Obligatoire dans les 3 mois suivant ton arrivée en France sur la plateforme ANEF.</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Valider mon visa</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🏛️</div>
+                    <div class="card-icon-wrapper">🏛️</div>
                     <h3>Titre de Séjour</h3>
                     <p>Demandes de renouvellement et suivi de dossier en ligne sur l'ANEF.</p>
                     <a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank" class="card-btn">Accéder à l'ANEF</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">💳</div>
+                    <div class="card-icon-wrapper">💳</div>
                     <h3>Comparatif des 10 Meilleures Banques</h3>
                     <p>Consulte le comparatif détaillé des meilleures banques pour étudiants en France (frais réduits, cartes gratuites, offres de bienvenue).</p>
                     <a href="https://www.google.com/search?q=meilleures+banques+etudiants+france" target="_blank" class="card-btn">Voir le comparatif</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📑</div>
+                    <div class="card-icon-wrapper">📑</div>
                     <h3>Attestation CVEC</h3>
                     <p>Contribution Vie Étudiante et de Campus à obtenir avant l'inscription universitaire.</p>
                     <a href="https://cvec.etudiant.gouv.fr/" target="_blank" class="card-btn">Obtenir la CVEC</a>
@@ -893,19 +924,19 @@
             </p>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🏢</div>
+                    <div class="card-icon-wrapper">🏢</div>
                     <h3>Logement Crous</h3>
                     <p>Chambres et studios universitaires publics via le Dossier Social Étudiant (DSE).</p>
                     <a href="https://www.google.com/search?q=trouverunlogement.lescrous.fr" target="_blank" class="card-btn">Rechercher au Crous</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🛡️</div>
+                    <div class="card-icon-wrapper">🛡️</div>
                     <h3>Garant Visale</h3>
                     <p>Caution locative gratuite accordée par Action Logement pour sécuriser ton bail.</p>
                     <a href="https://www.visale.fr/" target="_blank" class="card-btn">Demander Visale</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🏡</div>
+                    <div class="card-icon-wrapper">🏡</div>
                     <h3>Résidences Privées & Gestionnaires</h3>
                     <p>Un large choix de résidences étudiantes partenaires à travers la France :<br>
                     • <strong>Fac Habitat & Arpej</strong><br>
@@ -917,7 +948,7 @@
                     <a href="https://www.google.com/search?q=residence+etudiante+privee+france" target="_blank" class="card-btn">Explorer les résidences</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🔍</div>
+                    <div class="card-icon-wrapper">🔍</div>
                     <h3>Plateformes Généralistes</h3>
                     <p>Consulte également les annonces vérifiées sur <strong>SeLoger</strong>, <strong>Studapart</strong> ou <strong>Lokaviz</strong> pour multiplier tes chances.</p>
                     <a href="https://www.seloger.com/" target="_blank" class="card-btn">Voir SeLoger</a>
@@ -971,19 +1002,19 @@
             <h2 class="section-title">🎟️ Bons Plans Culture, Loisirs & Sport</h2>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🎨</div>
+                    <div class="card-icon-wrapper">🎨</div>
                     <h3>Pass Culture</h3>
                     <p>Profite de subventions, de places de cinéma à tarif réduit, de théâtres et d'expositions gratuites ou à prix cassés pour les jeunes.</p>
                     <a href="https://pass.culture.fr/" target="_blank" class="card-btn">Découvrir le Pass Culture</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">⚽</div>
+                    <div class="card-icon-wrapper">⚽</div>
                     <h3>Sport Universitaire (SUAPS)</h3>
                     <p>Pratique des dizaines d'activités sportives (fitness, natation, sports collectifs, escalade) directement sur ton campus à tarif préférentiel étudiant.</p>
                     <a href="https://www.google.com/search?q=SUAPS+sport+universitaire+france" target="_blank" class="card-btn">Trouver le SUAPS</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📚</div>
+                    <div class="card-icon-wrapper">📚</div>
                     <h3>Bibliothèques & Espaces de Révision</h3>
                     <p>Accède gratuitement à un large choix d'espaces de travail calmes et documentés à travers la France :<br>
                     • <strong>La BPI</strong> (Bibliothèque Publique d'Information au Centre Pompidou à Paris)<br>
@@ -1000,19 +1031,19 @@
             <h2 class="section-title">💻 Réussite Étudiante & Outils Numériques</h2>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🗣️</div>
+                    <div class="card-icon-wrapper">🗣️</div>
                     <h3>Apprentissage des Langues (FLE)</h3>
                     <p>Améliore ton français (Français Langue Étrangère) grâce à des plateformes et cours de soutien en ligne adaptés aux étudiants internationaux.</p>
                     <a href="https://www.fle.fr/" target="_blank" class="card-btn">Ressources FLE</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📄</div>
+                    <div class="card-icon-wrapper">📄</div>
                     <h3>CV & Lettre de Motivation</h3>
                     <p>Conseils clés pour rédiger ton CV aux normes françaises sur une seule page et structurer ta lettre de motivation formelle.</p>
                     <a href="https://www.welcomethejungle.com/fr/articles/modele-cv-etudiant" target="_blank" class="card-btn">Modèles & Astuces CV</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📂</div>
+                    <div class="card-icon-wrapper">📂</div>
                     <h3>Outils Bureautiques (LibreOffice)</h3>
                     <p>Télécharge gratuitement la suite bureautique indispensable (traitement de texte, tableur) pour rédiger tes mémoires et rapports universitaires.</p>
                     <a href="https://www.libreoffice.org/download/download/" target="_blank" class="card-btn">Télécharger LibreOffice</a>
@@ -1025,13 +1056,13 @@
             <h2 class="section-title">🚆 Transports & Vie Pratique</h2>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🎫</div>
+                    <div class="card-icon-wrapper">🎫</div>
                     <h3>Transports (Imagine R)</h3>
                     <p>Abonnements de transports en commun à tarifs préférentiels en Île-de-France pour les jeunes.</p>
                     <a href="https://www.iledefrance-mobilites.fr/" target="_blank" class="card-btn">Souscrire Imagine R</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📉</div>
+                    <div class="card-icon-wrapper">📉</div>
                     <h3>Réduction Passe Navigo (-75% via la CSS)</h3>
                     <p>Si tu bénéficies de la CSS, ton Passe Navigo mensuel revient à <strong>~22 €</strong>.<br><br><strong>Procédure :</strong> Va sur <em>solidaritetransport.fr</em> avec ton attestation CSS.</p>
                     <a href="https://www.solidaritetransport.fr/" target="_blank" class="card-btn">Faire la demande</a>
@@ -1047,7 +1078,7 @@
             </p>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🔍</div>
+                    <div class="card-icon-wrapper">🔍</div>
                     <h3>Plateformes Généralistes & Offres</h3>
                     <p>Explore un large choix de sites pour postuler à des jobs étudiants ou des alternances :<br>
                     • <strong>LinkedIn & Indeed</strong><br>
@@ -1057,7 +1088,7 @@
                     <a href="https://fr.indeed.com/" target="_blank" class="card-btn">Chercher sur Indeed</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">⚡</div>
+                    <div class="card-icon-wrapper">⚡</div>
                     <h3>Missions Courtes & Services à la Personne</h3>
                     <p>Pour des missions flexibles adaptées à ton emploi du temps de cours :<br>
                     • <strong>Side & Student Pop</strong><br>
@@ -1066,7 +1097,7 @@
                     <a href="https://www.studentpop.fr/" target="_blank" class="card-btn">Voir Student Pop</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">⏱️</div>
+                    <div class="card-icon-wrapper">⏱️</div>
                     <h3>Règles & Quotas de Travail</h3>
                     <p>Le temps de travail étudiant est réglementé. Pour les étudiants étrangers soumis à autorisation ou formalités spécifiques, veille à respecter les plafonds légaux (et les quotas horaires annuels) pour ne pas rencontrer de difficultés lors du renouvellement en préfecture.</p>
                     <a href="https://www.service-public.fr/particuliers/vosdroits/F2713" target="_blank" class="card-btn">Consulter la réglementation</a>
@@ -1082,25 +1113,25 @@
             </p>
             <div class="grid-container">
                 <div class="card">
-                    <div class="card-icon">🍲</div>
+                    <div class="card-icon-wrapper">🍲</div>
                     <h3>Les Restos du Cœur & Secours (Populaire / Catholique)</h3>
                     <p>Distributions hebdomadaires de denrées et kits d'hygiène.<br><br><strong>Comment faire :</strong> Rends-toi sur place muni d'une pièce d'identité et d'un certificat de scolarité.</p>
                     <a href="https://www.restosducoeur.org/" target="_blank" class="card-btn">Trouver un centre</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📦</div>
+                    <div class="card-icon-wrapper">📦</div>
                     <h3>Association Linkee</h3>
                     <p>Distribution de colis alimentaires frais et de qualité pour les étudiants.<br><br><strong>Comment faire :</strong> Inscription en ligne pour réserver ton panier.</p>
                     <a href="https://www.linkee.co/" target="_blank" class="card-btn">S'inscrire sur Linkee</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">🎒</div>
+                    <div class="card-icon-wrapper">🎒</div>
                     <h3>Association Cop1</h3>
                     <p>Distributions massives de paniers repas et produits d'hygiène gratuits.<br><br><strong>Comment faire :</strong> Inscription en ligne sur leur site.</p>
                     <a href="https://cop1.fr/" target="_blank" class="card-btn">Voir le site de Cop1</a>
                 </div>
                 <div class="card">
-                    <div class="card-icon">📱</div>
+                    <div class="card-icon-wrapper">📱</div>
                     <h3>Du Beurre Dans Leurs Épinards</h3>
                     <p>Association active sur les réseaux sociaux pour des coups de pouce alimentaires.<br><br><strong>Comment faire :</strong> Reste branché(e) sur leur Instagram pour choper les liens d'inscription.</p>
                     <a href="https://www.instagram.com/dubeurredansleursepinards?rpxt=ejNxcnJxN2Mzbm5s" target="_blank" class="card-btn">Voir leur Instagram</a>
