@@ -3,26 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide de Survie — Étudiant Algérien en France</title>
+    <title>Guide de Survie Étudiant — Diagnostic & Roadmap Interactive</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-bg: rgba(30, 41, 59, 0.75);
             --text-color: #f8fafc;
             --text-muted: #94a3b8;
             --primary: #3b82f6;
             --primary-hover: #2563eb;
+            --accent: #10b981;
             --border-color: rgba(255, 255, 255, 0.1);
         }
         [data-theme="light"] {
             --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-bg: rgba(255, 255, 255, 0.9);
             --text-color: #0f172a;
             --text-muted: #64748b;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
+            --accent: #059669;
             --border-color: rgba(0, 0, 0, 0.1);
         }
         body {
@@ -44,10 +46,25 @@
             align-items: center;
             box-sizing: border-box;
             border-bottom: 1px solid var(--border-color);
+            background: var(--card-bg);
         }
-        .logo {
-            font-weight: 700;
-            font-size: 1.2rem;
+        .version-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        .version-nav a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.3rem;
+            border: 1px solid transparent;
+        }
+        .version-nav a.active {
+            color: var(--primary);
+            border-color: var(--primary);
+            font-weight: 600;
         }
         .theme-toggle {
             background: none;
@@ -58,7 +75,7 @@
             cursor: pointer;
         }
         main {
-            max-width: 800px;
+            max-width: 900px;
             width: 90%;
             margin: 2rem auto;
             background: var(--card-bg);
@@ -74,16 +91,16 @@
             text-align: center;
         }
         .question-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
         label {
             display: block;
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
         }
         select {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.8rem;
             border-radius: 0.5rem;
             border: 1px solid var(--border-color);
             background: var(--bg-color);
@@ -94,7 +111,7 @@
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.75rem 1.5rem;
+            padding: 0.9rem 1.5rem;
             font-size: 1rem;
             border-radius: 0.5rem;
             cursor: pointer;
@@ -108,54 +125,142 @@
         .hidden {
             display: none;
         }
-        .roadmap-step {
+        .progress-bar-container {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+        .roadmap-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-left: 5px solid var(--primary);
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .roadmap-card.completed {
+            border-left-color: var(--accent);
+            opacity: 0.7;
+        }
+        .roadmap-card header {
+            background: none;
+            border: none;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        .roadmap-card input[type="checkbox"] {
+            width: 1.3rem;
+            height: 1.3rem;
+            cursor: pointer;
+            margin-top: 0.2rem;
+        }
+        .step-content {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+        .btn-link {
+            display: inline-block;
+            margin-top: 0.8rem;
+            padding: 0.5rem 1rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.4rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .btn-link:hover {
+            background: var(--primary-hover);
+        }
+        .tip-box {
             background: rgba(59, 130, 246, 0.1);
-            border-left: 4px solid var(--primary);
-            padding: 1rem;
-            margin-bottom: 1rem;
-            border-radius: 0 0.5rem 0.5rem 0;
+            border-left: 3px solid var(--primary);
+            padding: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            border-radius: 0 0.4rem 0.4rem 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="logo">Guide Étudiant International</div>
-        <button class="theme-toggle" onclick="toggleTheme()">Mode Clair / Sombre</button>
+        <div class="logo">Guide Étudiant Algérie-France</div>
+        <div class="version-nav">
+            <a href="index.html">v0 (Accueil)</a>
+            <a href="index1.html">v1 (Doc)</a>
+            <a href="index2.html">v2 (Portail)</a>
+            <a href="index3.html" class="active">v3 (QCM & Roadmap)</a>
+        </div>
+        <button class="theme-toggle" onclick="toggleTheme()">Thème</button>
     </header>
+
     <main>
+        <!-- Formulaire Diagnostic QCM -->
         <div id="diagnostic-container">
-            <h1>Diagnostic de ton projet d'études en France</h1>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Réponds à ces questions pour obtenir ta feuille de route personnalisée.</p>
-            
+            <h1>Diagnostic personnalisé de ta situation</h1>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
+                Réponds au questionnaire pour générer ton plan d'action chronologique détaillé avec les démarches et liens officiels.
+            </p>
+
             <div class="question-group">
-                <label for="q1">1. Où en es-tu dans ton parcours ?</label>
+                <label for="q1">1. Où en es-tu dans la procédure administrative ?</label>
                 <select id="q1">
-                    <option value="campus">Je prépare mon dossier / procédure Campus France en Algérie</option>
-                    <option value="visa">J'ai mon acceptation et je prépare mon dossier de visa (TLScontact)</option>
-                    <option value="depart">J'ai mon visa, je prépare mon départ imminent</option>
-                    <option value="france">Je suis déjà arrivé en France et je commence mes démarches</option>
+                    <option value="campus">Procédure Campus France en Algérie (Candidature / Entretien)</option>
+                    <option value="visa">Acceptation obtenue — Préparation du dossier de Visa (TLScontact)</option>
+                    <option value="depart">Visa validé — Préparation du voyage et départ pour la France</option>
+                    <option value="arrivee">Arrivé(e) en France — Démarches d'installation prioritaire</option>
                 </select>
             </div>
 
             <div class="question-group">
-                <label for="q2">2. Quelle est ta situation concernant le logement ?</label>
+                <label for="q2">2. Quelle est ta situation actuelle concernant le logement ?</label>
                 <select id="q2">
-                    <option value="cherche">Je cherche activement (besoin d'un garant / Visale)</option>
-                    <option value="crous">Crous ou logement étudiant validé</option>
-                    <option value="proches">Hébergement chez des proches prévu au début</option>
+                    <option value="cherche">Je recherche un logement à distance (besoin de garant / Visale)</option>
+                    <option value="crous">Réservation validée (Résidence Crous ou logement privé)</option>
+                    <option value="proches">Attestation d'hébergement provisoire chez des proches</option>
                 </select>
             </div>
 
-            <button class="submit-btn" onclick="generateRoadmap()">Générer ma feuille de route</button>
+            <div class="question-group">
+                <label for="q3">3. Souhaites-tu trouver un emploi étudiant sur place ?</label>
+                <select id="q3">
+                    <option value="oui">Oui, je cherche un job à temps partiel / Carrefour / Restauration</option>
+                    <option value="non">Non, je souhaite me concentrer sur mes études pour le moment</option>
+                </select>
+            </div>
+
+            <button class="submit-btn" onclick="generateRoadmap()">Générer ma feuille de route complète</button>
         </div>
 
+        <!-- Section Feuille de Route Interactive -->
         <div id="roadmap-container" class="hidden">
-            <h1>Ta feuille de route sur-mesure</h1>
-            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Suis ces étapes dans l'ordre pour sécuriser ton projet.</p>
+            <h1>Ta Feuille de Route Personnalisée</h1>
+            <p style="text-align: center; color: var(--text-muted);">Coche les étapes réalisées pour enregistrer ta progression.</p>
+            
+            <div id="stats-text" style="text-align: center; font-weight: 600; margin-top: 1rem;">Progression : 0%</div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
             <div id="steps-list"></div>
-            <button class="submit-btn" style="margin-top: 1.5rem; background: transparent; border: 1px solid var(--border-color);" onclick="resetDiagnostic()">Recommencer le diagnostic</button>
+
+            <button class="submit-btn" style="margin-top: 2rem; background: transparent; border: 1px solid var(--border-color);" onclick="resetDiagnostic()">
+                Modifier mes choix
+            </button>
         </div>
     </main>
+
     <script>
         function toggleTheme() {
             const html = document.documentElement;
@@ -163,45 +268,159 @@
             html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
         }
 
+        let generatedSteps = [];
+
         function generateRoadmap() {
             const q1 = document.getElementById('q1').value;
             const q2 = document.getElementById('q2').value;
-            const stepsList = document.getElementById('steps-list');
-            stepsList.innerHTML = '';
+            const q3 = document.getElementById('q3').value;
 
-            let steps = [];
+            generatedSteps = [];
 
+            // Démarches principales
             if (q1 === 'campus') {
-                steps.push("Étape 1 : Finaliser le dossier pédagogique et vérifier les prérequis linguistiques (TCF / DELF).");
-                steps.push("Étape 2 : Soumettre les choix de formation sur la plateforme Études en France et préparer l'entretien pédagogique.");
-            } else if (q1 === 'visa') {
-                steps.push("Étape 1 : Obtenir l'attestation d'acceptation définitive et préparer les justificatifs financiers exigés par le consulat.");
-                steps.push("Étape 2 : Prendre rendez-vous sur le site de TLScontact Algérie pour le dépôt du dossier de visa étudiant.");
-            } else if (q1 === 'depart') {
-                steps.push("Étape 1 : Réserver son billet d'avion et préparer les originaux de tous les documents administratifs dans le bagage cabine.");
-                steps.push("Étape 2 : Souscrire une assurance voyage et vérifier les moyens de paiement internationaux.");
-            } else {
-                steps.push("Étape 1 : Valider son attestation d'inscription et réaliser l'enregistrement auprès de l'OFII.");
-                steps.push("Étape 2 : Ouvrir un compte bancaire en France et déposer un dossier d'aide au logement (CAF).");
+                generatedSteps.push({
+                    title: "Procédure Études en France (Campus France Algérie)",
+                    desc: "Saisie de ton dossier pédagogique sur le portail Études en France. Tu dois soumettre tes diplômes, relevés de notes et tes certifications linguistiques (TCF/DELF). Après validation, prends rendez-vous pour l'entretien pédagogique à l'Espace Campus France (Alger, Oran, Constantine, Annaba).",
+                    tip: "Conseil : Prépare minutieusement ton projet d'études et de carrière pour réussir l'entretien pédagogique.",
+                    link: "https://www.algerie.campusfrance.org/",
+                    linkText: "Accéder au portail Campus France"
+                });
             }
 
+            if (q1 === 'campus' || q1 === 'visa') {
+                generatedSteps.push({
+                    title: "Demande de Visa Long Séjour Valant Titre de Séjour (VLS-TS)",
+                    desc: "Création du dossier sur France-Visas puis prise de rendez-vous auprès du centre TLScontact correspondant à ta wilaya. Prépare le justificatif d'acceptation, la preuve de logement pour au moins les 3 premiers mois, ainsi que le justificatif de ressources financières (blocage bancaire ou garant).",
+                    tip: "Attention : Assure-toi que l'attestation de blocage de compte bancaire respecte strictement les montants exigés par le consulat.",
+                    link: "https://france-visas.gouv.fr/",
+                    linkText: "Compléter le formulaire France-Visas"
+                });
+            }
+
+            if (q1 === 'depart' || q1 === 'arrivee') {
+                generatedSteps.push({
+                    title: "Validation en ligne du VLS-TS et taxe de séjour",
+                    desc: "Dès ton arrivée sur le territoire français, tu as 3 mois pour valider ton visa de long séjour en ligne sur la plateforme ANEF. Cette démarche est obligatoire et valide officiellement ton statut de résident en France.",
+                    tip: "Montant : Prévois le règlement de la taxe de séjour (redevance pour titre de séjour étudiant).",
+                    link: "https://administration-etrangers-en-france.interieur.gouv.fr/",
+                    linkText: "Valider mon visa VLS-TS sur l'ANEF"
+                });
+
+                generatedSteps.push({
+                    title: "Ouverture d'un compte bancaire français & Inscription Sécurité Sociale (CPAM)",
+                    desc: "Ouvre rapidement un compte bancaire en France (nécessaire pour percevoir des aides et payer le loyer). Dépose ensuite ta demande d'affiliation à la sécurité sociale étudiante sur le site dédié de l'Assurance Maladie pour bénéficier de la couverture santé.",
+                    tip: "Documents clés : Passeport, visa, attestation d'inscription universitaire et justificatif de domicile.",
+                    link: "https://etudiant-etranger.ameli.fr/",
+                    linkText: "S'inscrire à la Sécurité Sociale (Ameli)"
+                });
+
+                generatedSteps.push({
+                    title: "Demande d'aide au logement (CAF - APL)",
+                    desc: "Soumets ton dossier d'Aide Personnalisée au Logement (APL) sur le site de la CAF. L'aide est versée mensuellement et permet de réduire considérablement la charge financière de ton loyer.",
+                    tip: "Important : Fais ta demande immédiatement après avoir emménagé pour ne pas perdre tes droits.",
+                    link: "https://www.caf.fr/",
+                    linkText: "Faire ma demande d'APL sur la CAF"
+                });
+            }
+
+            // Gestion du logement
             if (q2 === 'cherche') {
-                steps.push("Logement : Effectuer en parallèle une demande de visa de cautionnement via le dispositif Visale pour rassurer les bailleurs.");
+                generatedSteps.push({
+                    title: "Recherche de logement & Garantie Visale (Caution gratuite)",
+                    desc: "Obtiens une garantie de cautionnement gratuite pour ton logement via le dispositif Visale financé par Action Logement. Cela rassure les propriétaires privés et résidences universitaires si tu n'as pas de garant physique en France.",
+                    tip: "Astuce : Obtiens ton visa Visale avant de démarcher les propriétaires.",
+                    link: "https://www.visale.fr/",
+                    linkText: "Obtenir la garantie Visale"
+                });
             } else if (q2 === 'crous') {
-                steps.push("Logement : Confirmer l'admission auprès du Crous et préparer le dossier d'état des lieux d'entrée.");
-            } else {
-                steps.push("Logement : Établir une attestation d'hébergement et préparer les justificatifs d'identité de l'hébergeant.");
+                generatedSteps.push({
+                    title: "Validation de la réservation CROUS & État des lieux",
+                    desc: "Valide ta réservation de chambre ou studio Crous, effectue le premier paiement de loyer et prépare ton attestation d'assurance habitation pour la remise des clés.",
+                    tip: "Pense à souscrire une assurance multirisque habitation (MRH) obligatoire avant ton entrée dans les lieux.",
+                    link: "https://www.crous-paris.fr/",
+                    linkText: "Portail Services Étre Étudiant (CROUS)"
+                });
+            } else if (q2 === 'proches') {
+                generatedSteps.push({
+                    title: "Formalisation de l'attestation d'hébergement",
+                    desc: "Fais rédiger par ton hébergeant une attestation d'hébergement à titre gratuit sur l'honneur, accompagnée de la copie de sa pièce d'identité et de sa facture d'électricité/gaz récente (de moins de 3 mois).",
+                    tip: "Document obligatoire pour tes démarches de visa, ouverture de compte bancaire et titre de séjour.",
+                    link: "#",
+                    linkText: "Modèle d'attestation d'hébergement"
+                });
             }
 
-            steps.forEach((step, index) => {
-                const div = document.createElement('div');
-                div.className = 'roadmap-step';
-                div.innerHTML = `<strong>Action ${index + 1}</strong><p>${step}</p>`;
-                stepsList.appendChild(div);
-            });
+            // Job étudiant
+            if (q3 === 'oui') {
+                generatedSteps.push({
+                    title: "Recherche de Job Étudiant (Réglementation & Candidatures)",
+                    desc: "En tant qu'étudiant international titulaire d'un VLS-TS, tu as le droit de travailler jusqu'à 60% de la durée annuelle du travail (964 heures/an). Prépare un CV au format français et postule dans la grande distribution (Carrefour, Auchan), la restauration rapide, ou les garde d'enfants.",
+                    tip: "Plateformes conseillées : Indeed, HelloWork, StudentJob et les centres de service Carrefour.",
+                    link: "https://www.hellowork.com/",
+                    linkText: "Chercher un emploi sur HelloWork"
+                });
+            }
+
+            renderSteps();
 
             document.getElementById('diagnostic-container').classList.add('hidden');
             document.getElementById('roadmap-container').classList.remove('hidden');
+        }
+
+        function renderSteps() {
+            const stepsList = document.getElementById('steps-list');
+            stepsList.innerHTML = '';
+
+            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+
+            generatedSteps.forEach((step, index) => {
+                const isChecked = savedProgress[index] || false;
+
+                const card = document.createElement('div');
+                card.className = `roadmap-card ${isChecked ? 'completed' : ''}`;
+                card.innerHTML = `
+                    <header>
+                        <input type="checkbox" id="step-${index}" ${isChecked ? 'checked' : ''} onchange="toggleStep(${index})">
+                        <div>
+                            <strong style="font-size: 1.1rem; color: var(--primary);">Étape ${index + 1} : ${step.title}</strong>
+                        </div>
+                    </header>
+                    <div class="step-content">
+                        <p style="margin: 0.5rem 0;">${step.desc}</p>
+                        ${step.tip ? `<div class="tip-box">${step.tip}</div>` : ''}
+                        ${step.link && step.link !== '#' ? `<a href="${step.link}" target="_blank" class="btn-link">${step.linkText} ↗</a>` : ''}
+                    </div>
+                `;
+                stepsList.appendChild(card);
+            });
+
+            updateProgress();
+        }
+
+        function toggleStep(index) {
+            const checkbox = document.getElementById(`step-${index}`);
+            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+
+            savedProgress[index] = checkbox.checked;
+            localStorage.setItem('v3_roadmap_progress', JSON.stringify(savedProgress));
+
+            renderSteps();
+        }
+
+        function updateProgress() {
+            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+            let checkedCount = 0;
+
+            generatedSteps.forEach((_, index) => {
+                if (savedProgress[index]) checkedCount++;
+            });
+
+            const total = generatedSteps.length;
+            const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+
+            document.getElementById('stats-text').innerText = `Progression globale : ${percentage}% (${checkedCount} sur ${total} démarches finalisées)`;
+            document.getElementById('progress-bar').style.width = `${percentage}%`;
         }
 
         function resetDiagnostic() {
