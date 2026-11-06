@@ -1,1 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guide de Survie — Étudiant Algérien en France</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --border-color: rgba(255, 255, 255, 0.1);
+        }
+        [data-theme="light"] {
+            --bg-color: #f1f5f9;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --text-color: #0f172a;
+            --text-muted: #64748b;
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            width: 100%;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+        }
+        main {
+            max-width: 800px;
+            width: 90%;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+        h1 {
+            margin-top: 0;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+        .question-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+        button.submit-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        button.submit-btn:hover {
+            background: var(--primary-hover);
+        }
+        .hidden {
+            display: none;
+        }
+        .roadmap-step {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Guide Étudiant International</div>
+        <button class="theme-toggle" onclick="toggleTheme()">Mode Clair / Sombre</button>
+    </header>
+    <main>
+        <div id="diagnostic-container">
+            <h1>Diagnostic de ton projet d'études en France</h1>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Réponds à ces questions pour obtenir ta feuille de route personnalisée.</p>
+            
+            <div class="question-group">
+                <label for="q1">1. Où en es-tu dans ton parcours ?</label>
+                <select id="q1">
+                    <option value="campus">Je prépare mon dossier / procédure Campus France en Algérie</option>
+                    <option value="visa">J'ai mon acceptation et je prépare mon dossier de visa (TLScontact)</option>
+                    <option value="depart">J'ai mon visa, je prépare mon départ imminent</option>
+                    <option value="france">Je suis déjà arrivé en France et je commence mes démarches</option>
+                </select>
+            </div>
 
+            <div class="question-group">
+                <label for="q2">2. Quelle est ta situation concernant le logement ?</label>
+                <select id="q2">
+                    <option value="cherche">Je cherche activement (besoin d'un garant / Visale)</option>
+                    <option value="crous">Crous ou logement étudiant validé</option>
+                    <option value="proches">Hébergement chez des proches prévu au début</option>
+                </select>
+            </div>
+
+            <button class="submit-btn" onclick="generateRoadmap()">Générer ma feuille de route</button>
+        </div>
+
+        <div id="roadmap-container" class="hidden">
+            <h1>Ta feuille de route sur-mesure</h1>
+            <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">Suis ces étapes dans l'ordre pour sécuriser ton projet.</p>
+            <div id="steps-list"></div>
+            <button class="submit-btn" style="margin-top: 1.5rem; background: transparent; border: 1px solid var(--border-color);" onclick="resetDiagnostic()">Recommencer le diagnostic</button>
+        </div>
+    </main>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        }
+
+        function generateRoadmap() {
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const stepsList = document.getElementById('steps-list');
+            stepsList.innerHTML = '';
+
+            let steps = [];
+
+            if (q1 === 'campus') {
+                steps.push("Étape 1 : Finaliser le dossier pédagogique et vérifier les prérequis linguistiques (TCF / DELF).");
+                steps.push("Étape 2 : Soumettre les choix de formation sur la plateforme Études en France et préparer l'entretien pédagogique.");
+            } else if (q1 === 'visa') {
+                steps.push("Étape 1 : Obtenir l'attestation d'acceptation définitive et préparer les justificatifs financiers exigés par le consulat.");
+                steps.push("Étape 2 : Prendre rendez-vous sur le site de TLScontact Algérie pour le dépôt du dossier de visa étudiant.");
+            } else if (q1 === 'depart') {
+                steps.push("Étape 1 : Réserver son billet d'avion et préparer les originaux de tous les documents administratifs dans le bagage cabine.");
+                steps.push("Étape 2 : Souscrire une assurance voyage et vérifier les moyens de paiement internationaux.");
+            } else {
+                steps.push("Étape 1 : Valider son attestation d'inscription et réaliser l'enregistrement auprès de l'OFII.");
+                steps.push("Étape 2 : Ouvrir un compte bancaire en France et déposer un dossier d'aide au logement (CAF).");
+            }
+
+            if (q2 === 'cherche') {
+                steps.push("Logement : Effectuer en parallèle une demande de visa de cautionnement via le dispositif Visale pour rassurer les bailleurs.");
+            } else if (q2 === 'crous') {
+                steps.push("Logement : Confirmer l'admission auprès du Crous et préparer le dossier d'état des lieux d'entrée.");
+            } else {
+                steps.push("Logement : Établir une attestation d'hébergement et préparer les justificatifs d'identité de l'hébergeant.");
+            }
+
+            steps.forEach((step, index) => {
+                const div = document.createElement('div');
+                div.className = 'roadmap-step';
+                div.innerHTML = `<strong>Action ${index + 1}</strong><p>${step}</p>`;
+                stepsList.appendChild(div);
+            });
+
+            document.getElementById('diagnostic-container').classList.add('hidden');
+            document.getElementById('roadmap-container').classList.remove('hidden');
+        }
+
+        function resetDiagnostic() {
+            document.getElementById('roadmap-container').classList.add('hidden');
+            document.getElementById('diagnostic-container').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
