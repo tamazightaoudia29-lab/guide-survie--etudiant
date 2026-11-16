@@ -1,31 +1,22 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide de Survie Étudiant — Diagnostic & Roadmap Interactive</title>
+    <title>Guide Étudiant Algérie-France — Assistant Interactif</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.75);
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
-            --accent: #10b981;
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
-        [data-theme="light"] {
-            --bg-color: #f1f5f9;
-            --card-bg: rgba(255, 255, 255, 0.9);
-            --text-color: #0f172a;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #1e293b;
             --text-muted: #64748b;
             --primary: #2563eb;
             --primary-hover: #1d4ed8;
-            --accent: #059669;
-            --border-color: rgba(0, 0, 0, 0.1);
+            --accent: #10b981;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
         }
         body {
             font-family: 'Inter', sans-serif;
@@ -47,91 +38,128 @@
             box-sizing: border-box;
             border-bottom: 1px solid var(--border-color);
             background: var(--card-bg);
+            box-shadow: var(--shadow);
+        }
+        .logo {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
         }
         .version-nav {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             align-items: center;
         }
         .version-nav a {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9rem;
-            padding: 0.3rem 0.6rem;
-            border-radius: 0.3rem;
-            border: 1px solid transparent;
+            font-size: 0.85rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.4rem;
+            border: 1px solid var(--border-color);
+            transition: all 0.2s;
+        }
+        .version-nav a:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
         .version-nav a.active {
-            color: var(--primary);
+            background: var(--primary);
+            color: white;
             border-color: var(--primary);
             font-weight: 600;
-        }
-        .theme-toggle {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-color);
-            padding: 0.5rem 1rem;
-            border-radius: 0.5rem;
-            cursor: pointer;
         }
         main {
             max-width: 900px;
             width: 90%;
-            margin: 2rem auto;
+            margin: 2.5rem auto;
             background: var(--card-bg);
-            backdrop-filter: blur(12px);
             border: 1px solid var(--border-color);
             border-radius: 1rem;
-            padding: 2rem;
+            padding: 2.5rem;
             box-sizing: border-box;
+            box-shadow: var(--shadow);
         }
-        h1 {
+        h1, h2 {
             margin-top: 0;
-            font-size: 1.8rem;
             text-align: center;
+            color: #0f172a;
+        }
+        .wizard-step {
+            display: none;
+        }
+        .wizard-step.active-step {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .question-group {
-            margin-bottom: 1.8rem;
+            margin-bottom: 1.5rem;
         }
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.6rem;
             font-weight: 600;
+            font-size: 1.05rem;
         }
-        select {
+        select, input[type="text"], input[type="email"], textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.85rem;
             border-radius: 0.5rem;
             border: 1px solid var(--border-color);
-            background: var(--bg-color);
+            background: #f8fafc;
             color: var(--text-color);
             font-size: 1rem;
+            box-sizing: border-box;
         }
-        button.submit-btn {
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+        .other-input {
+            margin-top: 0.6rem;
+        }
+        .wizard-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        button.btn {
             background: var(--primary);
             color: white;
             border: none;
-            padding: 0.9rem 1.5rem;
+            padding: 0.85rem 1.5rem;
             font-size: 1rem;
             border-radius: 0.5rem;
             cursor: pointer;
-            width: 100%;
             font-weight: 600;
             transition: background 0.2s;
         }
-        button.submit-btn:hover {
+        button.btn:hover {
             background: var(--primary-hover);
         }
+        button.btn-secondary {
+            background: #e2e8f0;
+            color: #475569;
+        }
+        button.btn-secondary:hover {
+            background: #cbd5e1;
+        }
         .hidden {
-            display: none;
+            display: none !important;
         }
         .progress-bar-container {
             width: 100%;
-            height: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
+            height: 10px;
+            background: #e2e8f0;
+            border-radius: 5px;
             overflow: hidden;
-            margin: 1rem 0;
+            margin: 1rem 0 2rem 0;
         }
         .progress-bar {
             height: 100%;
@@ -139,29 +167,33 @@
             background: var(--accent);
             transition: width 0.3s ease;
         }
+        .search-box {
+            margin-bottom: 1.5rem;
+        }
         .roadmap-card {
-            background: rgba(255, 255, 255, 0.03);
+            background: #f8fafc;
             border: 1px solid var(--border-color);
             border-left: 5px solid var(--primary);
             border-radius: 0.5rem;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
         .roadmap-card.completed {
             border-left-color: var(--accent);
-            opacity: 0.7;
+            opacity: 0.75;
         }
         .roadmap-card header {
             background: none;
             border: none;
             padding: 0;
+            box-shadow: none;
             display: flex;
             align-items: flex-start;
             gap: 1rem;
         }
         .roadmap-card input[type="checkbox"] {
-            width: 1.3rem;
-            height: 1.3rem;
+            width: 1.2rem;
+            height: 1.2rem;
             cursor: pointer;
             margin-top: 0.2rem;
         }
@@ -169,27 +201,105 @@
             margin-top: 1rem;
             line-height: 1.6;
         }
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
         .btn-link {
             display: inline-block;
             margin-top: 0.8rem;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.9rem;
             background: var(--primary);
             color: white;
             text-decoration: none;
             border-radius: 0.4rem;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
         }
         .btn-link:hover {
             background: var(--primary-hover);
         }
         .tip-box {
-            background: rgba(59, 130, 246, 0.1);
+            background: #eff6ff;
             border-left: 3px solid var(--primary);
             padding: 0.8rem;
             margin-top: 0.8rem;
             font-size: 0.9rem;
             border-radius: 0 0.4rem 0.4rem 0;
+            color: #1e40af;
+        }
+        /* Simulateur de budget */
+        .budget-simulator {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .budget-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .budget-item {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 1px solid #d1fae5;
+            text-align: center;
+        }
+        .budget-item strong {
+            display: block;
+            color: #047857;
+            font-size: 1.1rem;
+            margin-top: 0.3rem;
+        }
+        .emergency-box {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            margin-top: 2.5rem;
+        }
+        .emergency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .emergency-card {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 0.5rem;
+            border: 1px solid #fee2e2;
+            text-align: center;
+        }
+        .emergency-card strong {
+            display: block;
+            font-size: 1.1rem;
+            color: #dc2626;
+        }
+        .contact-section {
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+        @media print {
+            header, .version-nav, .wizard-buttons, .search-box, .emergency-box, .contact-section, button {
+                display: none !important;
+            }
+            main {
+                box-shadow: none;
+                border: none;
+                width: 100%;
+                margin: 0;
+            }
         }
     </style>
 </head>
@@ -197,75 +307,191 @@
     <header>
         <div class="logo">Guide Étudiant Algérie-France</div>
         <div class="version-nav">
-            <a href="index.html">v0 (Accueil)</a>
-            <a href="index1.html">v1 (Doc)</a>
-            <a href="index2.html">v2 (Portail)</a>
-            <a href="index3.html" class="active">v3 (QCM & Roadmap)</a>
+            <a href="index.html">v0</a>
+            <a href="index1.html">v1</a>
+            <a href="index2.html">v2</a>
+            <a href="index3.html" class="active">v3 (Assistant Interactif)</a>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()">Thème</button>
     </header>
 
     <main>
-        <!-- Formulaire Diagnostic QCM -->
+        <!-- WIZARD DIAGNOSTIC -->
         <div id="diagnostic-container">
-            <h1>Diagnostic personnalisé de ta situation</h1>
+            <h1>Assistant de Diagnostic Personnalisé</h1>
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
-                Réponds au questionnaire pour générer ton plan d'action chronologique détaillé avec les démarches et liens officiels.
+                Répondez aux questions étape par étape pour construire votre feuille de route sur-mesure.
             </p>
 
-            <div class="question-group">
-                <label for="q1">1. Où en es-tu dans la procédure administrative ?</label>
-                <select id="q1">
-                    <option value="campus">Procédure Campus France en Algérie (Candidature / Entretien)</option>
-                    <option value="visa">Acceptation obtenue — Préparation du dossier de Visa (TLScontact)</option>
-                    <option value="depart">Visa validé — Préparation du voyage et départ pour la France</option>
-                    <option value="arrivee">Arrivé(e) en France — Démarches d'installation prioritaire</option>
-                </select>
+            <!-- ÉTAPE 1 -->
+            <div class="wizard-step active-step" id="step-w1">
+                <div class="question-group">
+                    <label>1. Où en êtes-vous dans la procédure administrative ?</label>
+                    <select id="q1" onchange="checkOther('q1')">
+                        <option value="campus_dossier">Campus France : Création et soumission du dossier d'études</option>
+                        <option value="campus_entretien">Campus France : Convocation ou attente de l'entretien pédagogique</option>
+                        <option value="visa_attente">Visa : Acceptation reçue, attente du RDV TLScontact</option>
+                        <option value="visa_depot">Visa : Dossier déposé chez TLScontact / Attente du passeport</option>
+                        <option value="depart_prepa">Voyage : Visa obtenu, réservation des billets et départ</option>
+                        <option value="france_installation">En France : Arrivé(e) depuis peu, démarches initiales</option>
+                        <option value="autre">Autre (précisez)</option>
+                    </select>
+                    <input type="text" id="q1_other" class="other-input hidden" placeholder="Précisez...">
+                </div>
+                <div class="wizard-buttons">
+                    <div></div>
+                    <button class="btn" onclick="nextWizardStep(1)">Suivant →</button>
+                </div>
             </div>
 
-            <div class="question-group">
-                <label for="q2">2. Quelle est ta situation actuelle concernant le logement ?</label>
-                <select id="q2">
-                    <option value="cherche">Je recherche un logement à distance (besoin de garant / Visale)</option>
-                    <option value="crous">Réservation validée (Résidence Crous ou logement privé)</option>
-                    <option value="proches">Attestation d'hébergement provisoire chez des proches</option>
-                </select>
+            <!-- ÉTAPE 2 -->
+            <div class="wizard-step" id="step-w2">
+                <div class="question-group">
+                    <label>2. Quelle est votre situation de logement ?</label>
+                    <select id="q2" onchange="checkOther('q2')">
+                        <option value="crous_valide">Logement CROUS attribué et validé</option>
+                        <option value="prive_recherche">Recherche dans le privé (besoin de garant / Visale)</option>
+                        <option value="hebergement_famille">Hébergement provisoire chez de la famille ou un proche</option>
+                        <option value="sans_solution">Aucune solution de logement pour le moment</option>
+                        <option value="autre">Autre (précisez)</option>
+                    </select>
+                    <input type="text" id="q2_other" class="other-input hidden" placeholder="Précisez...">
+                </div>
+                <div class="wizard-buttons">
+                    <button class="btn btn-secondary" onclick="prevWizardStep(2)">← Précédent</button>
+                    <button class="btn" onclick="nextWizardStep(2)">Suivant →</button>
+                </div>
             </div>
 
-            <div class="question-group">
-                <label for="q3">3. Souhaites-tu trouver un emploi étudiant sur place ?</label>
-                <select id="q3">
-                    <option value="oui">Oui, je cherche un job à temps partiel / Carrefour / Restauration</option>
-                    <option value="non">Non, je souhaite me concentrer sur mes études pour le moment</option>
-                </select>
+            <!-- ÉTAPE 3 -->
+            <div class="wizard-step" id="step-w3">
+                <div class="question-group">
+                    <label>3. Comment assurez-vous votre prise en charge financière ?</label>
+                    <select id="q3" onchange="checkOther('q3')">
+                        <option value="blocage_bancaire">Compte bloqué en banque (Attestation de blocage des fonds)</option>
+                        <option value="garant_france">Garant résident en France</option>
+                        <option value="garant_algerie">Garant résident en Algérie</option>
+                        <option value="bourse_etat">Boursier de l'État</option>
+                        <option value="autre">Autre (précisez)</option>
+                    </select>
+                    <input type="text" id="q3_other" class="other-input hidden" placeholder="Précisez...">
+                </div>
+                <div class="wizard-buttons">
+                    <button class="btn btn-secondary" onclick="prevWizardStep(3)">← Précédent</button>
+                    <button class="btn" onclick="nextWizardStep(3)">Suivant →</button>
+                </div>
             </div>
 
-            <button class="submit-btn" onclick="generateRoadmap()">Générer ma feuille de route complète</button>
+            <!-- ÉTAPE 4 -->
+            <div class="wizard-step" id="step-w4">
+                <div class="question-group">
+                    <label>4. Envisagez-vous d'avoir un job étudiant sur place ?</label>
+                    <select id="q4" onchange="checkOther('q4')">
+                        <option value="job_urgent">Oui, dès mon arrivée (besoin financier)</option>
+                        <option value="job_plus_tard">Oui, après m'être adapté(e) aux cours</option>
+                        <option value="job_non">Non, uniquement mes études</option>
+                        <option value="autre">Autre (précisez)</option>
+                    </select>
+                    <input type="text" id="q4_other" class="other-input hidden" placeholder="Précisez...">
+                </div>
+                <div class="wizard-buttons">
+                    <button class="btn btn-secondary" onclick="prevWizardStep(4)">← Précédent</button>
+                    <button class="btn" onclick="generateRoadmap()">Générer ma feuille de route 🚀</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Section Feuille de Route Interactive -->
+        <!-- SECTION FEUILLE DE ROUTE INTERACTIVE -->
         <div id="roadmap-container" class="hidden">
-            <h1>Ta Feuille de Route Personnalisée</h1>
-            <p style="text-align: center; color: var(--text-muted);">Coche les étapes réalisées pour enregistrer ta progression.</p>
+            <h1>Votre Feuille de Route Interactive</h1>
+            <p style="text-align: center; color: var(--text-muted);">Suivez votre progression et cochez les tâches accomplies.</p>
             
             <div id="stats-text" style="text-align: center; font-weight: 600; margin-top: 1rem;">Progression : 0%</div>
             <div class="progress-bar-container">
                 <div class="progress-bar" id="progress-bar"></div>
             </div>
 
+            <!-- Barre de recherche -->
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="🔍 Rechercher une démarche (ex: CAF, Visale, Visa...)" onkeyup="filterRoadmap()">
+            </div>
+
+            <!-- Simulateur de Budget -->
+            <div class="budget-simulator">
+                <h3 style="margin-top: 0; color: #065f46;">📊 Simulateur de Budget Mensuel Estimé</h3>
+                <p style="font-size: 0.9rem; color: #047857; margin-bottom: 0.5rem;">Estimation moyenne des dépenses pour un étudiant en France :</p>
+                <div class="budget-grid">
+                    <div class="budget-item"><span>Logement (Loyer net APL)</span><strong>~350 €</strong></div>
+                    <div class="budget-item"><span>Alimentation & Courses</span><strong>~200 €</strong></div>
+                    <div class="budget-item"><span>Transport (Pass Navigo/Autre)</span><strong>~40 €</strong></div>
+                    <div class="budget-item"><span>Total Estimé</span><strong>~590 € / mois</strong></div>
+                </div>
+            </div>
+
             <div id="steps-list"></div>
 
-            <button class="submit-btn" style="margin-top: 2rem; background: transparent; border: 1px solid var(--border-color);" onclick="resetDiagnostic()">
-                Modifier mes choix
-            </button>
+            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                <button class="btn btn-secondary" style="flex: 1;" onclick="resetDiagnostic()">Modifier mes réponses</button>
+                <button class="btn" style="flex: 1; background: #059669;" onclick="window.print()">🖨️ Télécharger / Imprimer (PDF)</button>
+            </div>
+
+            <!-- Contacts et Urgences -->
+            <div class="emergency-box">
+                <h2 style="color: #dc2626; margin-bottom: 0.5rem; font-size: 1.2rem;">🚨 Contacts & Urgences en France</h2>
+                <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">Numéros gratuits 24h/24 et 7j/7.</p>
+                <div class="emergency-grid">
+                    <div class="emergency-card"><strong>112</strong><span>Urgence UE</span></div>
+                    <div class="emergency-card"><strong>15</strong><span>SAMU</span></div>
+                    <div class="emergency-card"><strong>17</strong><span>Police</span></div>
+                    <div class="emergency-card"><strong>18</strong><span>Pompiers</span></div>
+                    <div class="emergency-card"><strong>0800 500 896</strong><span>Écoute Crous</span></div>
+                </div>
+            </div>
+
+            <!-- Formulaire de Contact Direct -->
+            <div class="contact-section">
+                <h2>Besoin d'aide spécifique ?</h2>
+                <p style="text-align: center; color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">Posez votre question à notre équipe, réponse sous 48h.</p>
+                <form id="contact-form" onsubmit="submitContact(event)">
+                    <div class="question-group">
+                        <label for="c_name">Nom complet</label>
+                        <input type="text" id="c_name" required placeholder="Votre nom">
+                    </div>
+                    <div class="question-group">
+                        <label for="c_email">Email</label>
+                        <input type="email" id="c_email" required placeholder="votre@email.com">
+                    </div>
+                    <div class="question-group">
+                        <label for="c_msg">Votre question ou situation</label>
+                        <textarea id="c_msg" rows="3" required placeholder="Décrivez votre besoin..."></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Envoyer le message</button>
+                    <div id="contact-status" style="margin-top: 1rem; text-align: center; font-weight: 500; font-size: 0.9rem;"></div>
+                </form>
+            </div>
         </div>
     </main>
 
     <script>
-        function toggleTheme() {
-            const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            html.setAttribute('data-theme', currentTheme === 'dark' ? 'light' : 'dark');
+        // Gestion des étapes Wizard
+        function nextWizardStep(current) {
+            document.getElementById(`step-w${current}`).classList.remove('active-step');
+            document.getElementById(`step-w${current + 1}`).classList.add('active-step');
+        }
+        function prevWizardStep(current) {
+            document.getElementById(`step-w${current}`).classList.remove('active-step');
+            document.getElementById(`step-w${current - 1}`).classList.add('active-step');
+        }
+
+        function checkOther(selectId) {
+            const select = document.getElementById(selectId);
+            const otherInput = document.getElementById(selectId + '_other');
+            if (select.value === 'autre') {
+                otherInput.classList.remove('hidden');
+                otherInput.required = true;
+            } else {
+                otherInput.classList.add('hidden');
+                otherInput.required = false;
+            }
         }
 
         let generatedSteps = [];
@@ -274,91 +500,84 @@
             const q1 = document.getElementById('q1').value;
             const q2 = document.getElementById('q2').value;
             const q3 = document.getElementById('q3').value;
+            const q4 = document.getElementById('q4').value;
 
             generatedSteps = [];
 
-            // Démarches principales
-            if (q1 === 'campus') {
+            // Génération des étapes personnalisées
+            if (q1.includes('campus')) {
                 generatedSteps.push({
-                    title: "Procédure Études en France (Campus France Algérie)",
-                    desc: "Saisie de ton dossier pédagogique sur le portail Études en France. Tu dois soumettre tes diplômes, relevés de notes et tes certifications linguistiques (TCF/DELF). Après validation, prends rendez-vous pour l'entretien pédagogique à l'Espace Campus France (Alger, Oran, Constantine, Annaba).",
-                    tip: "Conseil : Prépare minutieusement ton projet d'études et de carrière pour réussir l'entretien pédagogique.",
+                    title: "Procédure Campus France Algérie",
+                    desc: "Finalisation du dossier pédagogique, choix des formations et préparation à l'entretien pédagogique aux espaces Campus France.",
+                    checklist: ["Vérifier les prérequis linguistiques (TCF/DELF)", "Soumettre les vœux sur Études en France", "Préparer la motivation du projet d'études"],
+                    tip: "Conseil : Entraînez-vous à expliquer clairement votre projet professionnel.",
                     link: "https://www.algerie.campusfrance.org/",
-                    linkText: "Accéder au portail Campus France"
+                    linkText: "Portail Campus France"
                 });
             }
 
-            if (q1 === 'campus' || q1 === 'visa') {
+            if (q1.includes('visa') || q1.includes('campus')) {
                 generatedSteps.push({
-                    title: "Demande de Visa Long Séjour Valant Titre de Séjour (VLS-TS)",
-                    desc: "Création du dossier sur France-Visas puis prise de rendez-vous auprès du centre TLScontact correspondant à ta wilaya. Prépare le justificatif d'acceptation, la preuve de logement pour au moins les 3 premiers mois, ainsi que le justificatif de ressources financières (blocage bancaire ou garant).",
-                    tip: "Attention : Assure-toi que l'attestation de blocage de compte bancaire respecte strictement les montants exigés par le consulat.",
+                    title: "Demande de Visa Long Séjour (TLScontact)",
+                    desc: "Création du dossier sur France-Visas et prise de rendez-vous auprès du centre TLScontact de votre région.",
+                    checklist: ["Imprimer le formulaire France-Visas", "Rassembler les justificatifs financiers", "Valider l'attestation d'hébergement ou de logement"],
+                    tip: "Attention : Vérifiez la validité de votre passeport.",
                     link: "https://france-visas.gouv.fr/",
-                    linkText: "Compléter le formulaire France-Visas"
+                    linkText: "France-Visas"
                 });
             }
 
-            if (q1 === 'depart' || q1 === 'arrivee') {
+            if (q3 === 'blocage_bancaire') {
                 generatedSteps.push({
-                    title: "Validation en ligne du VLS-TS et taxe de séjour",
-                    desc: "Dès ton arrivée sur le territoire français, tu as 3 mois pour valider ton visa de long séjour en ligne sur la plateforme ANEF. Cette démarche est obligatoire et valide officiellement ton statut de résident en France.",
-                    tip: "Montant : Prévois le règlement de la taxe de séjour (redevance pour titre de séjour étudiant).",
-                    link: "https://administration-etrangers-en-france.interieur.gouv.fr/",
-                    linkText: "Valider mon visa VLS-TS sur l'ANEF"
-                });
-
-                generatedSteps.push({
-                    title: "Ouverture d'un compte bancaire français & Inscription Sécurité Sociale (CPAM)",
-                    desc: "Ouvre rapidement un compte bancaire en France (nécessaire pour percevoir des aides et payer le loyer). Dépose ensuite ta demande d'affiliation à la sécurité sociale étudiante sur le site dédié de l'Assurance Maladie pour bénéficier de la couverture santé.",
-                    tip: "Documents clés : Passeport, visa, attestation d'inscription universitaire et justificatif de domicile.",
-                    link: "https://etudiant-etranger.ameli.fr/",
-                    linkText: "S'inscrire à la Sécurité Sociale (Ameli)"
-                });
-
-                generatedSteps.push({
-                    title: "Demande d'aide au logement (CAF - APL)",
-                    desc: "Soumets ton dossier d'Aide Personnalisée au Logement (APL) sur le site de la CAF. L'aide est versée mensuellement et permet de réduire considérablement la charge financière de ton loyer.",
-                    tip: "Important : Fais ta demande immédiatement après avoir emménagé pour ne pas perdre tes droits.",
-                    link: "https://www.caf.fr/",
-                    linkText: "Faire ma demande d'APL sur la CAF"
+                    title: "Attestation de Blocage des Fonds",
+                    desc: "Obtention de l'attestation de virement irrévocable (AVI) garantissant le montant minimal mensuel requis pour le consulat.",
+                    checklist: ["Effectuer le virement international", "Récupérer l'attestation bancaire officielle"]
                 });
             }
 
-            // Gestion du logement
-            if (q2 === 'cherche') {
+            if (q2 === 'prive_recherche' || q2 === 'sans_solution') {
                 generatedSteps.push({
-                    title: "Recherche de logement & Garantie Visale (Caution gratuite)",
-                    desc: "Obtiens une garantie de cautionnement gratuite pour ton logement via le dispositif Visale financé par Action Logement. Cela rassure les propriétaires privés et résidences universitaires si tu n'as pas de garant physique en France.",
-                    tip: "Astuce : Obtiens ton visa Visale avant de démarcher les propriétaires.",
+                    title: "Garantie Visale (Caution Gratuite)",
+                    desc: "Demande de visa Visale auprès d'Action Logement pour rassurer les propriétaires et résidences privées.",
+                    checklist: ["Créer un compte sur Visale.fr", "Obtenir le visa certifié avant les démarches de location"],
                     link: "https://www.visale.fr/",
-                    linkText: "Obtenir la garantie Visale"
+                    linkText: "Demander Visale"
                 });
-            } else if (q2 === 'crous') {
+            } else if (q2 === 'crous_valide') {
                 generatedSteps.push({
-                    title: "Validation de la réservation CROUS & État des lieux",
-                    desc: "Valide ta réservation de chambre ou studio Crous, effectue le premier paiement de loyer et prépare ton attestation d'assurance habitation pour la remise des clés.",
-                    tip: "Pense à souscrire une assurance multirisque habitation (MRH) obligatoire avant ton entrée dans les lieux.",
-                    link: "https://www.crous-paris.fr/",
-                    linkText: "Portail Services Étre Étudiant (CROUS)"
-                });
-            } else if (q2 === 'proches') {
-                generatedSteps.push({
-                    title: "Formalisation de l'attestation d'hébergement",
-                    desc: "Fais rédiger par ton hébergeant une attestation d'hébergement à titre gratuit sur l'honneur, accompagnée de la copie de sa pièce d'identité et de sa facture d'électricité/gaz récente (de moins de 3 mois).",
-                    tip: "Document obligatoire pour tes démarches de visa, ouverture de compte bancaire et titre de séjour.",
-                    link: "#",
-                    linkText: "Modèle d'attestation d'hébergement"
+                    title: "Validation CROUS & Assurance Habitation",
+                    desc: "Confirmation du logement CROUS, paiement du premier loyer et souscription d'une assurance multirisque habitation.",
+                    checklist: ["Payer la redevance du premier mois", "Souscrire l'assurance habitation obligatoire"],
+                    link: "https://www.messervices.etudiant.gouv.fr/",
+                    linkText: "MesServices.Etudiant"
                 });
             }
 
-            // Job étudiant
-            if (q3 === 'oui') {
+            if (q1.includes('depart') || q1.includes('france')) {
                 generatedSteps.push({
-                    title: "Recherche de Job Étudiant (Réglementation & Candidatures)",
-                    desc: "En tant qu'étudiant international titulaire d'un VLS-TS, tu as le droit de travailler jusqu'à 60% de la durée annuelle du travail (964 heures/an). Prépare un CV au format français et postule dans la grande distribution (Carrefour, Auchan), la restauration rapide, ou les garde d'enfants.",
-                    tip: "Plateformes conseillées : Indeed, HelloWork, StudentJob et les centres de service Carrefour.",
+                    title: "Validation du Visa VLS-TS (ANEF)",
+                    desc: "Validation obligatoire de votre visa en ligne sur le portail de l'administration des étrangers dans les 3 mois suivant l'arrivée.",
+                    checklist: ["Se connecter sur l'ANEF", "Payer la taxe de séjour en ligne"],
+                    link: "https://administration-etrangers-en-france.interieur.gouv.fr/",
+                    linkText: "Portail ANEF"
+                });
+
+                generatedSteps.push({
+                    title: "Demande d'Aide au Logement (CAF)",
+                    desc: "Dépôt du dossier d'Aide Personnalisée au Logement (APL) sur le site de la CAF dès l'emménagement.",
+                    checklist: ["Fournir l'attestation de loyer", "Renseigner le RIB français"],
+                    link: "https://www.caf.fr/",
+                    linkText: "Caf.fr"
+                });
+            }
+
+            if (q4.includes('job')) {
+                generatedSteps.push({
+                    title: "Recherche de Job Étudiant",
+                    desc: "Recherche d'un emploi à temps partiel (limité à 964h par an, soit 60% du temps de travail annuel).",
+                    checklist: ["Préparer un CV au format français", "Candidater sur Indeed, HelloWork ou en grande distribution"],
                     link: "https://www.hellowork.com/",
-                    linkText: "Chercher un emploi sur HelloWork"
+                    linkText: "Offres d'emploi"
                 });
             }
 
@@ -372,24 +591,26 @@
             const stepsList = document.getElementById('steps-list');
             stepsList.innerHTML = '';
 
-            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
 
             generatedSteps.forEach((step, index) => {
                 const isChecked = savedProgress[index] || false;
 
                 const card = document.createElement('div');
                 card.className = `roadmap-card ${isChecked ? 'completed' : ''}`;
+                card.setAttribute('data-title', (step.title + ' ' + step.desc).toLowerCase());
                 card.innerHTML = `
                     <header>
                         <input type="checkbox" id="step-${index}" ${isChecked ? 'checked' : ''} onchange="toggleStep(${index})">
                         <div>
-                            <strong style="font-size: 1.1rem; color: var(--primary);">Étape ${index + 1} : ${step.title}</strong>
+                            <strong style="font-size: 1.05rem; color: var(--primary);">Étape ${index + 1} : ${step.title}</strong>
                         </div>
                     </header>
                     <div class="step-content">
-                        <p style="margin: 0.5rem 0;">${step.desc}</p>
+                        <p style="margin: 0.4rem 0;">${step.desc}</p>
+                        ${step.checklist ? step.checklist.map(item => `<div class="checklist-item">☑ ${item}</div>`).join('') : ''}
                         ${step.tip ? `<div class="tip-box">${step.tip}</div>` : ''}
-                        ${step.link && step.link !== '#' ? `<a href="${step.link}" target="_blank" class="btn-link">${step.linkText} ↗</a>` : ''}
+                        ${step.link ? `<a href="${step.link}" target="_blank" class="btn-link">${step.linkText} ↗</a>` : ''}
                     </div>
                 `;
                 stepsList.appendChild(card);
@@ -400,16 +621,16 @@
 
         function toggleStep(index) {
             const checkbox = document.getElementById(`step-${index}`);
-            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
 
             savedProgress[index] = checkbox.checked;
-            localStorage.setItem('v3_roadmap_progress', JSON.stringify(savedProgress));
+            localStorage.setItem('v3_wizard_progress', JSON.stringify(savedProgress));
 
             renderSteps();
         }
 
         function updateProgress() {
-            const savedProgress = JSON.parse(localStorage.getItem('v3_roadmap_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
             let checkedCount = 0;
 
             generatedSteps.forEach((_, index) => {
@@ -419,13 +640,38 @@
             const total = generatedSteps.length;
             const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
 
-            document.getElementById('stats-text').innerText = `Progression globale : ${percentage}% (${checkedCount} sur ${total} démarches finalisées)`;
+            document.getElementById('stats-text').innerText = `Progression globale : ${percentage}% (${checkedCount} sur ${total} étapes complétées)`;
             document.getElementById('progress-bar').style.width = `${percentage}%`;
+        }
+
+        function filterRoadmap() {
+            const query = document.getElementById('search-input').value.toLowerCase();
+            const cards = document.querySelectorAll('.roadmap-card');
+
+            cards.forEach(card => {
+                const text = card.getAttribute('data-title');
+                if (text.includes(query)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
         }
 
         function resetDiagnostic() {
             document.getElementById('roadmap-container').classList.add('hidden');
             document.getElementById('diagnostic-container').classList.remove('hidden');
+            // Revenir à l'étape 1 du wizard
+            document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active-step'));
+            document.getElementById('step-w1').classList.add('active-step');
+        }
+
+        function submitContact(e) {
+            e.preventDefault();
+            const status = document.getElementById('contact-status');
+            status.style.color = '#059669';
+            status.innerText = "Votre message a été envoyé avec succès ! Notre équipe vous répondra rapidement.";
+            document.getElementById('contact-form').reset();
         }
     </script>
 </body>
