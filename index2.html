@@ -154,7 +154,7 @@
         .emergency-card { background: white; padding: 0.9rem; border-radius: 0.6rem; border: 1px solid #ffe4e6; text-align: center; }
         .emergency-card strong { display: block; font-size: 1.1rem; color: #e11d48; }
 
-        /* --- STYLES DU CHATBOT IA GEMINI --- */
+        /* --- STYLES DU CHATBOT GEMINI FLOTTANT --- */
         .chat-toggle-btn {
             position: fixed; bottom: 25px; right: 25px; background: var(--primary); color: white;
             border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 1.8rem;
@@ -443,7 +443,7 @@
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             try {
-                const apiKey = "AQ.Ab8RN6KkLo1eZ-VGJEtyu88N9e4D_A4t-Map0Hf9GYJazBGxNg";
+                const apiKey = "TA_CLE_API_GOOGLE_AI_STUDIO"; // Remplace par ta clé API Gemini
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
 
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF).";
