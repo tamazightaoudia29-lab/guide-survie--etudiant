@@ -493,8 +493,8 @@
             const loadingDiv = appendMessage('ai', "Réflexion en cours...");
 
             try {
-                // Utilisation du modèle gemini-2.5-flash mis à jour
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+                // Utilisation du modèle gemini-3.8-flash recommandé par Google AI Studio
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`;
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF).";
 
                 const response = await fetch(url, {
