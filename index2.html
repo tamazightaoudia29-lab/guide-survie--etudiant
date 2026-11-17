@@ -71,7 +71,7 @@
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Modal d'authentification */
+        /* Modal d'authentification interactive avec mot de passe */
         .auth-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(45, 38, 37, 0.6); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .auth-overlay.show { display: flex; }
         .auth-box { background: #ffffff; padding: 2.5rem; border-radius: 1rem; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 1px solid var(--border-color); text-align: center; position: relative; }
@@ -183,22 +183,22 @@
 </head>
 <body>
 
-    <!-- MODAL AUTHENTIFICATION -->
+    <!-- MODAL AUTHENTIFICATION INTERACTIVE (AVEC MOT DE PASSE) -->
     <div id="auth-modal" class="auth-overlay">
         <div class="auth-box">
             <button class="close-auth" onclick="toggleAuthModal(false)">×</button>
-            <h2>🌸 Connexion Espace Personnel</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Connecte-toi pour synchroniser tes favoris et ta progression.</p>
+            <h2>🌸 Espace Personnel Sécurisé</h2>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Connecte-toi ou crée ton compte pour sauvegarder ta To-Do List et tes favoris.</p>
             <form id="auth-form" class="auth-form" onsubmit="handleAuth(event)">
                 <div class="input-group">
-                    <label for="auth-email">Identifiant ou Email</label>
+                    <label for="auth-email">Adresse Email</label>
                     <input type="email" id="auth-email" required placeholder="ton.email@domaine.com">
                 </div>
                 <div class="input-group">
                     <label for="auth-pass">Mot de passe</label>
-                    <input type="password" id="auth-pass" required placeholder="••••••••">
+                    <input type="password" id="auth-pass" required placeholder="••••••••" minlength="4">
                 </div>
-                <button type="submit" class="btn">Se connecter</button>
+                <button type="submit" class="btn">Se connecter / S'inscrire</button>
             </form>
         </div>
     </div>
@@ -493,10 +493,10 @@
             </div>
         </div>
 
-        <!-- TO-DO LIST PERSONNELLE COMMUNE -->
+        <!-- TO-DO LIST PERSONNELLE (RESTREINTE AUX UTILISATEURS CONNECTÉS) -->
         <div class="todo-section">
             <h2>📝 Mon Carnet Personnel (To-Do List & Révisions)</h2>
-            <p style="font-size: 0.9rem; color: var(--text-muted);">Ajoute tes tâches administratives, deadlines de stages ou révisions d'examens.</p>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Connecte-toi pour ajouter et synchroniser tes tâches personnelles.</p>
             <form class="todo-form" onsubmit="addTodo(event)">
                 <input type="text" id="todo-input" placeholder="Ajouter une tâche (ex : Déposer mon dossier CAF)..." required>
                 <button type="submit" class="btn" style="width: 140px;">Ajouter</button>
@@ -504,7 +504,7 @@
             <ul id="todo-list" class="todo-list"></ul>
         </div>
 
-        <!-- FORMULAIRE DE CONTACT DIRECT (Connecté à Formspree pour recevoir sur tamazightaoudia29@gmail.com) -->
+        <!-- FORMULAIRE DE CONTACT DIRECT -->
         <div class="tool-card" style="margin-top: 2rem;">
             <h3>✉️ Contact & Support Direct</h3>
             <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Une question spécifique ou un retour sur le site ? Écris-nous.</p>
@@ -607,7 +607,6 @@
             const loadingDiv = appendMessage('ai', "Réflexion en cours...");
 
             try {
-                // Utilisation du modèle stable gemini-1.5-flash
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF) et rappelle que l'étudiant algérien a droit à 803h de travail par an.";
 
@@ -633,7 +632,7 @@
             document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
         }
 
-        // --- AUTHENTIFICATION & STOCKAGE ---
+        // --- AUTHENTIFICATION SÉCURISÉE AVEC MOT DE PASSE ---
         document.addEventListener("DOMContentLoaded", () => {
             const currentUser = localStorage.getItem('v3_current_user');
             if (currentUser) {
@@ -651,12 +650,35 @@
         function handleAuth(e) {
             e.preventDefault();
             const email = document.getElementById('auth-email').value.trim();
-            if (email) {
+            const password = document.getElementById('auth-pass').value.trim();
+            
+            if (!email || !password) return;
+
+            // Vérifier si un mot de passe existe déjà pour cet email dans localStorage
+            const savedPassKey = `pass_${email}`;
+            const existingPass = localStorage.getItem(savedPassKey);
+
+            if (existingPass) {
+                // Un compte existe déjà, vérifions le mot de passe
+                if (existingPass === password) {
+                    localStorage.setItem('v3_current_user', email);
+                    updateUserUI(email);
+                    toggleAuthModal(false);
+                    loadTodos();
+                    loadFavorites();
+                    alert(`👋 Bon retour parmi nous, ${email} !`);
+                } else {
+                    alert("❌ Mot de passe incorrect pour cet email.");
+                }
+            } else {
+                // Nouveau compte : enregistrer le mot de passe et connecter
+                localStorage.setItem(savedPassKey, password);
                 localStorage.setItem('v3_current_user', email);
                 updateUserUI(email);
                 toggleAuthModal(false);
                 loadTodos();
                 loadFavorites();
+                alert(`🎉 Compte créé et connecté avec succès pour ${email} !`);
             }
         }
 
@@ -782,6 +804,13 @@
         }
 
         function toggleFav(cardId) {
+            const currentUser = localStorage.getItem('v3_current_user');
+            if (!currentUser) {
+                alert("⚠️ Connecte-toi pour ajouter des ressources à tes favoris personnels !");
+                toggleAuthModal(true);
+                return;
+            }
+
             const card = document.querySelector(`[data-id="${cardId}"]`);
             const favBtn = card.querySelector('.fav-btn');
             favBtn.classList.toggle('is-fav');
@@ -826,7 +855,7 @@
             });
         }
 
-        // --- OUTILS : BUDGET, FAQ, CONTACT ---
+        // --- OUTILS : BUDGET, FAQ, CONTACT, TO-DO RESTREINTE ---
         function calculateFullBudget() {
             const loyer = parseFloat(document.getElementById('b-loyer').value) || 0;
             const charges = parseFloat(document.getElementById('b-charges').value) || 0;
@@ -865,10 +894,17 @@
             }
         }
 
-        // To-Do List Personnelle
+        // To-Do List Personnelle (Sécurisée par connexion)
         function loadTodos() {
             const list = document.getElementById('todo-list');
             list.innerHTML = '';
+            const currentUser = localStorage.getItem('v3_current_user');
+            
+            if (!currentUser) {
+                list.innerHTML = '<p style="text-align:center; color: var(--text-muted); font-size: 0.85rem;">🔒 Connecte-toi pour afficher et gérer ta To-Do List personnelle.</p>';
+                return;
+            }
+
             const todos = JSON.parse(localStorage.getItem(getUserKey('todos')) || '[]');
             
             if (todos.length === 0) {
@@ -892,6 +928,13 @@
 
         function addTodo(e) {
             e.preventDefault();
+            const currentUser = localStorage.getItem('v3_current_user');
+            if (!currentUser) {
+                alert("⚠️ Tu dois être connecté pour ajouter des tâches à ton carnet !");
+                toggleAuthModal(true);
+                return;
+            }
+
             const input = document.getElementById('todo-input');
             const text = input.value.trim();
             if (!text) return;
