@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Étudiant Algérie-France — Assistant Interactif</title>
+    <title>Guide Étudiant Algérie-France — Portail Complet & Assistant</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -70,7 +70,7 @@
             font-weight: 600;
         }
         main {
-            max-width: 900px;
+            max-width: 950px;
             width: 90%;
             margin: 2.5rem auto;
             background: var(--card-bg);
@@ -80,10 +80,12 @@
             box-sizing: border-box;
             box-shadow: var(--shadow);
         }
-        h1, h2 {
-            margin-top: 0;
-            text-align: center;
+        h1, h2, h3 {
             color: #0f172a;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 0;
         }
         .wizard-step {
             display: none;
@@ -232,6 +234,45 @@
             border-radius: 0 0.4rem 0.4rem 0;
             color: #1e40af;
         }
+        /* Section Ressources de la V2 intégrée */
+        .v2-resources-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .resource-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 0.6rem;
+            padding: 1.2rem;
+        }
+        .resource-card h4 {
+            margin-top: 0;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .resource-card ul {
+            padding-left: 1.2rem;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+        .resource-card li {
+            margin-bottom: 0.3rem;
+        }
+        .resource-card a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
         /* Simulateur de budget */
         .budget-simulator {
             background: #f0fdf4;
@@ -310,7 +351,7 @@
             <a href="index.html">v0</a>
             <a href="index1.html">v1</a>
             <a href="index2.html">v2</a>
-            <a href="index3.html" class="active">v3 (Assistant Interactif)</a>
+            <a href="index3.html" class="active">v3 (Assistant Ultime)</a>
         </div>
     </header>
 
@@ -319,7 +360,7 @@
         <div id="diagnostic-container">
             <h1>Assistant de Diagnostic Personnalisé</h1>
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
-                Répondez aux questions étape par étape pour construire votre feuille de route sur-mesure.
+                Répondez aux questions étape par étape pour construire votre feuille de route sur-mesure et accéder aux ressources complètes.
             </p>
 
             <!-- ÉTAPE 1 -->
@@ -328,7 +369,7 @@
                     <label>1. Où en êtes-vous dans la procédure administrative ?</label>
                     <select id="q1" onchange="checkOther('q1')">
                         <option value="campus_dossier">Campus France : Création et soumission du dossier d'études</option>
-                        <option value="campus_entretien">Campus France : Convocation ou attente de l'entretien pédagogique</option>
+                        <option value="campus_entretien">Campus France : Entretien pédagogique</option>
                         <option value="visa_attente">Visa : Acceptation reçue, attente du RDV TLScontact</option>
                         <option value="visa_depot">Visa : Dossier déposé chez TLScontact / Attente du passeport</option>
                         <option value="depart_prepa">Voyage : Visa obtenu, réservation des billets et départ</option>
@@ -350,7 +391,7 @@
                     <select id="q2" onchange="checkOther('q2')">
                         <option value="crous_valide">Logement CROUS attribué et validé</option>
                         <option value="prive_recherche">Recherche dans le privé (besoin de garant / Visale)</option>
-                        <option value="hebergement_famille">Hébergement provisoire chez de la famille ou un proche</option>
+                        <option value="hebergement_famille">Hébergement provisoire chez des proches</option>
                         <option value="sans_solution">Aucune solution de logement pour le moment</option>
                         <option value="autre">Autre (précisez)</option>
                     </select>
@@ -389,7 +430,7 @@
                         <option value="job_urgent">Oui, dès mon arrivée (besoin financier)</option>
                         <option value="job_plus_tard">Oui, après m'être adapté(e) aux cours</option>
                         <option value="job_non">Non, uniquement mes études</option>
-                        <option value="autre">Autre (précisez)</option>
+                        <option value="autre">Précisez...</option>
                     </select>
                     <input type="text" id="q4_other" class="other-input hidden" placeholder="Précisez...">
                 </div>
@@ -400,10 +441,10 @@
             </div>
         </div>
 
-        <!-- SECTION FEUILLE DE ROUTE INTERACTIVE -->
+        <!-- SECTION FEUILLE DE ROUTE INTERACTIVE & RESSOURCES V2 -->
         <div id="roadmap-container" class="hidden">
-            <h1>Votre Feuille de Route Interactive</h1>
-            <p style="text-align: center; color: var(--text-muted);">Suivez votre progression et cochez les tâches accomplies.</p>
+            <h1>Votre Feuille de Route & Portail de Ressources</h1>
+            <p style="text-align: center; color: var(--text-muted);">Suivez votre progression interactive et consultez l'ensemble des guides et liens officiels de référence.</p>
             
             <div id="stats-text" style="text-align: center; font-weight: 600; margin-top: 1rem;">Progression : 0%</div>
             <div class="progress-bar-container">
@@ -412,13 +453,12 @@
 
             <!-- Barre de recherche -->
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="🔍 Rechercher une démarche (ex: CAF, Visale, Visa...)" onkeyup="filterRoadmap()">
+                <input type="text" id="search-input" placeholder="🔍 Rechercher une démarche (ex: CAF, Visale, Visa, CPAM, CROUS...)" onkeyup="filterRoadmap()">
             </div>
 
             <!-- Simulateur de Budget -->
             <div class="budget-simulator">
                 <h3 style="margin-top: 0; color: #065f46;">📊 Simulateur de Budget Mensuel Estimé</h3>
-                <p style="font-size: 0.9rem; color: #047857; margin-bottom: 0.5rem;">Estimation moyenne des dépenses pour un étudiant en France :</p>
                 <div class="budget-grid">
                     <div class="budget-item"><span>Logement (Loyer net APL)</span><strong>~350 €</strong></div>
                     <div class="budget-item"><span>Alimentation & Courses</span><strong>~200 €</strong></div>
@@ -429,8 +469,67 @@
 
             <div id="steps-list"></div>
 
+            <!-- INTÉGRATION DE TOUTES LES RESSOURCES DE LA V2 -->
+            <div class="v2-resources-section">
+                <h2>📚 Base Documentaire & Liens Officiels Complets (Version 2)</h2>
+                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem;">Retrouvez l'ensemble des rubriques thématiques de référence pour réussir votre installation en France.</p>
+                
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <h4>1. Procédure & Études</h4>
+                        <ul>
+                            <li><a href="https://www.algerie.campusfrance.org/" target="_blank">Campus France Algérie</a></li>
+                            <li><a href="https://www.if-algerie.com/" target="_blank">Institut Français (Tests TCF)</a></li>
+                            <li><a href="https://www.etudiant.gouv.fr/" target="_blank">Portail Étudiant Gouvernement</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>2. Visa & Consulat</h4>
+                        <ul>
+                            <li><a href="https://france-visas.gouv.fr/" target="_blank">France-Visas (Formulaire officiel)</a></li>
+                            <li><a href="https://alger.tlscontact.com/" target="_blank">Centre TLScontact Algérie</a></li>
+                            <li><a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">Portail ANEF (Validation visa)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>3. Logement & Aides</h4>
+                        <ul>
+                            <li><a href="https://www.messervices.etudiant.gouv.fr/" target="_blank">MesServices.Etudiant (CROUS)</a></li>
+                            <li><a href="https://www.visale.fr/" target="_blank">Visale (Caution gratuite Action Logement)</a></li>
+                            <li><a href="https://www.caf.fr/" target="_blank">CAF (Aide au logement APL)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>4. Santé & Sécurité Sociale</h4>
+                        <ul>
+                            <li><a href="https://etudiant-etranger.ameli.fr/" target="_blank">Assurance Maladie (Ameli Étudiant)</a></li>
+                            <li><a href="https://www.sante.fr/" target="_blank">Santé.fr (Annuaire médical)</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>5. Emploi & Jobs Étudiants</h4>
+                        <ul>
+                            <li><a href="https://www.hellowork.com/" target="_blank">HelloWork (Offres d'emploi)</a></li>
+                            <li><a href="https://www.etudiant.gouv.fr/fr/alternance-et-emploi-etudiant-983" target="_blank">Guide travail étudiant officiel</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4>6. Transports & Vie Quotidienne</h4>
+                        <ul>
+                            <li><a href="https://www.iledefrance-mobilites.fr/" target="_blank">Île-de-France Mobilités (Pass Navigo)</a></li>
+                            <li><a href="https://www.sncf-connect.com/" target="_blank">SNCF Connect (Voyages en train)</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
             <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-                <button class="btn btn-secondary" style="flex: 1;" onclick="resetDiagnostic()">Modifier mes réponses</button>
+                <button class="btn btn-secondary" style="flex: 1;" onclick="resetDiagnostic()">Modifier mes réponses QCM</button>
                 <button class="btn" style="flex: 1; background: #059669;" onclick="window.print()">🖨️ Télécharger / Imprimer (PDF)</button>
             </div>
 
@@ -472,7 +571,6 @@
     </main>
 
     <script>
-        // Gestion des étapes Wizard
         function nextWizardStep(current) {
             document.getElementById(`step-w${current}`).classList.remove('active-step');
             document.getElementById(`step-w${current + 1}`).classList.add('active-step');
@@ -504,7 +602,6 @@
 
             generatedSteps = [];
 
-            // Génération des étapes personnalisées
             if (q1.includes('campus')) {
                 generatedSteps.push({
                     title: "Procédure Campus France Algérie",
@@ -661,7 +758,6 @@
         function resetDiagnostic() {
             document.getElementById('roadmap-container').classList.add('hidden');
             document.getElementById('diagnostic-container').classList.remove('hidden');
-            // Revenir à l'étape 1 du wizard
             document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active-step'));
             document.getElementById('step-w1').classList.add('active-step');
         }
