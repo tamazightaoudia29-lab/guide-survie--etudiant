@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Étudiant Algérie-France — Portail Complet & Assistant</title>
+    <title>Guide Étudiant Algérie-France — Assistant & Parcours Intégral</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -234,7 +234,27 @@
             border-radius: 0 0.4rem 0.4rem 0;
             color: #1e40af;
         }
-        /* Section Ressources de la V2 intégrée */
+        /* Module CV & LM personnalisé */
+        .cv-module {
+            background: #faf5ff;
+            border: 1px solid #e9d5ff;
+            border-radius: 0.8rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        .cv-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .cv-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #f3e8ff;
+        }
         .v2-resources-section {
             margin-top: 3rem;
             padding-top: 2rem;
@@ -273,7 +293,6 @@
         .resource-card a:hover {
             text-decoration: underline;
         }
-        /* Simulateur de budget */
         .budget-simulator {
             background: #f0fdf4;
             border: 1px solid #bbf7d0;
@@ -360,7 +379,7 @@
         <div id="diagnostic-container">
             <h1>Assistant de Diagnostic Personnalisé</h1>
             <p style="text-align: center; color: var(--text-muted); margin-bottom: 2rem;">
-                Répondez aux questions étape par étape pour construire votre feuille de route sur-mesure et accéder aux ressources complètes.
+                Répondez aux questions étape par étape pour construire votre parcours intégral Campus France, Visa et Installation.
             </p>
 
             <!-- ÉTAPE 1 -->
@@ -368,12 +387,12 @@
                 <div class="question-group">
                     <label>1. Où en êtes-vous dans la procédure administrative ?</label>
                     <select id="q1" onchange="checkOther('q1')">
-                        <option value="campus_dossier">Campus France : Création et soumission du dossier d'études</option>
-                        <option value="campus_entretien">Campus France : Entretien pédagogique</option>
+                        <option value="tcf_preparation">Préparation du TCF / Certifications linguistiques</option>
+                        <option value="campus_dossier">Campus France : Soumission du dossier d'études (Études en France)</option>
+                        <option value="campus_entretien">Campus France : Préparation de l'entretien pédagogique</option>
                         <option value="visa_attente">Visa : Acceptation reçue, attente du RDV TLScontact</option>
-                        <option value="visa_depot">Visa : Dossier déposé chez TLScontact / Attente du passeport</option>
-                        <option value="depart_prepa">Voyage : Visa obtenu, réservation des billets et départ</option>
-                        <option value="france_installation">En France : Arrivé(e) depuis peu, démarches initiales</option>
+                        <option value="depart_prepa">Visa obtenu : Préparation du départ et des bagages</option>
+                        <option value="france_installation">En France : Arrivé(e), démarches administratives (ANEF, CPAM, CAF)</option>
                         <option value="autre">Autre (précisez)</option>
                     </select>
                     <input type="text" id="q1_other" class="other-input hidden" placeholder="Précisez...">
@@ -389,10 +408,10 @@
                 <div class="question-group">
                     <label>2. Quelle est votre situation de logement ?</label>
                     <select id="q2" onchange="checkOther('q2')">
-                        <option value="crous_valide">Logement CROUS attribué et validé</option>
+                        <option value="crous_valide">Logement CROUS validé</option>
                         <option value="prive_recherche">Recherche dans le privé (besoin de garant / Visale)</option>
                         <option value="hebergement_famille">Hébergement provisoire chez des proches</option>
-                        <option value="sans_solution">Aucune solution de logement pour le moment</option>
+                        <option value="sans_solution">Aucune solution pour le moment</option>
                         <option value="autre">Autre (précisez)</option>
                     </select>
                     <input type="text" id="q2_other" class="other-input hidden" placeholder="Précisez...">
@@ -408,7 +427,7 @@
                 <div class="question-group">
                     <label>3. Comment assurez-vous votre prise en charge financière ?</label>
                     <select id="q3" onchange="checkOther('q3')">
-                        <option value="blocage_bancaire">Compte bloqué en banque (Attestation de blocage des fonds)</option>
+                        <option value="blocage_bancaire">Compte bloqué en banque (Attestation de virement irrévocable AVI)</option>
                         <option value="garant_france">Garant résident en France</option>
                         <option value="garant_algerie">Garant résident en Algérie</option>
                         <option value="bourse_etat">Boursier de l'État</option>
@@ -425,26 +444,25 @@
             <!-- ÉTAPE 4 -->
             <div class="wizard-step" id="step-w4">
                 <div class="question-group">
-                    <label>4. Envisagez-vous d'avoir un job étudiant sur place ?</label>
+                    <label>4. Envisagez-vous d'avoir un job étudiant ou de chercher un stage ?</label>
                     <select id="q4" onchange="checkOther('q4')">
-                        <option value="job_urgent">Oui, dès mon arrivée (besoin financier)</option>
-                        <option value="job_plus_tard">Oui, après m'être adapté(e) aux cours</option>
-                        <option value="job_non">Non, uniquement mes études</option>
-                        <option value="autre">Précisez...</option>
+                        <option value="job_oui">Oui, besoin d'aide pour rédiger mon CV et ma lettre de motivation aux normes françaises</option>
+                        <option value="job_non">Non, je me concentre uniquement sur mes études</option>
+                        <option value="autre">Autre (précisez)</option>
                     </select>
                     <input type="text" id="q4_other" class="other-input hidden" placeholder="Précisez...">
                 </div>
                 <div class="wizard-buttons">
                     <button class="btn btn-secondary" onclick="prevWizardStep(4)">← Précédent</button>
-                    <button class="btn" onclick="generateRoadmap()">Générer ma feuille de route 🚀</button>
+                    <button class="btn" onclick="generateRoadmap()">Générer ma feuille de route intégrale 🚀</button>
                 </div>
             </div>
         </div>
 
-        <!-- SECTION FEUILLE DE ROUTE INTERACTIVE & RESSOURCES V2 -->
+        <!-- SECTION FEUILLE DE ROUTE INTERACTIVE & MODULE CV -->
         <div id="roadmap-container" class="hidden">
-            <h1>Votre Feuille de Route & Portail de Ressources</h1>
-            <p style="text-align: center; color: var(--text-muted);">Suivez votre progression interactive et consultez l'ensemble des guides et liens officiels de référence.</p>
+            <h1>Votre Feuille de Route & Parcours Intégral</h1>
+            <p style="text-align: center; color: var(--text-muted);">Suivez votre progression interactive pas à pas depuis l'Algérie jusqu'à votre installation en France.</p>
             
             <div id="stats-text" style="text-align: center; font-weight: 600; margin-top: 1rem;">Progression : 0%</div>
             <div class="progress-bar-container">
@@ -453,7 +471,26 @@
 
             <!-- Barre de recherche -->
             <div class="search-box">
-                <input type="text" id="search-input" placeholder="🔍 Rechercher une démarche (ex: CAF, Visale, Visa, CPAM, CROUS...)" onkeyup="filterRoadmap()">
+                <input type="text" id="search-input" placeholder="🔍 Rechercher une démarche (ex: TCF, Campus France, Visale, CAF...)" onkeyup="filterRoadmap()">
+            </div>
+
+            <!-- Module CV et Lettre de Motivation Personnalisée -->
+            <div id="cv-module-container" class="cv-module hidden">
+                <h3 style="margin-top: 0; color: #6b21a8;">📄 Guide & Outils Recommandés : CV et Lettre de Motivation (Normes Françaises)</h3>
+                <p style="font-size: 0.9rem; color: #581c87; margin-bottom: 0.8rem;">Pour décrocher un job étudiant ou un stage en France, votre CV doit tenir sur <strong>une seule page</strong>, sans photo obligatoire, structuré de façon percutante.</p>
+                <div class="cv-grid">
+                    <div class="cv-card">
+                        <strong style="color: #7c3aed;">Outils de création conseillés</strong>
+                        <ul style="padding-left: 1rem; font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem;">
+                            <li><a href="https://www.canva.com/fr_fr/" target="_blank">Canva</a> (Modèles modernes)</li>
+                            <li><a href="https://www.cvdesignr.com/fr" target="_blank">CVDesignR</a> (Standard français)</li>
+                        </ul>
+                    </div>
+                    <div class="cv-card">
+                        <strong style="color: #7c3aed;">Règles d'or de la Lettre de Motivation</strong>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.4rem;">Structure en 3 blocs : <em>Vous</em> (l'entreprise), <em>Moi</em> (vouis et vos compétences), <em>Nous</em> (notre collaboration future). Pas de tournures trop archaïques.</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Simulateur de Budget -->
@@ -469,30 +506,24 @@
 
             <div id="steps-list"></div>
 
-            <!-- INTÉGRATION DE TOUTES LES RESSOURCES DE LA V2 -->
+            <!-- RESSOURCES V2 -->
             <div class="v2-resources-section">
-                <h2>📚 Base Documentaire & Liens Officiels Complets (Version 2)</h2>
-                <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem;">Retrouvez l'ensemble des rubriques thématiques de référence pour réussir votre installation en France.</p>
-                
+                <h2>📚 Base Documentaire & Liens Officiels Complets</h2>
                 <div class="resource-grid">
                     <div class="resource-card">
                         <h4>1. Procédure & Études</h4>
                         <ul>
                             <li><a href="https://www.algerie.campusfrance.org/" target="_blank">Campus France Algérie</a></li>
                             <li><a href="https://www.if-algerie.com/" target="_blank">Institut Français (Tests TCF)</a></li>
-                            <li><a href="https://www.etudiant.gouv.fr/" target="_blank">Portail Étudiant Gouvernement</a></li>
                         </ul>
                     </div>
-
                     <div class="resource-card">
                         <h4>2. Visa & Consulat</h4>
                         <ul>
                             <li><a href="https://france-visas.gouv.fr/" target="_blank">France-Visas (Formulaire officiel)</a></li>
                             <li><a href="https://alger.tlscontact.com/" target="_blank">Centre TLScontact Algérie</a></li>
-                            <li><a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">Portail ANEF (Validation visa)</a></li>
                         </ul>
                     </div>
-
                     <div class="resource-card">
                         <h4>3. Logement & Aides</h4>
                         <ul>
@@ -501,28 +532,11 @@
                             <li><a href="https://www.caf.fr/" target="_blank">CAF (Aide au logement APL)</a></li>
                         </ul>
                     </div>
-
                     <div class="resource-card">
                         <h4>4. Santé & Sécurité Sociale</h4>
                         <ul>
                             <li><a href="https://etudiant-etranger.ameli.fr/" target="_blank">Assurance Maladie (Ameli Étudiant)</a></li>
-                            <li><a href="https://www.sante.fr/" target="_blank">Santé.fr (Annuaire médical)</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="resource-card">
-                        <h4>5. Emploi & Jobs Étudiants</h4>
-                        <ul>
-                            <li><a href="https://www.hellowork.com/" target="_blank">HelloWork (Offres d'emploi)</a></li>
-                            <li><a href="https://www.etudiant.gouv.fr/fr/alternance-et-emploi-etudiant-983" target="_blank">Guide travail étudiant officiel</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="resource-card">
-                        <h4>6. Transports & Vie Quotidienne</h4>
-                        <ul>
-                            <li><a href="https://www.iledefrance-mobilites.fr/" target="_blank">Île-de-France Mobilités (Pass Navigo)</a></li>
-                            <li><a href="https://www.sncf-connect.com/" target="_blank">SNCF Connect (Voyages en train)</a></li>
+                            <li><a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">Portail ANEF (Validation visa)</a></li>
                         </ul>
                     </div>
                 </div>
@@ -536,7 +550,6 @@
             <!-- Contacts et Urgences -->
             <div class="emergency-box">
                 <h2 style="color: #dc2626; margin-bottom: 0.5rem; font-size: 1.2rem;">🚨 Contacts & Urgences en France</h2>
-                <p style="text-align: center; font-size: 0.85rem; color: var(--text-muted);">Numéros gratuits 24h/24 et 7j/7.</p>
                 <div class="emergency-grid">
                     <div class="emergency-card"><strong>112</strong><span>Urgence UE</span></div>
                     <div class="emergency-card"><strong>15</strong><span>SAMU</span></div>
@@ -602,80 +615,75 @@
 
             generatedSteps = [];
 
-            if (q1.includes('campus')) {
-                generatedSteps.push({
-                    title: "Procédure Campus France Algérie",
-                    desc: "Finalisation du dossier pédagogique, choix des formations et préparation à l'entretien pédagogique aux espaces Campus France.",
-                    checklist: ["Vérifier les prérequis linguistiques (TCF/DELF)", "Soumettre les vœux sur Études en France", "Préparer la motivation du projet d'études"],
-                    tip: "Conseil : Entraînez-vous à expliquer clairement votre projet professionnel.",
-                    link: "https://www.algerie.campusfrance.org/",
-                    linkText: "Portail Campus France"
-                });
-            }
+            // Parcours Intégral Campus France et Visa
+            generatedSteps.push({
+                title: "Étape 1 : Passage du TCF & Certifications Linguistiques",
+                desc: "Inscription aux sessions de TCF (Test de Connaissance du Français) auprès de l'Institut Français d'Algérie. Le niveau B2 minimum est généralement requis pour la majorité des cursus universitaires.",
+                checklist: ["S'inscrire sur le site de l'Institut Français", "Obtenir l'attestation des résultats du TCF", "Joindre le certificat au dossier numérique"],
+                tip: "Anticipez l'inscription plusieurs mois à l'avance, les places partent très vite en Algérie.",
+                link: "https://www.if-algerie.com/",
+                linkText: "Institut Français d'Algérie"
+            });
 
-            if (q1.includes('visa') || q1.includes('campus')) {
-                generatedSteps.push({
-                    title: "Demande de Visa Long Séjour (TLScontact)",
-                    desc: "Création du dossier sur France-Visas et prise de rendez-vous auprès du centre TLScontact de votre région.",
-                    checklist: ["Imprimer le formulaire France-Visas", "Rassembler les justificatifs financiers", "Valider l'attestation d'hébergement ou de logement"],
-                    tip: "Attention : Vérifiez la validité de votre passeport.",
-                    link: "https://france-visas.gouv.fr/",
-                    linkText: "France-Visas"
-                });
-            }
+            generatedSteps.push({
+                title: "Étape 2 : Constitution du dossier « Études en France » (Campus France)",
+                desc: "Création du compte sur la plateforme nationale, saisie du parcours académique, choix motivés des formations (licences, masters ou écoles) et soumission du dossier.",
+                checklist: ["Numériser les diplômes et relevés de notes", "Rédiger les lettres de motivation pour chaque vœu", "Payer les frais de dossier Campus France"],
+                tip: "Respectez scrupuleusement les calendriers pédagogiques fixés chaque année par l'opérateur.",
+                link: "https://www.algerie.campusfrance.org/",
+                linkText: "Portail Campus France Algérie"
+            });
 
-            if (q3 === 'blocage_bancaire') {
-                generatedSteps.push({
-                    title: "Attestation de Blocage des Fonds",
-                    desc: "Obtention de l'attestation de virement irrévocable (AVI) garantissant le montant minimal mensuel requis pour le consulat.",
-                    checklist: ["Effectuer le virement international", "Récupérer l'attestation bancaire officielle"]
-                });
-            }
+            generatedSteps.push({
+                title: "Étape 3 : Entretien Pédagogique à l'Espace Campus France",
+                desc: "Convocation pour un entretien individuel devant un conseiller pédagogique afin de défendre votre projet d'études, votre cohérence de parcours et votre choix d'établissement.",
+                checklist: ["Préparer sa présentation orale (5 à 10 minutes)", "Apporter les originaux de tous ses diplômes et pièces justificatives"],
+                tip: "Restez naturel(le) et clair(e) sur vos motivations professionnelles à l'issue du diplôme."
+            });
 
+            generatedSteps.push({
+                title: "Étape 4 : Procédure de Visa Long Séjour (TLScontact)",
+                desc: "Réception de l'acceptation définitive (avis favorable), remplissage du formulaire officiel sur France-Visas et prise de rendez-vous auprès du centre TLScontact de votre wilaya.",
+                checklist: ["Créer le dossier sur France-Visas", "Prendre le rendez-vous en ligne TLScontact", "Rassembler les justificatifs financiers et de logement"],
+                tip: "Vérifiez que votre passeport est valide au moins 3 mois après la date de fin de votre visa sollicité.",
+                link: "https://france-visas.gouv.fr/",
+                linkText: "France-Visas"
+            });
+
+            // Logement
             if (q2 === 'prive_recherche' || q2 === 'sans_solution') {
                 generatedSteps.push({
-                    title: "Garantie Visale (Caution Gratuite)",
-                    desc: "Demande de visa Visale auprès d'Action Logement pour rassurer les propriétaires et résidences privées.",
-                    checklist: ["Créer un compte sur Visale.fr", "Obtenir le visa certifié avant les démarches de location"],
+                    title: "Étape 5 : Garantie Visale & Recherche de Logement",
+                    desc: "Obtention de la caution gratuite Visale (Action Logement) pour rassurer les bailleurs et sécuriser un logement avant votre arrivée.",
+                    checklist: ["Créer un compte sur Visale.fr", "Obtenir le visa Visale certifié", "Rechercher sur des plateformes de confiance"],
                     link: "https://www.visale.fr/",
                     linkText: "Demander Visale"
                 });
             } else if (q2 === 'crous_valide') {
                 generatedSteps.push({
-                    title: "Validation CROUS & Assurance Habitation",
-                    desc: "Confirmation du logement CROUS, paiement du premier loyer et souscription d'une assurance multirisque habitation.",
-                    checklist: ["Payer la redevance du premier mois", "Souscrire l'assurance habitation obligatoire"],
+                    title: "Étape 5 : Validation du Logement CROUS & Assurance",
+                    desc: "Confirmation de l'attribution du logement CROUS, règlement du premier loyer et souscription d'une assurance habitation.",
+                    checklist: ["Payer la redevance en ligne", "Souscrire l'assurance multirisque habitation (MRH)"],
                     link: "https://www.messervices.etudiant.gouv.fr/",
                     linkText: "MesServices.Etudiant"
                 });
             }
 
-            if (q1.includes('depart') || q1.includes('france')) {
-                generatedSteps.push({
-                    title: "Validation du Visa VLS-TS (ANEF)",
-                    desc: "Validation obligatoire de votre visa en ligne sur le portail de l'administration des étrangers dans les 3 mois suivant l'arrivée.",
-                    checklist: ["Se connecter sur l'ANEF", "Payer la taxe de séjour en ligne"],
-                    link: "https://administration-etrangers-en-france.interieur.gouv.fr/",
-                    linkText: "Portail ANEF"
-                });
+            // Arrivée en France
+            generatedSteps.push({
+                title: "Étape 6 : Arrivée en France & Démarches Officielles (ANEF, CPAM, CAF)",
+                desc: "Une fois sur place, réalisez les formalités indispensables pour sécuriser votre séjour, votre couverture médicale et vos aides financières.",
+                checklist: ["Valider le visa VLS-TS en ligne sur l'ANEF", "S'affilier à la Sécurité Sociale (Ameli Étudiant)", "Faire la demande d'APL auprès de la CAF"],
+                link: "https://administration-etrangers-en-france.interieur.gouv.fr/",
+                linkText: "Portail ANEF"
+            });
 
-                generatedSteps.push({
-                    title: "Demande d'Aide au Logement (CAF)",
-                    desc: "Dépôt du dossier d'Aide Personnalisée au Logement (APL) sur le site de la CAF dès l'emménagement.",
-                    checklist: ["Fournir l'attestation de loyer", "Renseigner le RIB français"],
-                    link: "https://www.caf.fr/",
-                    linkText: "Caf.fr"
-                });
-            }
-
-            if (q4.includes('job')) {
-                generatedSteps.push({
-                    title: "Recherche de Job Étudiant",
-                    desc: "Recherche d'un emploi à temps partiel (limité à 964h par an, soit 60% du temps de travail annuel).",
-                    checklist: ["Préparer un CV au format français", "Candidater sur Indeed, HelloWork ou en grande distribution"],
-                    link: "https://www.hellowork.com/",
-                    linkText: "Offres d'emploi"
-                });
+            // Affichage conditionnel du module CV
+            const cvModule = document.getElementById('cv-module-container');
+            if (q4 === 'job_oui') {
+                cvModule.classList.remove('hidden');
+            } else {
+                cvModule.classList.add('hidden');
             }
 
             renderSteps();
@@ -688,7 +696,7 @@
             const stepsList = document.getElementById('steps-list');
             stepsList.innerHTML = '';
 
-            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_ultimate_progress') || '{}');
 
             generatedSteps.forEach((step, index) => {
                 const isChecked = savedProgress[index] || false;
@@ -700,7 +708,7 @@
                     <header>
                         <input type="checkbox" id="step-${index}" ${isChecked ? 'checked' : ''} onchange="toggleStep(${index})">
                         <div>
-                            <strong style="font-size: 1.05rem; color: var(--primary);">Étape ${index + 1} : ${step.title}</strong>
+                            <strong style="font-size: 1.05rem; color: var(--primary);">${step.title}</strong>
                         </div>
                     </header>
                     <div class="step-content">
@@ -718,16 +726,16 @@
 
         function toggleStep(index) {
             const checkbox = document.getElementById(`step-${index}`);
-            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_ultimate_progress') || '{}');
 
             savedProgress[index] = checkbox.checked;
-            localStorage.setItem('v3_wizard_progress', JSON.stringify(savedProgress));
+            localStorage.setItem('v3_ultimate_progress', JSON.stringify(savedProgress));
 
             renderSteps();
         }
 
         function updateProgress() {
-            const savedProgress = JSON.parse(localStorage.getItem('v3_wizard_progress') || '{}');
+            const savedProgress = JSON.parse(localStorage.getItem('v3_ultimate_progress') || '{}');
             let checkedCount = 0;
 
             generatedSteps.forEach((_, index) => {
