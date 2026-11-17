@@ -23,7 +23,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 0 0 90px 0; /* Espace en bas pour éviter que la bulle du chat ne couvre le contenu */
+            padding: 0 0 90px 0;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -433,7 +433,7 @@
     </main>
 
     <script>
-        // --- SCRIPT CHATBOT IA GEMINI (SÉCURISÉ POUR GITHUB) ---
+        // --- SCRIPT CHATBOT IA GEMINI (CORRIGÉ & SÉCURISÉ) ---
         function toggleChat() {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.classList.toggle('open');
@@ -493,7 +493,8 @@
             const loadingDiv = appendMessage('ai', "Réflexion en cours...");
 
             try {
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+                // Utilisation du modèle gemini-2.5-flash mis à jour
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF).";
 
                 const response = await fetch(url, {
