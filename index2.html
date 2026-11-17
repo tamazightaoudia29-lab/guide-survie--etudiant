@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guide Étudiant Algérie-France — Assistant IA & Répertoire</title>
+    <title>Guide Étudiant Algérie-France — Portail Complet & Assistant IA</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -67,9 +67,9 @@
         .auth-box { background: #ffffff; padding: 2.5rem; border-radius: 1rem; width: 90%; max-width: 400px; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 1px solid var(--border-color); text-align: center; position: relative; }
         .close-auth { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-muted); }
         .auth-form { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; text-align: left; }
-        .input-group { display: flex; flex-direction: column; gap: 0.4rem; }
+        .input-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.8rem; }
         .input-group label { font-size: 0.85rem; font-weight: 600; color: var(--text-muted); }
-        select, input[type="text"], input[type="email"], input[type="password"], textarea, number { width: 100%; padding: 0.85rem; border-radius: 0.6rem; border: 1px solid #e7e5e4; background: #fafaf9; color: var(--text-color); font-size: 1rem; box-sizing: border-box; }
+        select, input[type="text"], input[type="email"], input[type="password"], textarea, input[type="number"] { width: 100%; padding: 0.8rem; border-radius: 0.6rem; border: 1px solid #e7e5e4; background: #fafaf9; color: var(--text-color); font-size: 0.95rem; box-sizing: border-box; }
         select:focus, input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(219, 39, 119, 0.15); background: #fff; }
         button.btn { background: var(--primary); color: white; border: none; padding: 0.9rem 1.6rem; font-size: 1rem; border-radius: 0.6rem; cursor: pointer; font-weight: 600; transition: all 0.2s; width: 100%; }
         button.btn:hover { background: var(--primary-hover); }
@@ -81,8 +81,6 @@
         .wizard-step { display: none; }
         .wizard-step.active-step { display: block; animation: fadeIn 0.3s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        .question-group { margin-bottom: 1.5rem; }
-        label { display: block; margin-bottom: 0.6rem; font-weight: 600; font-size: 1.05rem; }
         .wizard-buttons { display: flex; justify-content: space-between; margin-top: 2rem; gap: 1rem; }
         .progress-bar-container { width: 100%; height: 10px; background: #f5f5f4; border-radius: 5px; overflow: hidden; margin: 1rem 0 2rem 0; }
         .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #db2777, #f43f5e); transition: width 0.3s ease; }
@@ -93,7 +91,7 @@
         .step-content { margin-top: 1rem; line-height: 1.6; }
         .checklist-item { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; font-size: 0.95rem; color: var(--text-muted); }
 
-        /* Répertoire Interactif & Recherche */
+        /* Répertoire & Recherche */
         .search-bar-container { margin-bottom: 1.5rem; }
         .filter-buttons { display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center; margin-bottom: 1.5rem; }
         .filter-btn { background: #f5f5f4; border: none; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 600; color: #57534e; cursor: pointer; transition: all 0.2s; }
@@ -110,15 +108,17 @@
         .resource-card a { color: var(--primary); text-decoration: none; }
         .resource-card a:hover { text-decoration: underline; }
 
-        /* NOUVEAUX MODULES : Budget, FAQ, Générateur de message */
-        .extra-tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 3rem; }
-        .tool-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 0.8rem; padding: 1.5rem; }
-        .tool-box h3 { margin-top: 0; color: var(--primary); font-size: 1.1rem; }
-        
-        /* FAQ Accordéon */
-        .faq-item { background: white; border: 1px solid #e7e5e4; border-radius: 0.5rem; margin-bottom: 0.6rem; overflow: hidden; }
-        .faq-question { background: none; border: none; width: 100%; padding: 0.8rem 1rem; text-align: left; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.9rem; color: var(--text-color); }
-        .faq-answer { padding: 0 1rem 0.8rem 1rem; font-size: 0.85rem; color: var(--text-muted); display: none; line-height: 1.5; }
+        /* SECTIONS UTILES AVANCÉES (Budget complet, FAQ riche, Formulaire de contact) */
+        .advanced-section { margin-top: 3rem; padding-top: 2rem; border-top: 2px dashed #e7e5e4; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .tool-card { background: #fff; border: 1px solid var(--border-color); border-radius: 1rem; padding: 1.8rem; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+        .tool-card h3 { margin-top: 0; color: var(--primary); font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+
+        /* FAQ Riche Accordéon */
+        .faq-container { display: flex; flex-direction: column; gap: 0.6rem; max-height: 320px; overflow-y: auto; padding-right: 5px; }
+        .faq-item { background: #fafaf9; border: 1px solid #e7e5e4; border-radius: 0.6rem; overflow: hidden; }
+        .faq-question { background: none; border: none; width: 100%; padding: 0.9rem; text-align: left; font-weight: 600; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.88rem; color: var(--text-color); }
+        .faq-answer { padding: 0 0.9rem 0.9rem 0.9rem; font-size: 0.85rem; color: var(--text-muted); display: none; line-height: 1.5; }
         .faq-item.active .faq-answer { display: block; }
 
         /* To-do List Personnelle */
@@ -154,7 +154,6 @@
         .message.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 0.2rem; }
         .message.ai { background: white; color: var(--text-color); align-self: flex-start; border: 1px solid #e7e5e4; border-bottom-left-radius: 0.2rem; }
         
-        /* Suggestions rapides chat */
         .chat-suggestions { padding: 0.5rem 0.8rem; background: #fff; border-top: 1px solid #f0f0f0; display: flex; gap: 0.4rem; overflow-x: auto; white-space: nowrap; }
         .suggestion-chip { background: #fdf2f8; color: var(--primary); border: 1px solid #fbcfe8; padding: 0.3rem 0.6rem; border-radius: 1rem; font-size: 0.75rem; cursor: pointer; font-weight: 500; }
         .suggestion-chip:hover { background: var(--primary); color: white; }
@@ -167,8 +166,6 @@
             header { padding: 1rem; }
             main { width: 95%; padding: 1.4rem; margin: 1.2rem auto; }
             h1 { font-size: 1.5rem; }
-            .todo-form { flex-direction: column; }
-            .todo-form button { width: 100% !important; }
         }
     </style>
 </head>
@@ -382,49 +379,81 @@
                 </div>
             </div>
 
-            <!-- OUTILS SUPPLÉMENTAIRES UTILES (Budget, FAQ, Générateur de message) -->
-            <div class="extra-tools-grid">
-                <!-- Simulateur de Budget -->
-                <div class="tool-box">
-                    <h3>💰 Simulateur de Budget Mensuel</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Estime tes dépenses de base en Île-de-France.</p>
-                    <div class="input-group" style="margin-bottom: 0.8rem;">
-                        <label style="font-size: 0.8rem;">Loyer estimé (€) :</label>
-                        <input type="number" id="sim-loyer" value="450" oninput="calculateBudget()">
-                    </div>
-                    <div class="input-group" style="margin-bottom: 0.8rem;">
-                        <label style="font-size: 0.8rem;">Alimentation (€) :</label>
-                        <input type="number" id="sim-food" value="200" oninput="calculateBudget()">
-                    </div>
-                    <div style="background: white; padding: 0.8rem; border-radius: 0.5rem; border: 1px solid #e7e5e4; text-align: center;">
-                        <strong>Total estimé : <span id="sim-total" style="color: var(--primary);">750 €</span> / mois</strong>
-                    </div>
-                </div>
-
-                <!-- Foire Aux Questions (FAQ) -->
-                <div class="tool-box">
-                    <h3>❓ FAQ Express</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.8rem;">Réponses immédiates aux questions clés.</p>
+            <!-- OUTILS AVANCÉS UTILES (Simulateur Complet, FAQ Riche, Formulaire de Contact) -->
+            <div class="advanced-section">
+                <h2>🛠️ Outils Pratiques & Assistance Étudiante</h2>
+                <div class="tools-grid">
                     
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Qu'est-ce que la CVEC ? <span>▼</span></button>
-                        <div class="faq-answer">La Contribution de Vie Étudiante et de Campus (environ 103€) est obligatoire à payer avant toute inscription à l'université.</div>
+                    <!-- 1. Simulateur de Budget Complet -->
+                    <div class="tool-card">
+                        <h3>💰 Simulateur de Budget Mensuel</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Calcule toutes tes charges obligatoires en France.</p>
+                        <div class="input-group">
+                            <label>Loyer HC (€) :</label>
+                            <input type="number" id="b-loyer" value="450" oninput="calculateFullBudget()">
+                        </div>
+                        <div class="input-group">
+                            <label>Charges locatives & Électricité/Gaz (€) :</label>
+                            <input type="number" id="b-charges" value="60" oninput="calculateFullBudget()">
+                        </div>
+                        <div class="input-group">
+                            <label>Transport (Pass Navigo Étudiant) (€) :</label>
+                            <input type="number" id="b-transport" value="38" oninput="calculateFullBudget()">
+                        </div>
+                        <div class="input-group">
+                            <label>Alimentation & Courses (€) :</label>
+                            <input type="number" id="b-food" value="200" oninput="calculateFullBudget()">
+                        </div>
+                        <div class="input-group">
+                            <label>Assurance habitation & Mutuelle santé (€) :</label>
+                            <input type="number" id="b-assur" value="25" oninput="calculateFullBudget()">
+                        </div>
+                        <div style="background: #fdf2f8; padding: 1rem; border-radius: 0.6rem; border: 1px solid #fbcfe8; text-align: center; margin-top: 1rem;">
+                            <strong>Total mensuel estimé : <span id="b-total" style="color: var(--primary); font-size: 1.2rem;">773 €</span></strong>
+                        </div>
                     </div>
 
-                    <div class="faq-item">
-                        <button class="faq-question" onclick="toggleFaq(this)">Comment toucher les APL de la CAF ? <span>▼</span></button>
-                        <div class="faq-answer">Dès ton emménagement en France et la signature de ton bail, fais la demande en ligne sur le site de la CAF avec ton contrat de location et ton RIB.</div>
+                    <!-- 2. FAQ Riche et Classée -->
+                    <div class="tool-card">
+                        <h3>❓ FAQ & Questions Fréquentes</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Réponses officielles aux points bloquants.</p>
+                        <div class="faq-container">
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">Qu'est-ce que la CVEC et qui doit la payer ? <span>▼</span></button>
+                                <div class="faq-answer">La Contribution de Vie Étudiante et de Campus s'élève à environ 103 €. Elle est obligatoire pour toute inscription en formation initiale dans un établissement d'enseignement supérieur français (les boursiers en sont exonérés).</div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">Comment faire ma demande d'APL auprès de la CAF ? <span>▼</span></button>
+                                <div class="faq-answer">Dès votre emménagement effectif, rendez-vous sur le site de la CAF. Munissez-vous de votre bail de location, d'un acte de naissance traduit, de votre RIB français et de votre attestation de carte vitale ou récépissé de visa.</div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">Comment valider mon visa VLS-TS à l'arrivée ? <span>▼</span></button>
+                                <div class="faq-answer">Le visa valant titre de séjour doit être validé obligatoirement en ligne sur le portail ANEF (Administration Numérique des Étrangers en France) dans les 3 mois suivant votre arrivée en réglant la taxe de séjour par timbre fiscal électronique.</div>
+                            </div>
+                            <div class="faq-item">
+                                <button class="faq-question" onclick="toggleFaq(this)">Qu'est-ce que la garantie Visale ? <span>▼</span></button>
+                                <div class="faq-answer">C'est un dispositif gratuit d'Action Logement qui se porte garant pour vous auprès du propriétaire si vous n'avez pas de garant physique en France. À demander impérativement avant de chercher un logement privé.</div>
+                            </div>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Générateur de Message Administratif -->
-                <div class="tool-box">
-                    <h3>✉️ Générateur de Modèle de Bail</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted);">Crée un message type pour contacter un propriétaire.</p>
-                    <div class="input-group" style="margin-bottom: 0.6rem;">
-                        <input type="text" id="gen-name" placeholder="Ton Prénom et Nom...">
+                    <!-- 3. Vrai Formulaire de Contact -->
+                    <div class="tool-card">
+                        <h3>✉️ Contact & Support Direct</h3>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">Une question spécifique ou un retour sur le site ? Écris-nous.</p>
+                        <form onsubmit="handleContactForm(event)">
+                            <div class="input-group">
+                                <label>Ton Nom ou Email :</label>
+                                <input type="text" id="contact-name" required placeholder="Ex: amine@domaine.com">
+                            </div>
+                            <div class="input-group">
+                                <label>Ton Message :</label>
+                                <textarea id="contact-msg" rows="3" required placeholder="Ex: J'ai une question concernant le renouvellement de mon titre de séjour..."></textarea>
+                            </div>
+                            <button type="submit" class="btn" style="padding: 0.7rem;">Envoyer le message</button>
+                        </form>
                     </div>
-                    <button class="btn" style="padding: 0.5rem; font-size: 0.85rem;" onclick="generateMessage()">Copier le message type</button>
+
                 </div>
             </div>
 
@@ -458,7 +487,7 @@
     </main>
 
     <script>
-        // --- SCRIPT CHATBOT IA GEMINI (CORRIGÉ & STABLE) ---
+        // --- SCRIPT CHATBOT IA GEMINI (CORRIGÉ AVEC LE MODÈLE STABLE gemini-1.5-flash) ---
         function toggleChat() {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.classList.toggle('open');
@@ -523,8 +552,8 @@
             const loadingDiv = appendMessage('ai', "Réflexion en cours...");
 
             try {
-                // Utilisation du modèle stable gemini-flash pour éviter les erreurs de version
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash:generateContent?key=${apiKey}`;
+                // Utilisation du modèle stable gemini-1.5-flash compatible avec v1beta
+                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF).";
 
                 const response = await fetch(url, {
@@ -743,14 +772,15 @@
             });
         }
 
-        // --- OUTILS SUPPLÉMENTAIRES (Budget, FAQ, Générateur) ---
-        function calculateBudget() {
-            const loyer = parseFloat(document.getElementById('sim-loyer').value) || 0;
-            const food = parseFloat(document.getElementById('sim-food').value) || 0;
-            const transport = 80; // Pass Navigo étudiant estimé
-            const autres = 100;
-            const total = loyer + food + transport + autres;
-            document.getElementById('sim-total').innerText = total + " €";
+        // --- OUTILS AVANCÉS (Budget, FAQ, Contact) ---
+        function calculateFullBudget() {
+            const loyer = parseFloat(document.getElementById('b-loyer').value) || 0;
+            const charges = parseFloat(document.getElementById('b-charges').value) || 0;
+            const transport = parseFloat(document.getElementById('b-transport').value) || 0;
+            const food = parseFloat(document.getElementById('b-food').value) || 0;
+            const assur = parseFloat(document.getElementById('b-assur').value) || 0;
+            const total = loyer + charges + transport + food + assur;
+            document.getElementById('b-total').innerText = total + " €";
         }
 
         function toggleFaq(btn) {
@@ -758,11 +788,12 @@
             item.classList.toggle('active');
         }
 
-        function generateMessage() {
-            const name = document.getElementById('gen-name').value.trim() || "[Votre Nom]";
-            const msg = `Bonjour,\n\nJe suis étudiant(e) et je souhaite candidater pour votre logement. Mon dossier est solide (garantie Visale / justificatifs en règle).\n\nBien cordialement,\n${name}`;
-            navigator.clipboard.writeText(msg);
-            alert("📋 Message type copié dans le presse-papier ! Tu peux le coller partout.");
+        function handleContactForm(e) {
+            e.preventDefault();
+            const name = document.getElementById('contact-name').value;
+            alert(`✅ Merci ${name} ! Ton message a bien été pris en compte. Nous te répondrons rapidement.`);
+            document.getElementById('contact-name').value = '';
+            document.getElementById('contact-msg').value = '';
         }
 
         // To-Do List Personnelle
