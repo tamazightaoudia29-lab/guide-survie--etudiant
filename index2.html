@@ -23,7 +23,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 0;
+            padding: 0 0 90px 0; /* Espace en bas pour éviter que la bulle du chat ne couvre le contenu */
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,6 +40,8 @@
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(8px);
             box-shadow: var(--shadow);
+            flex-wrap: wrap;
+            gap: 0.8rem;
         }
         .logo {
             font-weight: 800;
@@ -118,8 +120,8 @@
         .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #db2777, #f43f5e); transition: width 0.3s ease; }
         .roadmap-card { background: #fffbeb; border: 1px solid #fef3c7; border-left: 5px solid var(--primary); border-radius: 0.8rem; padding: 1.5rem; margin-bottom: 1.2rem; }
         .roadmap-card.completed { border-left-color: #10b981; opacity: 0.7; background: #f8fafc; }
-        .roadmap-card header { background: none; border: none; padding: 0; display: flex; align-items: flex-start; gap: 1rem; }
-        .roadmap-card input[type="checkbox"] { width: 1.3rem; height: 1.3rem; cursor: pointer; accent-color: var(--primary); }
+        .roadmap-card header { background: none; border: none; padding: 0; box-shadow: none; display: flex; align-items: flex-start; gap: 1rem; justify-content: flex-start; }
+        .roadmap-card input[type="checkbox"] { width: 1.3rem; height: 1.3rem; cursor: pointer; accent-color: var(--primary); margin-top: 2px; }
         .step-content { margin-top: 1rem; line-height: 1.6; }
         .checklist-item { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.4rem; font-size: 0.95rem; color: var(--text-muted); }
         .btn-link { display: inline-block; margin-top: 0.8rem; padding: 0.5rem 1rem; background: var(--primary); color: white; text-decoration: none; border-radius: 0.5rem; font-size: 0.85rem; font-weight: 500; }
@@ -130,7 +132,7 @@
         .filter-btn { background: #f5f5f4; border: none; padding: 0.5rem 1rem; border-radius: 2rem; font-size: 0.85rem; font-weight: 600; color: #57534e; cursor: pointer; transition: all 0.2s; }
         .filter-btn:hover, .filter-btn.active { background: var(--primary); color: white; }
         .v2-full-portal { margin-top: 3rem; padding-top: 2rem; border-top: 2px dashed #e7e5e4; }
-        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
+        .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.5rem; }
         .resource-card { background: #fafaf9; border: 1px solid #e7e5e4; border-radius: 0.8rem; padding: 1.2rem; position: relative; transition: transform 0.2s; }
         .resource-card:hover { transform: translateY(-2px); border-color: var(--primary); }
         .resource-card h4 { margin-top: 0; color: var(--primary); margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; }
@@ -145,25 +147,25 @@
         .todo-section { margin-top: 3rem; background: #fff; border: 1px solid var(--border-color); border-radius: 0.8rem; padding: 1.5rem; }
         .todo-form { display: flex; gap: 0.8rem; margin-bottom: 1.2rem; }
         .todo-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.8rem; }
-        .todo-item { display: flex; justify-content: space-between; align-items: center; background: #fafaf9; padding: 0.8rem 1rem; border-radius: 0.5rem; border: 1px solid #e7e5e4; }
+        .todo-item { display: flex; justify-content: space-between; align-items: center; background: #fafaf9; padding: 0.8rem 1rem; border-radius: 0.5rem; border: 1px solid #e7e5e4; gap: 0.5rem; }
         .todo-item.completed span { text-decoration: line-through; opacity: 0.5; }
         .todo-delete { background: #ffe4e6; color: #e11d48; border: none; padding: 0.4rem 0.8rem; border-radius: 0.4rem; cursor: pointer; font-size: 0.8rem; }
 
         .emergency-box { background: #fff1f2; border: 1px solid #fecdd3; border-radius: 0.8rem; padding: 1.5rem; margin-top: 2.5rem; }
-        .emergency-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-top: 1rem; }
+        .emergency-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 1rem; margin-top: 1rem; }
         .emergency-card { background: white; padding: 0.9rem; border-radius: 0.6rem; border: 1px solid #ffe4e6; text-align: center; }
         .emergency-card strong { display: block; font-size: 1.1rem; color: #e11d48; }
 
         /* --- STYLES DU CHATBOT GEMINI FLOTTANT --- */
         .chat-toggle-btn {
-            position: fixed; bottom: 25px; right: 25px; background: var(--primary); color: white;
-            border: none; width: 60px; height: 60px; border-radius: 50%; font-size: 1.8rem;
-            cursor: pointer; box-shadow: 0 10px 25px rgba(219, 39, 119, 0.3); z-index: 1001;
+            position: fixed; bottom: 20px; right: 20px; background: var(--primary); color: white;
+            border: none; width: 58px; height: 58px; border-radius: 50%; font-size: 1.7rem;
+            cursor: pointer; box-shadow: 0 10px 25px rgba(219, 39, 119, 0.35); z-index: 1001;
             display: flex; align-items: center; justify-content: center; transition: transform 0.2s;
         }
         .chat-toggle-btn:hover { transform: scale(1.08); }
         .chat-window {
-            position: fixed; bottom: 100px; right: 25px; width: 360px; height: 480px;
+            position: fixed; bottom: 90px; right: 20px; width: 360px; max-width: calc(100vw - 40px); height: 480px; max-height: calc(100vh - 120px);
             background: white; border: 1px solid var(--border-color); border-radius: 1rem;
             box-shadow: 0 20px 25px -5px rgba(0,0,0,0.15); display: none; flex-direction: column;
             z-index: 1002; overflow: hidden; animation: slideUp 0.3s ease-out;
@@ -171,17 +173,34 @@
         .chat-window.open { display: flex; }
         @keyframes slideUp { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
         .chat-header {
-            background: var(--primary); color: white; padding: 1rem; font-weight: 700;
+            background: var(--primary); color: white; padding: 0.9rem 1rem; font-weight: 700;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .close-chat { background: none; border: none; color: white; font-size: 1.2rem; cursor: pointer; }
+        .chat-header-actions { display: flex; align-items: center; gap: 0.5rem; }
+        .api-config-btn { background: rgba(255,255,255,0.2); border: none; color: white; font-size: 0.75rem; padding: 0.3rem 0.6rem; border-radius: 0.4rem; cursor: pointer; }
+        .api-config-btn:hover { background: rgba(255,255,255,0.35); }
+        .close-chat { background: none; border: none; color: white; font-size: 1.3rem; cursor: pointer; line-height: 1; }
+        .api-bar { background: #fff1f2; padding: 0.6rem 0.8rem; border-bottom: 1px solid #fecdd3; display: none; gap: 0.4rem; align-items: center; }
+        .api-bar.show { display: flex; }
+        .api-bar input { flex: 1; padding: 0.4rem 0.6rem; font-size: 0.8rem; border-radius: 0.4rem; border: 1px solid #fda4af; }
+        .api-bar button { background: var(--primary); color: white; border: none; padding: 0.4rem 0.7rem; border-radius: 0.4rem; font-size: 0.8rem; cursor: pointer; font-weight: 600; }
         .chat-messages { flex: 1; padding: 1rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.8rem; background: #fafaf9; }
-        .message { max-width: 80%; padding: 0.7rem 1rem; border-radius: 0.8rem; font-size: 0.9rem; line-height: 1.4; }
+        .message { max-width: 82%; padding: 0.7rem 1rem; border-radius: 0.8rem; font-size: 0.9rem; line-height: 1.45; white-space: pre-wrap; }
         .message.user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 0.2rem; }
         .message.ai { background: white; color: var(--text-color); align-self: flex-start; border: 1px solid #e7e5e4; border-bottom-left-radius: 0.2rem; }
         .chat-input-area { padding: 0.8rem; background: white; border-top: 1px solid #e7e5e4; display: flex; gap: 0.5rem; }
         .chat-input-area input { flex: 1; padding: 0.6rem; border-radius: 0.5rem; border: 1px solid #e7e5e4; font-size: 0.9rem; }
         .chat-input-area button { background: var(--primary); color: white; border: none; padding: 0.6rem 1rem; border-radius: 0.5rem; cursor: pointer; font-weight: 600; }
+
+        /* Adaptations Mobile (Responsive) */
+        @media (max-width: 600px) {
+            header { padding: 1rem; }
+            main { width: 95%; padding: 1.4rem; margin: 1.2rem auto; }
+            h1 { font-size: 1.5rem; }
+            .todo-form { flex-direction: column; }
+            .todo-form button { width: 100% !important; }
+            .action-footer-btns { flex-direction: column; }
+        }
     </style>
 </head>
 <body>
@@ -211,7 +230,14 @@
     <div class="chat-window" id="chat-window">
         <div class="chat-header">
             <span>🌸 Assistant Virtuel IA</span>
-            <button class="close-chat" onclick="toggleChat()">×</button>
+            <div class="chat-header-actions">
+                <button class="api-config-btn" onclick="toggleApiConfig()" title="Configurer la clé API">⚙️ Clé API</button>
+                <button class="close-chat" onclick="toggleChat()">×</button>
+            </div>
+        </div>
+        <div class="api-bar" id="api-bar">
+            <input type="password" id="api-key-input" placeholder="Colle ta clé API Gemini ici...">
+            <button onclick="saveApiKey()">OK</button>
         </div>
         <div class="chat-messages" id="chat-messages">
             <div class="message ai">Bonjour ! Je suis ton assistant virtuel expert du Guide Étudiant Algérie-France. Pose-moi n'importe quelle question sur Campus France, le visa, la CAF ou le logement !</div>
@@ -240,7 +266,7 @@
 
             <div class="wizard-step active-step" id="step-w1">
                 <div class="question-group">
-                    <label>1. Où en es-tu dans la procédure ?</label>
+                    <label for="q1">1. Où en es-tu dans la procédure ?</label>
                     <select id="q1" onchange="checkOther('q1')">
                         <option value="tcf_prep">Préparation du TCF / Institut Français d'Algérie</option>
                         <option value="campus_dossier">Campus France : Soumission du dossier d'études</option>
@@ -259,7 +285,7 @@
 
             <div class="wizard-step" id="step-w2">
                 <div class="question-group">
-                    <label>2. Quelle est ta situation de logement ?</label>
+                    <label for="q2">2. Quelle est ta situation de logement ?</label>
                     <select id="q2" onchange="checkOther('q2')">
                         <option value="crous">Logement CROUS validé</option>
                         <option value="prive">Recherche dans le privé (besoin de Visale)</option>
@@ -277,7 +303,7 @@
 
             <div class="wizard-step" id="step-w3">
                 <div class="question-group">
-                    <label>3. Comment assures-tu ta prise en charge financière ?</label>
+                    <label for="q3">3. Comment assures-tu ta prise en charge financière ?</label>
                     <select id="q3" onchange="checkOther('q3')">
                         <option value="AVI">Compte bloqué en banque (Attestation AVI / virement irrévocable)</option>
                         <option value="garant_fr">Garant résident en France</option>
@@ -294,7 +320,7 @@
 
             <div class="wizard-step" id="step-w4">
                 <div class="question-group">
-                    <label>4. Cherches-tu des informations sur l'emploi ou les aides ?</label>
+                    <label for="q4">4. Cherches-tu des informations sur l'emploi ou les aides ?</label>
                     <select id="q4" onchange="checkOther('q4')">
                         <option value="oui_job">Oui, recherche de jobs étudiants et CV aux normes françaises</option>
                         <option value="non_cours">Non, uniquement démarches administratives et cours</option>
@@ -340,38 +366,38 @@
                         <h4>🧳 Premiers Pas & Banques <button class="fav-btn" onclick="toggleFav('card-1')">★</button></h4>
                         <ul>
                             <li><strong>Téléphonie :</strong> Offres et parrainages (Lebara, etc.)</li>
-                            <li><a href="https://www.google.com/search?q=meilleures+banques+etudiants+france" target="_blank">Comparatif des 10 banques étudiantes</a>[cite: 1]</li>
-                            <li><a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">Plateforme ANEF (Visa & Séjour)</a>[cite: 1]</li>
+                            <li><a href="https://www.google.com/search?q=meilleures+banques+etudiants+france" target="_blank">Comparatif des 10 banques étudiantes</a></li>
+                            <li><a href="https://administration-etrangers-en-france.interieur.gouv.fr/" target="_blank">Plateforme ANEF (Visa & Séjour)</a></li>
                         </ul>
                     </div>
 
                     <div class="resource-card" data-category="admin" data-id="card-2">
                         <h4>📋 Démarches & Inscription <button class="fav-btn" onclick="toggleFav('card-2')">★</button></h4>
                         <ul>
-                            <li><a href="https://www.algerie.campusfrance.org/" target="_blank">Campus France Algérie</a>[cite: 1]</li>
-                            <li><a href="https://www.if-algerie.com/" target="_blank">Institut Français (Tests TCF)</a>[cite: 1]</li>
-                            <li><a href="https://cvec.etudiant.gouv.fr/" target="_blank">Attestation CVEC</a>[cite: 1]</li>
-                            <li><a href="https://france-visas.gouv.fr/" target="_blank">France-Visas (Formulaire officiel)</a>[cite: 1]</li>
-                            <li><a href="https://alger.tlscontact.com/" target="_blank">Centre TLScontact Algérie</a>[cite: 1]</li>
+                            <li><a href="https://www.algerie.campusfrance.org/" target="_blank">Campus France Algérie</a></li>
+                            <li><a href="https://www.if-algerie.com/" target="_blank">Institut Français (Tests TCF)</a></li>
+                            <li><a href="https://cvec.etudiant.gouv.fr/" target="_blank">Attestation CVEC</a></li>
+                            <li><a href="https://france-visas.gouv.fr/" target="_blank">France-Visas (Formulaire officiel)</a></li>
+                            <li><a href="https://alger.tlscontact.com/" target="_blank">Centre TLScontact Algérie</a></li>
                         </ul>
                     </div>
 
                     <div class="resource-card" data-category="logement" data-id="card-3">
                         <h4>🏠 Logement & Résidences <button class="fav-btn" onclick="toggleFav('card-3')">★</button></h4>
                         <ul>
-                            <li><a href="https://www.google.com/search?q=trouverunlogement.lescrous.fr" target="_blank">Logement Crous (DSE)</a>[cite: 1]</li>
-                            <li><a href="https://www.visale.fr/" target="_blank">Garant Visale (Action Logement)</a>[cite: 1]</li>
-                            <li><strong>Résidences privées :</strong> Fac Habitat, Arpej, Studefi, Espacil, Les Estudines, Nexity Studea, Cardinal Campus, Kley, Campsea, Studelites, Les Belles Années[cite: 1].</li>
+                            <li><a href="https://www.google.com/search?q=trouverunlogement.lescrous.fr" target="_blank">Logement Crous (DSE)</a></li>
+                            <li><a href="https://www.visale.fr/" target="_blank">Garant Visale (Action Logement)</a></li>
+                            <li><strong>Résidences privées :</strong> Fac Habitat, Arpej, Studefi, Espacil, Les Estudines, Nexity Studea, Cardinal Campus, Kley, Campsea, Studelites, Les Belles Années.</li>
                         </ul>
                     </div>
 
                     <div class="resource-card" data-category="culture" data-id="card-4">
                         <h4>🎟️ Culture, Sport & Études <button class="fav-btn" onclick="toggleFav('card-4')">★</button></h4>
                         <ul>
-                            <li><a href="https://pass.culture.fr/" target="_blank">Pass Culture</a>[cite: 1]</li>
-                            <li><a href="https://www.google.com/search?q=SUAPS+sport+universitaire+france" target="_blank">Sport Universitaire (SUAPS)</a>[cite: 1]</li>
-                            <li><a href="https://www.bpi.fr/" target="_blank">Bibliothèques (BPI, BSG, BU)</a>[cite: 1]</li>
-                            <li><a href="https://www.welcomethejungle.com/fr/articles/modele-cv-etudiant" target="_blank">Modèles de CV & Lettre de motivation</a>[cite: 1]</li>
+                            <li><a href="https://pass.culture.fr/" target="_blank">Pass Culture</a></li>
+                            <li><a href="https://www.google.com/search?q=SUAPS+sport+universitaire+france" target="_blank">Sport Universitaire (SUAPS)</a></li>
+                            <li><a href="https://www.bpi.fr/" target="_blank">Bibliothèques (BPI, BSG, BU)</a></li>
+                            <li><a href="https://www.welcomethejungle.com/fr/articles/modele-cv-etudiant" target="_blank">Modèles de CV & Lettre de motivation</a></li>
                         </ul>
                     </div>
                 </div>
@@ -388,7 +414,7 @@
                 <ul id="todo-list" class="todo-list"></ul>
             </div>
 
-            <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <div class="action-footer-btns" style="display: flex; gap: 1rem; margin-top: 2rem;">
                 <button class="btn btn-secondary" style="flex: 1;" onclick="resetDiagnostic()">Modifier mes réponses</button>
                 <button class="btn" style="flex: 1;" onclick="window.print()">🖨️ Imprimer mon dossier (PDF)</button>
             </div>
@@ -407,10 +433,40 @@
     </main>
 
     <script>
-        // --- SCRIPT CHATBOT IA GEMINI ---
+        // --- SCRIPT CHATBOT IA GEMINI (SÉCURISÉ POUR GITHUB) ---
         function toggleChat() {
             const chatWindow = document.getElementById('chat-window');
             chatWindow.classList.toggle('open');
+            const savedKey = localStorage.getItem('gemini_api_key');
+            if (!savedKey && chatWindow.classList.contains('open')) {
+                document.getElementById('api-bar').classList.add('show');
+            }
+        }
+
+        function toggleApiConfig() {
+            const apiBar = document.getElementById('api-bar');
+            apiBar.classList.toggle('show');
+            const savedKey = localStorage.getItem('gemini_api_key') || '';
+            document.getElementById('api-key-input').value = savedKey;
+        }
+
+        function saveApiKey() {
+            const key = document.getElementById('api-key-input').value.trim();
+            if (key) {
+                localStorage.setItem('gemini_api_key', key);
+                document.getElementById('api-bar').classList.remove('show');
+                appendMessage('ai', "✅ Clé API enregistrée dans ton navigateur ! Tu peux maintenant poser tes questions.");
+            }
+        }
+
+        function appendMessage(sender, text) {
+            const chatMessages = document.getElementById('chat-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            msgDiv.innerText = text;
+            chatMessages.appendChild(msgDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            return msgDiv;
         }
 
         function handleChatKey(e) {
@@ -424,28 +480,20 @@
             const userText = inputField.value.trim();
             if (!userText) return;
 
-            const chatMessages = document.getElementById('chat-messages');
+            const apiKey = localStorage.getItem('gemini_api_key');
+            if (!apiKey) {
+                document.getElementById('api-bar').classList.add('show');
+                appendMessage('ai', "⚠️ Configure d'abord ta clé API Gemini dans la barre ci-dessus (bouton ⚙️ Clé API) pour activer l'assistant.");
+                return;
+            }
 
-            // Afficher le message utilisateur
-            const userMsgDiv = document.createElement('div');
-            userMsgDiv.className = 'message user';
-            userMsgDiv.innerText = userText;
-            chatMessages.appendChild(userMsgDiv);
-
+            appendMessage('user', userText);
             inputField.value = '';
-            chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Afficher indicateur de chargement
-            const loadingDiv = document.createElement('div');
-            loadingDiv.className = 'message ai';
-            loadingDiv.innerText = "Réflexion en cours...";
-            chatMessages.appendChild(loadingDiv);
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            const loadingDiv = appendMessage('ai', "Réflexion en cours...");
 
             try {
-                const apiKey = "TA_CLE_API_GOOGLE_AI_STUDIO"; // Remplace par ta clé API Gemini
                 const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-
                 const systemInstruction = "Tu es l'assistant virtuel expert du Guide Étudiant Algérie-France. Réponds précisément et chaleureusement aux questions en te basant sur les démarches officielles (Campus France Algérie, TCF, Visa TLScontact, Visale, CAF, Crous, ANEF).";
 
                 const response = await fetch(url, {
@@ -459,13 +507,15 @@
                 });
 
                 const data = await response.json();
-                const aiReply = data.candidates[0].content.parts[0].text;
-
-                loadingDiv.innerText = aiReply;
+                if (data.error) {
+                    loadingDiv.innerText = "Erreur API : " + data.error.message;
+                } else {
+                    loadingDiv.innerText = data.candidates[0].content.parts[0].text;
+                }
             } catch (error) {
-                loadingDiv.innerText = "Désolé, une erreur est survenue lors de la communication avec l'assistant IA.";
+                loadingDiv.innerText = "Désolé, une erreur réseau est survenue lors de la communication avec l'assistant IA.";
             }
-            chatMessages.scrollTop = chatMessages.scrollHeight;
+            document.getElementById('chat-messages').scrollTop = document.getElementById('chat-messages').scrollHeight;
         }
 
         // --- AUTHENTIFICATION & STOCKAGE ---
@@ -539,19 +589,19 @@
             const q2 = document.getElementById('q2').value;
 
             generatedSteps = [
-                { title: "Étape 1 : Passage du TCF & Inscription Institut Français", desc: "Inscription obligatoire aux sessions de TCF en Algérie[cite: 1] pour justifier du niveau de langue.", checklist: ["S'inscrire sur le site de l'Institut Français", "Obtenir l'attestation de résultats"] },
-                { title: "Étape 2 : Dossier « Études en France »", desc: "Saisie des vœux et du parcours académique sur Campus France Algérie[cite: 1].", checklist: ["Numériser les diplômes", "Payer les frais de dossier"] },
+                { title: "Étape 1 : Passage du TCF & Inscription Institut Français", desc: "Inscription obligatoire aux sessions de TCF en Algérie pour justifier du niveau de langue.", checklist: ["S'inscrire sur le site de l'Institut Français", "Obtenir l'attestation de résultats"] },
+                { title: "Étape 2 : Dossier « Études en France »", desc: "Saisie des vœux et du parcours académique sur Campus France Algérie.", checklist: ["Numériser les diplômes", "Payer les frais de dossier"] },
                 { title: "Étape 3 : Entretien Pédagogique", desc: "Entretien individuel de motivation devant un conseiller à l'Espace Campus France.", checklist: ["Préparer sa présentation orale"] },
-                { title: "Étape 4 : Procédure de Visa (TLScontact)", desc: "Saisie sur France-Visas[cite: 1] et prise de RDV au centre TLScontact[cite: 1].", checklist: ["Formulaire France-Visas", "Justificatifs financiers"] }
+                { title: "Étape 4 : Procédure de Visa (TLScontact)", desc: "Saisie sur France-Visas et prise de RDV au centre TLScontact.", checklist: ["Formulaire France-Visas", "Justificatifs financiers"] }
             ];
 
             if (q2 === 'prive' || q2 === 'sans') {
-                generatedSteps.push({ title: "Étape 5 : Garantie Visale & Logement", desc: "Obtention de la caution gratuite Action Logement[cite: 1] pour sécuriser ton bail.", checklist: ["Créer un compte Visale.fr"] });
+                generatedSteps.push({ title: "Étape 5 : Garantie Visale & Logement", desc: "Obtention de la caution gratuite Action Logement pour sécuriser ton bail.", checklist: ["Créer un compte Visale.fr"] });
             } else {
                 generatedSteps.push({ title: "Étape 5 : Validation CROUS & Assurance", desc: "Validation de la chambre et souscription de l'assurance habitation.", checklist: ["Payer la redevance du premier mois"] });
             }
 
-            generatedSteps.push({ title: "Étape 6 : Arrivée en France & Démarches", desc: "Validation du visa ANEF[cite: 1], demande d'APL CAF[cite: 1] et sécurité sociale Ameli[cite: 1].", checklist: ["Valider le visa en ligne", "Faire la demande CAF"] });
+            generatedSteps.push({ title: "Étape 6 : Arrivée en France & Démarches", desc: "Validation du visa ANEF, demande d'APL CAF et sécurité sociale Ameli.", checklist: ["Valider le visa en ligne", "Faire la demande CAF"] });
 
             renderSteps();
             document.getElementById('diagnostic-container').classList.add('hidden');
